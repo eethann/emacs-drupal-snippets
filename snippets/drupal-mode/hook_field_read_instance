@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_field_read_instance
+# key: hook_field_read_instance
+# --
+/**
+ * ${2:Act on a field record being read from the database.
+ *
+ * This hook is invoked from field_read_instances() on each instance being read.
+ *}
+ * @param $instance
+ *   The instance record just read from the database.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_read_instance($instance) {
+$0  // @todo Needs function body.
+}

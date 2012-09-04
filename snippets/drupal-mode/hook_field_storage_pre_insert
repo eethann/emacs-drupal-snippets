@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: hook_field_storage_pre_insert
+# key: hook_field_storage_pre_insert
+# --
+/**
+ * ${2:Act before the storage backends insert field data.
+ *
+ * This hook allows modules to store data before the Field Storage API,
+ * optionally preventing the field storage module from doing so.
+ *}
+ * @param $entity_type
+ *   The type of $entity; for example, 'node' or 'user'.
+ * @param $entity
+ *   The entity with fields to save.
+ * @param $skip_fields
+ *   An array keyed by field IDs whose data has already been written and
+ *   therefore should not be written again. The values associated with these
+ *   keys are not specified.
+ * @return
+ *   Saved field IDs are set set as keys in $skip_fields.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_storage_pre_insert($entity_type, $entity, &$skip_fields) {
+$0  if ($entity_type == 'node' && $entity->status && _forum_node_check_node_type($entity)) {
+    $query = db_insert('forum_index')->fields(array('nid', 'title', 'tid', 'sticky', 'created', 'comment_count', 'last_comment_timestamp'));
+    foreach ($entity->taxonomy_forums as $language) {
+      foreach ($language as $delta) {
+        $query->values(array(
+          'nid' => $entity->nid,
+          'title' => $entity->title,
+          'tid' => $delta['value'],
+          'sticky' => $entity->sticky,
+          'created' => $entity->created,
+          'comment_count' => 0,
+          'last_comment_timestamp' => $entity->created,
+        ));
+      }
+    }
+    $query->execute();
+  }
+}

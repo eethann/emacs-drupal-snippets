@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_actions_delete
+# key: hook_actions_delete
+# --
+/**
+ * ${2:Executes code after an action is deleted.
+ *}
+ * @param $aid
+ *   The action ID.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_actions_delete($aid) {
+$0  db_delete('actions_assignments')
+    ->condition('aid', $aid)
+    ->execute();
+}

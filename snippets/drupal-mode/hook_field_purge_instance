@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_field_purge_instance
+# key: hook_field_purge_instance
+# --
+/**
+ * ${2:Acts when a field instance is being purged.
+ *
+ * In field_purge_instance(), after the field instance has been
+ * removed from the database, the field storage module has had a chance to
+ * run its hook_field_storage_purge_instance(), and the field info cache
+ * has been cleared, this hook is invoked on all modules to allow them to
+ * respond to the field instance being purged.
+ *}
+ * @param $instance
+ *   The instance being purged.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_purge_instance($instance) {
+$0  db_delete('my_module_field_instance_info')
+    ->condition('id', $instance['id'])
+    ->execute();
+}

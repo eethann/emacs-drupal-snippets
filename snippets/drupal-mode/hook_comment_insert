@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_comment_insert
+# key: hook_comment_insert
+# --
+/**
+ * ${2:The comment is being inserted.
+ *}
+ * @param $comment
+ *   The comment object.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_comment_insert($comment) {
+$0  // Reindex the node when comments are added.
+  search_touch_node($comment->nid);
+}

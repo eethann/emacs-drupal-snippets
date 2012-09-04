@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_ds_fields_info_alter
+# key: hook_ds_fields_info_alter
+# --
+/**
+ * ${2:Alter fields defined by Display Suite
+ *}
+ * @param $fields
+ *   An array with fields which can be altered just before they get cached.
+ * @param $entity_type
+ *   The name of the entity type.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ds_fields_info_alter(&$fields, $entity_type) {
+$0  if (isset($fields['title'])) {
+    $fields['title']['title'] = t('My title');
+  }
+}

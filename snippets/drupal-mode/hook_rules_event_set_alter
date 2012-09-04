@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: hook_rules_event_set_alter
+# key: hook_rules_event_set_alter
+# --
+/**
+ * ${2:Alters event sets.
+ *
+ * This hooks allows altering rules event sets, which contain all rules that are
+ * triggered upon a specific event. Rules internally caches all rules associated
+ * to an event in an event set, which is cached for fast evaluation. This hook
+ * is invoked just before any event set is cached, thus it allows altering of
+ * the to be executed rules without the changes to appear in the UI, e.g. to add
+ * a further condition to some rules.
+ *}
+ * @param $event_name
+ *   The name of the event.
+ * @param $event_set
+ *   The event set that is to be cached.
+ *
+ * @see rules_invoke_event()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_event_set_alter($event_name, RulesEventSet $event_set) {
+$0
+}

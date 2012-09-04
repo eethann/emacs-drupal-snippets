@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_multilingual_settings_changed
+# key: hook_multilingual_settings_changed
+# --
+/**
+ * ${2:Allow modules to react to language settings changes.
+ *
+ * Every module needing to act when the number of enabled languages changes
+ * should implement this. This is an "internal" hook and should not be invoked
+ * elsewhere. The typical implementation would trigger some kind of rebuilding,
+ * this way system components could properly react to the change of the enabled
+ * languages number.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_multilingual_settings_changed() {
+$0  field_info_cache_clear();
+}

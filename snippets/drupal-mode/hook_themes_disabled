@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_themes_disabled
+# key: hook_themes_disabled
+# --
+/**
+ * ${2:Respond to themes being disabled.
+ *}
+ * @param array $theme_list
+ *   Array containing the names of the themes being disabled.
+ *
+ * @see theme_disable()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_themes_disabled($theme_list) {
+$0 // Clear all update module caches.
+  _update_cache_clear();
+}

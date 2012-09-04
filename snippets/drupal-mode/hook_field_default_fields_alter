@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: hook_field_default_fields_alter
+# key: hook_field_default_fields_alter
+# --
+/**
+ * ${2:Alter the default fields right before they are cached into the database.
+ *}
+ * @param &$fields
+ *   By reference. The fields that have been declared by another feature.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_default_fields_alter(&$fields) {
+$0}

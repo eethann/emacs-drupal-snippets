@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_xmlsitemap_context_alter
+# key: hook_xmlsitemap_context_alter
+# --
+/**
+ * ${2:Alter the current context information.
+ *}
+ * @see hook_xmlsitemap_context()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_xmlsitemap_context_alter(&$context) {
+$0  if (user_access('administer taxonomy')) {
+    unset($context['vocabulary']);
+  }
+}

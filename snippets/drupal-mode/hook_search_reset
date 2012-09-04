@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_search_reset
+# key: hook_search_reset
+# --
+/**
+ * ${2:Take action when the search index is going to be rebuilt.
+ *
+ * Modules that use hook_update_index() should update their indexing
+ * bookkeeping so that it starts from scratch the next time
+ * hook_update_index() is called.
+ *}
+ * @ingroup search
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_reset() {
+$0  db_update('search_dataset')
+    ->fields(array('reindex' => REQUEST_TIME))
+    ->condition('type', 'node')
+    ->execute();
+}

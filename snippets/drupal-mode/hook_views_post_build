@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_views_post_build
+# key: hook_views_post_build
+# --
+/**
+ * ${2:This hook is called right after the build process. The query is
+ * now fully built, but it has not yet been run through db_rewrite_sql.
+ *
+ * Adding output to the view can be accomplished by placing text on
+ * $view->attachment_before and $view->attachment_after.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_post_build(&$view) {
+$0  // example code here
+}

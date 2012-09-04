@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_field_read_field
+# key: hook_field_read_field
+# --
+/**
+ * ${2:Act on field records being read from the database.
+ *
+ * This hook is invoked from field_read_fields() on each field being read.
+ *}
+ * @param $field
+ *   The field record just read from the database.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_read_field($field) {
+$0  // @todo Needs function body.
+}

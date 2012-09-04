@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: hook_token_info_alter
+# key: hook_token_info_alter
+# --
+/**
+ * ${2:Alter the metadata about available placeholder tokens and token types.
+ *}
+ * @param $data
+ *   The associative array of token definitions from hook_token_info().
+ *
+ * @see hook_token_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_token_info_alter(&$data) {
+$0  // Modify description of node tokens for our site.
+  $data['tokens']['node']['nid'] = array(
+    'name' => t("Node ID"),
+    'description' => t("The unique ID of the article."),
+  );
+  $data['tokens']['node']['title'] = array(
+    'name' => t("Title"),
+    'description' => t("The title of the article."),
+  );
+
+  // Chained tokens for nodes.
+  $data['tokens']['node']['created'] = array(
+    'name' => t("Date created"),
+    'description' => t("The date the article was posted."),
+    'type' => 'date',
+  );
+}

@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: hook_admin_paths
+# key: hook_admin_paths
+# --
+/**
+ * ${2:Define administrative paths.
+ *
+ * Modules may specify whether or not the paths they define in hook_menu() are
+ * to be considered administrative. Other modules may use this information to
+ * display those pages differently (e.g. in a modal overlay, or in a different
+ * theme).
+ *
+ * To change the administrative status of menu items defined in another module's
+ * hook_menu(), modules should implement hook_admin_paths_alter().
+ *}
+ * @return
+ *   An associative array. For each item, the key is the path in question, in
+ *   a format acceptable to drupal_match_path(). The value for each item should
+ *   be TRUE (for paths considered administrative) or FALSE (for non-
+ *   administrative paths).
+ *
+ * @see hook_menu()
+ * @see drupal_match_path()
+ * @see hook_admin_paths_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_admin_paths() {
+$0  $paths = array(
+    'mymodule/*/add' => TRUE,
+    'mymodule/*/edit' => TRUE,
+  );
+  return $paths;
+}

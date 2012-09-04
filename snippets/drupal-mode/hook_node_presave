@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_node_presave
+# key: hook_node_presave
+# --
+/**
+ * ${2:Act on a node being inserted or updated.
+ *
+ * This hook is invoked from node_save() before the node is saved to the
+ * database.
+ *}
+ * @param $node
+ *   The node that is being inserted or updated.
+ *
+ * @ingroup node_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_presave($node) {
+$0  if ($node->nid && $node->moderate) {
+    // Reset votes when node is updated:
+    $node->score = 0;
+    $node->users = '';
+    $node->votes = 0;
+  }
+}

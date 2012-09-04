@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_widgets
+# key: hook_facetapi_widgets
+# --
+/**
+ * ${2:Define all widget plugins provided by the module.
+ *
+ * Widget plugins process the facet render arrays to the structure that wille be
+ * passed to drupal_render(), which in turn converts the facet to HTML.
+ *}
+ * @return array
+ *   An associative array keyed by unique name of the widget. Each widget is an
+ *   associative array keyed by "handler" containing:
+ *   - label: The human readable name of the plugin displayed in the admin UI.
+ *   - class: The name of the plugin class.
+ *   - query types: An array of query-types that this widget is compatible with
+ *
+ * @see FacetapiFilter
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_widgets() {
+$0  return array(
+    'facetapi_links' => array(
+      'handler' => array(
+        'label' => t('Links'),
+        'class' => 'FacetapiWidgetLinks',
+        'query types' => array('term', 'date'),
+      ),
+    ),
+  );
+}

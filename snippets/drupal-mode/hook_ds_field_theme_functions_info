@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_ds_field_theme_functions_info
+# key: hook_ds_field_theme_functions_info
+# --
+/**
+ * ${2:Define theme functions for fields.
+ *
+ * This only is necessary when you're using the field settings
+ * plugin which comes with the DS extras module and you want to
+ * expose a special field theming function to the interface.
+ *
+ * The theme function gets $variables as the only parameter.
+ * The optional configuration through the UI is in $variables['ds-config'].
+ *
+ * Note that 'theme_ds_field_' is always needed, so the suggestions can work.
+ *}
+ * @return $field_theme_functions
+ *   A collection of field theming functions.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ds_field_theme_functions_info() {
+$0  return array('theme_ds_field_mine' => t('Theme field'));
+}

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_service_links_alter
+# key: hook_service_links_alter
+# --
+/**
+ * ${2:Allows alteration of the Service Links.
+ *}
+ * @param $links
+ *   The constructed array of service links.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_service_links_alter(&$links) {
+$0  if (isset($links['myservice'])) {
+    // Change the icon of MyService.
+    $links['myservice']['icon'] = 'http://drupal.org/misc/favicon.ico';
+  }
+}

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_redirect_presave
+# key: hook_redirect_presave
+# --
+/**
+ * ${2:Act on a redirect being inserted or updated.
+ *
+ * This hook is invoked from redirect_save() before the redirect is saved to
+ * the database.
+ *}
+ * @param $redirect
+ *   The redirect that is being inserted or updated.
+ *
+ * @see redirect_save()
+ * @ingroup redirect_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_redirect_presave($redirect) {
+$0
+}

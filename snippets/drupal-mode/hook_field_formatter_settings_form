@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: hook_field_formatter_settings_form
+# key: hook_field_formatter_settings_form
+# --
+/**
+ * ${2:Specify the form elements for a formatter's settings.
+ *}
+ * @param $field
+ *   The field structure being configured.
+ * @param $instance
+ *   The instance structure being configured.
+ * @param $view_mode
+ *   The view mode being configured.
+ * @param $form
+ *   The (entire) configuration form array, which will usually have no use here.
+ * @param $form_state
+ *   The form state of the (entire) configuration form.
+ *
+ * @return
+ *   The form elements for the formatter settings.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+$0  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $element = array();
+
+  if ($display['type'] == 'text_trimmed' || $display['type'] == 'text_summary_or_trimmed') {
+    $element['trim_length'] = array(
+      '#title' => t('Length'),
+      '#type' => 'textfield',
+      '#size' => 20,
+      '#default_value' => $settings['trim_length'],
+      '#element_validate' => array('element_validate_integer_positive'),
+      '#required' => TRUE,
+    );
+  }
+
+  return $element;
+
+}

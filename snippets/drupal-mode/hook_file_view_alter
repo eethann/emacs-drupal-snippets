@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: hook_file_view_alter
+# key: hook_file_view_alter
+# --
+/**
+ * ${2:@todo Add documentation.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_view_alter($build, $type) {
+$0}

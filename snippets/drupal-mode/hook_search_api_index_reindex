@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_index_reindex
+# key: hook_search_api_index_reindex
+# --
+/**
+ * ${2:A search index was scheduled for reindexing
+ *}
+ * @param SearchApiIndex $index
+ *   The edited index.
+ * @param $clear
+ *   Boolean indicating whether the index was also cleared.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_index_reindex(SearchApiIndex $index, $clear = FALSE) {
+$0  db_insert('example_search_index_reindexed')
+    ->fields(array(
+      'index' => $index->id,
+      'update_time' => REQUEST_TIME,
+    ))
+    ->execute();
+}

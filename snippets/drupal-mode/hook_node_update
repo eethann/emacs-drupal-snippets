@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_node_update
+# key: hook_node_update
+# --
+/**
+ * ${2:Respond to updates to a node.
+ *
+ * This hook is invoked from node_save() after the node is updated in the node
+ * table in the database, after the type-specific hook_update() is invoked, and
+ * after field_attach_update() is called.
+ *}
+ * @param $node
+ *   The node that is being updated.
+ *
+ * @ingroup node_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_update($node) {
+$0  db_update('mytable')
+    ->fields(array('extra' => $node->extra))
+    ->condition('nid', $node->nid)
+    ->execute();
+}

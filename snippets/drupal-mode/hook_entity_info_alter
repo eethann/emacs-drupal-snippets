@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_entity_info_alter
+# key: hook_entity_info_alter
+# --
+/**
+ * ${2:Alter the entity info.
+ *
+ * Modules may implement this hook to alter the information that defines an
+ * entity. All properties that are available in hook_entity_info() can be
+ * altered here.
+ *}
+ * @param $entity_info
+ *   The entity info array, keyed by entity name.
+ *
+ * @see hook_entity_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_entity_info_alter(&$entity_info) {
+$0  // Set the controller class for nodes to an alternate implementation of the
+  // DrupalEntityController interface.
+  $entity_info['node']['controller class'] = 'MyCustomNodeController';
+}

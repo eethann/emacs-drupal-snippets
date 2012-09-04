@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_ckeditor_link_autocomplete_alter
+# key: hook_ckeditor_link_autocomplete_alter
+# --
+/**
+ * ${2:Alter autocomplete suggestions.
+ *}
+ * @param $results
+ *   The results returned by hook_ckeditor_link_TYPE_autocomplete.
+ * @param $string
+ *   The string to autocomplete.
+ *
+ * @see hook_ckeditor_link_TYPE_autocomplete().
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ckeditor_link_autocomplete_alter(&$results, $string) {
+$0  // Change results.
+}

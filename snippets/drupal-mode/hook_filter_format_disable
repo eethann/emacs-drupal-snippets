@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_filter_format_disable
+# key: hook_filter_format_disable
+# --
+/**
+ * ${2:Perform actions when a text format has been disabled.
+ *}
+ * @param $format
+ *   The format object of the format being disabled.
+ *
+ * @see hook_filter_format_insert()
+ * @see hook_filter_format_update()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_filter_format_disable($format) {
+$0  mymodule_cache_rebuild();
+}

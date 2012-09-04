@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: hook_date_field_settings_form_alter
+# key: hook_date_field_settings_form_alter
+# --
+/**
+ * ${2:Alter a date field settings form.
+ *}
+ * @param array $form
+ *   Nested array of form elements that comprise the form.
+ * @param array $context
+ *   An associative array containing the following keys:
+ *   - field: The $field array.
+ *   - instance: The $instance array.
+ *   - has_data: The value of $has_data.
+ *
+ * @see hook_field_settings_form()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_date_field_settings_form_alter(&$form, $context) {
+$0  $field = $context['field'];
+  $instance = $context['instance'];
+  $has_data = $context['has_data'];
+
+  $form['repeat'] = array(
+    '#type' => 'select',
+    '#title' => t('Repeating date'),
+    '#default_value' => $field['settings']['repeat'],
+    '#options' => array(0 => t('No'), 1 => t('Yes')),
+    '#attributes' => array('class' => array('container-inline')),
+    '#description' => t("Repeating dates use an 'Unlimited' number of values. Instead of the 'Add more' button, they include a form to select when and how often the date should repeat."),
+    '#disabled' => $has_data,
+  );
+}

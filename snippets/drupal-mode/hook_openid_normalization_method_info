@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_openid_normalization_method_info
+# key: hook_openid_normalization_method_info
+# --
+/**
+ * ${2:Allow modules to declare OpenID normalization methods.
+ *
+ * The discovery function callbacks will be called in turn with an unique
+ * parameter, the identifier to normalize. They have to return a normalized
+ * identifier, or NULL if the identifier is not in a form they can handle.
+ *
+ * The first normalization method that succeed (return a value that is not NULL)
+ * will stop the normalization process.
+ *}
+ * @return
+ *   An array with a set of function callbacks, that will be called in turn
+ *   when normalizing an OpenID identifier. The normalization functions have
+ *   to return a normalized identifier, or NULL if the identifier is not in
+ *   a form they can handle.
+ * @see hook_openid_normalization_method_info_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_openid_normalization_method_info() {
+$0  return array(
+    'new_normalization_idea' => '_my_normalization_method',
+  );
+}

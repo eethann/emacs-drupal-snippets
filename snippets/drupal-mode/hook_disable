@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_disable
+# key: hook_disable
+# --
+/**
+ * ${2:Perform necessary actions before module is disabled.
+ *
+ * The hook is called every time the module is disabled. It should be
+ * implemented in the module's .install file. The implementation can rely
+ * on the .module file being loaded.
+ *}
+ * @see hook_uninstall()
+ * @see hook_modules_disabled()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_disable() {
+$0  mymodule_cache_rebuild();
+}

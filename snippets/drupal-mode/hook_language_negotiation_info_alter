@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_language_negotiation_info_alter
+# key: hook_language_negotiation_info_alter
+# --
+/**
+ * ${2:Perform alterations on language providers.
+ *}
+ * @param $language_providers
+ *   Array of language provider definitions.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_language_negotiation_info_alter(array &$language_providers) {
+$0  if (isset($language_providers['custom_language_provider'])) {
+    $language_providers['custom_language_provider']['config'] = 'admin/config/regional/language/configure/custom-language-provider';
+  }
+}

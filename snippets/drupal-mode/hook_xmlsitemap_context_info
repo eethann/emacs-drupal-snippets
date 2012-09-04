@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_xmlsitemap_context_info
+# key: hook_xmlsitemap_context_info
+# --
+/**
+ * ${2:Provide information about contexts available to XML sitemap.
+ *}
+ * @see hook_xmlsitemap_context_info_alter().
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_xmlsitemap_context_info() {
+$0  $info['vocabulary'] = array(
+    'label' => t('Vocabulary'),
+    'summary callback' => 'mymodule_xmlsitemap_vocabulary_context_summary',
+    'default' => 0,
+  );
+  return $info;
+}

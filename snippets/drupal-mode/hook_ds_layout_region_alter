@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_ds_layout_region_alter
+# key: hook_ds_layout_region_alter
+# --
+/**
+ * ${2:Alter the region options in the field UI screen.
+ *
+ * This function is only called when a layout has been chosen.
+ *}
+ * @param $context
+ *   A collection of keys for the context. The keys are 'entity_type',
+ *   'bundle' and 'view_mode'.
+ * @param $region_info
+ *   A collection of info for regions. The keys are 'region_options'
+ *   and 'table_regions'.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ds_layout_region_alter($context, &$region_info) {
+$0  $region_info['region_options'][$block_key] = $block['title'];
+  $region_info['table_regions'][$block_key] = array(
+    'title' => check_plain($block['title']),
+    'message' => t('No fields are displayed in this region'),
+  );
+}

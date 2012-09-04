@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_redirect_alter
+# key: hook_redirect_alter
+# --
+/**
+ * ${2:Act on a redirect being redirected.
+ *
+ * This hook is invoked from redirect_redirect() before the redirect callback
+ * is invoked.
+ *}
+ * @param $redirect
+ *   The redirect that is being used for the redirect.
+ *
+ * @see redirect_redirect()
+ * @see drupal_page_is_cacheable()
+ * @ingroup redirect_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_redirect_alter($redirect) {
+$0}

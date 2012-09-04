@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_taxonomy_vocabulary_delete
+# key: hook_taxonomy_vocabulary_delete
+# --
+/**
+ * ${2:Respond to the deletion of taxonomy vocabularies.
+ *
+ * Modules implementing this hook can respond to the deletion of taxonomy
+ * vocabularies from the database.
+ *}
+ * @param $vocabulary
+ *   A taxonomy vocabulary object.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_taxonomy_vocabulary_delete($vocabulary) {
+$0  if (variable_get('taxonomy_' . $vocabulary->vid . '_synonyms', FALSE)) {
+    variable_del('taxonomy_' . $vocabulary->vid . '_synonyms');
+  }
+}

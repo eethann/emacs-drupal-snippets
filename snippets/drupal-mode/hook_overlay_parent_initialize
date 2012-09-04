@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_overlay_parent_initialize
+# key: hook_overlay_parent_initialize
+# --
+/**
+ * ${2:Allow modules to act when an overlay parent window is initialized.
+ *
+ * The parent window is initialized when a page is displayed in which the
+ * overlay might be required to be displayed, so modules can act here if they
+ * need to take action to accommodate the possibility of the overlay appearing
+ * within a Drupal page.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_overlay_parent_initialize() {
+$0  // Add our custom JavaScript.
+  drupal_add_js(drupal_get_path('module', 'hook') . '/hook-overlay.js');
+}

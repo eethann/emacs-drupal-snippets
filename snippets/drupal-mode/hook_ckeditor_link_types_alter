@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_ckeditor_link_types_alter
+# key: hook_ckeditor_link_types_alter
+# --
+/**
+ * ${2:Alter types.
+ *}
+ * @param $types
+ *   The types returned by hook_ckeditor_link_types(). The types are keyed by
+ *   'MODULE.TYPE' for easy lookup.
+ *
+ * @see hook_ckeditor_link_types().
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ckeditor_link_types_alter(&$types) {
+$0  // Change types
+}

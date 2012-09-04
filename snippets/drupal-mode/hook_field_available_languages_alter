@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: hook_field_available_languages_alter
+# key: hook_field_available_languages_alter
+# --
+/**
+ * ${2:Alter field_available_languages() values.
+ *
+ * This hook is invoked from field_available_languages() to allow modules to
+ * alter the array of available languages for the given field.
+ *}
+ * @param $languages
+ *   A reference to an array of language codes to be made available.
+ * @param $context
+ *   An associative array containing:
+ *   - entity_type: The type of the entity the field is attached to.
+ *   - field: A field data structure.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_available_languages_alter(&$languages, $context) {
+$0  // Add an unavailable language.
+  $languages[] = 'xx';
+
+  // Remove an available language.
+  $index = array_search('yy', $languages);
+  unset($languages[$index]);
+}

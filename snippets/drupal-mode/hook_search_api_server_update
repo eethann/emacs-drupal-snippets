@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_server_update
+# key: hook_search_api_server_update
+# --
+/**
+ * ${2:A search server was edited, enabled or disabled.
+ *}
+ * @param SearchApiServer $server
+ *   The edited server.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_server_update(SearchApiServer $server) {
+$0  if ($server->name != $server->original->name) {
+    db_insert('example_search_server_name_update')
+      ->fields(array(
+        'server' => $server->machine_name,
+        'update_time' => REQUEST_TIME,
+      ))
+      ->execute();
+  }
+}

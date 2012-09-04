@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_bundle_copy_info
+# key: hook_bundle_copy_info
+# --
+/**
+ * ${2:Implements hook_bundle_copy_info().
+ *
+ * Return info for bundle copy. The first key is
+ * the name of the entity_type.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_bundle_copy_info() {
+$0  return array(
+    'node' => array(
+      'bundle_export_callback' => 'node_type_get_type',
+      'bundle_save_callback' => 'node_type_save',
+      'export_menu' => array(
+        'path' => 'admin/structure/types/export',
+        'access arguments' => 'administer content types',
+      ),
+      'import_menu' => array(
+        'path' => 'admin/structure/types/import',
+        'access arguments' => 'administer content types',
+      ),
+    ),
+  );
+}

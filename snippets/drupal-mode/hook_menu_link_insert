@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: hook_menu_link_insert
+# key: hook_menu_link_insert
+# --
+/**
+ * ${2:Inform modules that a menu link has been created.
+ *
+ * This hook is used to notify modules that menu items have been
+ * created. Contributed modules may use the information to perform
+ * actions based on the information entered into the menu system.
+ *}
+ * @param $link
+ *   Associative array defining a menu link as passed into menu_link_save().
+ *
+ * @see hook_menu_link_update()
+ * @see hook_menu_link_delete()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_menu_link_insert($link) {
+$0  // In our sample case, we track menu items as editing sections
+  // of the site. These are stored in our table as 'disabled' items.
+  $record['mlid'] = $link['mlid'];
+  $record['menu_name'] = $link['menu_name'];
+  $record['status'] = 0;
+  drupal_write_record('menu_example', $record);
+}

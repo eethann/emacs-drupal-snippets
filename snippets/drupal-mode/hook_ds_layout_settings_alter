@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_ds_layout_settings_alter
+# key: hook_ds_layout_settings_alter
+# --
+/**
+ * ${2:Modify the layout settings just before they get saved.
+ *}
+ * @param $record
+ *   The record just before it gets saved into the database.
+ * @param $form_state
+ *   The form_state values.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ds_layout_settings_alter($record, $form_state) {
+$0  $record->settings['hide_page_title'] = TRUE;
+}

@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_bean_types
+# key: hook_bean_types
+# --
+/**
+ * ${2:Implements hook_bean_types().
+ *
+ * Beans uses ctools plugins to define the block types.
+ * All plugin files must be registered in the .info file.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_bean_types() {
+$0  $plugins = array();
+
+  $plugins['plugin_key'] = array(
+    'label' => t('Title'),
+    'description' => t('Description'),
+    // This is optional.  Set it to TRUE if you do not want the plugin to be displayed in the UI
+    'abstract' => FALSE,
+    'handler' => array(
+      'class' => 'ClassName',
+      'parent' => 'bean',
+    ),
+  );
+
+  return $plugins;
+}

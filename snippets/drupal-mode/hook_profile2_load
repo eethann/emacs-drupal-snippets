@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_profile2_load
+# key: hook_profile2_load
+# --
+/**
+* Act on profiles being loaded from the database.
+*
+* This hook is invoked during profile loading, which is handled by
+* entity_load(), via the EntityCRUDController.
+*
+* @param $entities
+*   An array of profile2 entities being loaded, keyed by id.
+*
+* @see hook_entity_load()
+*/
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_profile2_load($entities) {
+$0  $result = db_query('SELECT pid, foo FROM {mytable} WHERE pid IN(:ids)', array(':ids' => array_keys($entities)));
+  foreach ($result as $record) {
+    $entities[$record->pid]->foo = $record->foo;
+  }
+}

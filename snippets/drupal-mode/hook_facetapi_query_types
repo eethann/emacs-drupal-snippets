@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_query_types
+# key: hook_facetapi_query_types
+# --
+/**
+ * ${2:Define all query type plugins provided by the module.
+ *
+ * Query type plugins are responsible for converting the active facet items into
+ * facet queries that are processed by the backend. They are also responsible
+ * for extracting extra information about the active item, such as the start and
+ * end values of a range query.
+ *}
+ * @return array
+ *   An associative array keyed by unique name of the query type. Each query
+ *   type is an associative array keyed by "handler" containing:
+ *   - class: The name of the plugin class.
+ *   - adapter: The adapter that the query type plugin is associated with.
+ *
+ * @see FacetapiQueryTypeInterface
+ * @see FacetapiQueryType
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_query_types() {
+$0  return array(
+    'apachesolr_term' => array(
+      'handler' => array(
+        'class' => 'FacetapiApachesolrTerm',
+        'adapter' => 'apachesolr',
+      ),
+    ),
+  );
+}

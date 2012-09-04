@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_wysiwyg_include_directory
+# key: hook_wysiwyg_include_directory
+# --
+/**
+ * ${2:Register a directory containing Wysiwyg plugins.
+ *}
+ * @param $type
+ *   The type of objects being collected: either 'plugins' or 'editors'.
+ * @return
+ *   A sub-directory of the implementing module that contains the corresponding
+ *   plugin files. This directory must only contain integration files for
+ *   Wysiwyg module.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_wysiwyg_include_directory($type) {
+$0  switch ($type) {
+    case 'plugins':
+      // You can just return $type, if you place your Wysiwyg plugins into a
+      // sub-directory named 'plugins'.
+      return $type;
+  }
+}

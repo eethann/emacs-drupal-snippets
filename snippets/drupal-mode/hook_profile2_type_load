@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_profile2_type_load
+# key: hook_profile2_type_load
+# --
+/**
+ * ${2:Act on profile type being loaded from the database.
+ *
+ * This hook is invoked during profile type loading, which is handled by
+ * entity_load(), via the EntityCRUDController.
+ *}
+ * @param $types
+ *   An array of profiles being loaded, keyed by profile type names.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_profile2_type_load($types) {
+$0  if (isset($types['main'])) {
+    $types['main']->userCategory = FALSE;
+    $types['main']->userView = FALSE;
+  }
+}

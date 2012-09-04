@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: hook_views_slideshow_option_definition
+# key: hook_views_slideshow_option_definition
+# --
+/**
+ * ${2:Set default values for your form fields specified in hook_views_slideshow_type_form
+ *}
+ * @return
+ *  Associative array of slideshow type name and options.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_slideshow_option_definition() {
+$0  $options['views_slideshow_cycle'] = array(
+    'contains' => array(
+      // Transition
+      'effect' => array('default' => 'fade'),
+      'transition_advanced' => array('default' => 0),
+      'timeout' => array('default' => 5000),
+      'speed' => array('default' => 700), //normal
+      'delay' => array('default' => 0),
+      'sync' => array('default' => 1),
+      'random' => array('default' => 0),
+    )
+  );
+  return $options;
+}

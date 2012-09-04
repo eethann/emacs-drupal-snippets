@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_file_move
+# key: hook_file_move
+# --
+/**
+ * ${2:Respond to a file that has been moved.
+ *}
+ * @param $file
+ *   The updated file object after the move.
+ * @param $source
+ *   The original file object before the move.
+ *
+ * @see file_move()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_move($file, $source) {
+$0
+}

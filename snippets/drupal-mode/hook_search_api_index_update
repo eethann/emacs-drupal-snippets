@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_index_update
+# key: hook_search_api_index_update
+# --
+/**
+ * ${2:A search index was edited in any way.
+ *}
+ * @param SearchApiIndex $index
+ *   The edited index.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_index_update(SearchApiIndex $index) {
+$0  if ($index->name != $index->original->name) {
+    db_insert('example_search_index_name_update')
+      ->fields(array(
+        'index' => $index->machine_name,
+        'update_time' => REQUEST_TIME,
+      ))
+      ->execute();
+  }
+}

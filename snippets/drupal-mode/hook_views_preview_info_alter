@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: hook_views_preview_info_alter
+# key: hook_views_preview_info_alter
+# --
+/**
+ * ${2:This hook should be placed in MODULENAME.views.inc and it will be auto-loaded.
+ * MODULENAME.views.inc must be in the directory specified by the 'path' key
+ * returned by MODULENAME_views_api(), or the same directory as the .module
+ * file, if 'path' is unspecified.
+ *
+ * Alter the rows that appear with a view preview, which include query and
+ * performance statistics. $rows is an associative array with two keys:
+ * - query: An array of rows suitable for theme('table'), containing information
+ *   about the query and the display title and path.
+ * - statistics: An array of rows suitable for theme('table'), containing
+ *   performance statistics.
+ *
+ * Warning: $view is not a reference in PHP4 and cannot be modified here. But it IS
+ * a reference in PHP5, and can be modified. Please be careful with it.
+ *}
+ * @see theme_table
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_preview_info_alter(&$rows, $view) {
+$0  // example code here
+}

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_aggregator_remove
+# key: hook_aggregator_remove
+# --
+/**
+ * ${2:Remove stored feed data.
+ *
+ * Aggregator calls this hook if either a feed is deleted or a user clicks on
+ * "remove items".
+ *
+ * If your module stores feed items for example on hook_aggregator_process() it
+ * is recommended to implement this hook and to remove data related to $feed
+ * when called.
+ *}
+ * @param $feed
+ *   The $feed object whose items are being removed.
+ *
+ * @ingroup aggregator
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_aggregator_remove($feed) {
+$0  mymodule_remove_items($feed->fid);
+}

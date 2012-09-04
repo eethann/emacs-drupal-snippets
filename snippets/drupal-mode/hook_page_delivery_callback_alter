@@ -1,0 +1,48 @@
+# -*- mode: snippet -*-
+# name: hook_page_delivery_callback_alter
+# key: hook_page_delivery_callback_alter
+# --
+/**
+ * ${2:Alters the delivery callback used to send the result of the page callback to the browser.
+ *
+ * Called by drupal_deliver_page() to allow modules to alter how the
+ * page is delivered to the browser.
+ *
+ * This hook is intended for altering the delivery callback based on
+ * information unrelated to the path of the page accessed. For example,
+ * it can be used to set the delivery callback based on a HTTP request
+ * header (as shown in the code sample). To specify a delivery callback
+ * based on path information, use hook_menu() or hook_menu_alter().
+ *
+ * This hook can also be used as an API function that can be used to explicitly
+ * set the delivery callback from some other function. For example, for a module
+ * named MODULE:}
+ * @code
+ * function MODULE_page_delivery_callback_alter(&$callback, $set = FALSE) {
+ *   static $stored_callback;
+ *   if ($set) {
+ *     $stored_callback = $callback;
+ *   }
+ *   elseif (isset($stored_callback)) {
+ *     $callback = $stored_callback;
+ *   }
+ * }
+ * function SOMEWHERE_ELSE() {
+ *   $desired_delivery_callback = 'foo';
+ *   MODULE_page_delivery_callback_alter($desired_delivery_callback, TRUE);
+ * }
+ * @endcode
+ *
+ * @param $callback
+ *   The name of a function.
+ *
+ * @see drupal_deliver_page()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_page_delivery_callback_alter(&$callback) {
+$0  // jQuery sets a HTTP_X_REQUESTED_WITH header of 'XMLHttpRequest'.
+  // If a page would normally be delivered as an html page, and it is called
+  // from jQuery, deliver it instead as an Ajax response.
+  if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' && $callback == 'drupal_deliver_html_page') {
+    $callback = 'ajax_deliver';
+  }
+}

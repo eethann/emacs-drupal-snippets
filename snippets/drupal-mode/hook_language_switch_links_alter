@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: hook_language_switch_links_alter
+# key: hook_language_switch_links_alter
+# --
+/**
+ * ${2:Perform alterations on language switcher links.
+ *
+ * A language switcher link may need to point to a different path or use a
+ * translated link text before going through l(), which will just handle the
+ * path aliases.
+ *}
+ * @param $links
+ *   Nested array of links keyed by language code.
+ * @param $type
+ *   The language type the links will switch.
+ * @param $path
+ *   The current path.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_language_switch_links_alter(array &$links, $type, $path) {
+$0  global $language;
+
+  if ($type == LANGUAGE_TYPE_CONTENT && isset($links[$language->language])) {
+    foreach ($links[$language->language] as $link) {
+      $link['attributes']['class'][] = 'active-language';
+    }
+  }
+}

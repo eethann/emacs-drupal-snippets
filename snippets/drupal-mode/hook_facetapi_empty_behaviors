@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_empty_behaviors
+# key: hook_facetapi_empty_behaviors
+# --
+/**
+ * ${2:Define all empty behavior plugins provided by the module.
+ *
+ * Empty behavior plugins determine what to display when a facet has no
+ * available items.
+ *}
+ * @return array
+ *   An associative array keyed by unique name of the empty behavior. Each empty
+ *   behavior is an associative array keyed by "handler" containing:
+ *   - label: The human readable name of the plugin displayed in the admin UI.
+ *   - class: The name of the plugin class.
+ *
+ * @see FacetapiEmptyBehavior
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_empty_behaviors() {
+$0  return array(
+    'none' => array(
+      'handler' => array(
+        'label' => t('Do not display facet'),
+        'class' => 'FacetapiEmptyBehaviorNone',
+      ),
+    ),
+  );
+}

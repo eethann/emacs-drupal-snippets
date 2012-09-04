@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: hook_form_FORM_ID_alter
+# key: hook_form_FORM_ID_alter
+# --
+/**
+ * ${2:Provide a form-specific alteration instead of the global hook_form_alter().
+ *
+ * Modules can implement hook_form_FORM_ID_alter() to modify a specific form,
+ * rather than implementing hook_form_alter() and checking the form ID, or
+ * using long switch statements to alter multiple forms.
+ *
+ * Form alter hooks are called in the following order: hook_form_alter(),
+ * hook_form_BASE_FORM_ID_alter(), hook_form_FORM_ID_alter(). See
+ * hook_form_alter() for more details.
+ *}
+ * @param $form
+ *   Nested array of form elements that comprise the form.
+ * @param $form_state
+ *   A keyed array containing the current state of the form. The arguments
+ *   that drupal_get_form() was originally called with are available in the
+ *   array $form_state['build_info']['args'].
+ * @param $form_id
+ *   String representing the name of the form itself. Typically this is the
+ *   name of the function that generated the form.
+ *
+ * @see hook_form_alter()
+ * @see hook_form_BASE_FORM_ID_alter()
+ * @see drupal_prepare_form()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_form_FORM_ID_alter(&$form, &$form_state, $form_id) {
+$0  // Modification for the form with the given form ID goes here. For example, if
+  // FORM_ID is "user_register_form" this code would run only on the user
+  // registration form.
+
+  // Add a checkbox to registration form about agreeing to terms of use.
+  $form['terms_of_use'] = array(
+    '#type' => 'checkbox',
+    '#title' => t("I agree with the website's terms and conditions."),
+    '#required' => TRUE,
+  );
+}

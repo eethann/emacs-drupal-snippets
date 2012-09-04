@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_taxonomy_vocabulary_load
+# key: hook_taxonomy_vocabulary_load
+# --
+/**
+ * ${2:Act on taxonomy vocabularies when loaded.
+ *
+ * Modules implementing this hook can act on the vocabulary objects before they
+ * are returned by taxonomy_vocabulary_load_multiple().
+ *}
+ * @param $vocabulary
+ *   An array of taxonomy vocabulary objects.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_taxonomy_vocabulary_load($vocabularies) {
+$0  foreach ($vocabularies as $vocabulary) {
+    $vocabulary->synonyms = variable_get('taxonomy_' . $vocabulary->vid . '_synonyms', FALSE);
+  }
+}

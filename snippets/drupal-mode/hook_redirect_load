@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: hook_redirect_load
+# key: hook_redirect_load
+# --
+/**
+ * ${2:Act on redirects being loaded from the database.
+ *
+ * This hook is invoked during redirect loading, which is handled by
+ * entity_load(), via classes RedirectController and
+ * DrupalDefaultEntityController. After the redirect information is read from
+ * the database or the entity cache, hook_entity_load() is invoked on all
+ * implementing modules, and then hook_redirect_load() is invoked on all
+ * implementing modules.
+ *
+ * This hook should only be used to add information that is not in the redirect
+ * table, not to replace information that is in that table (which could
+ * interfere with the entity cache). For performance reasons, information for
+ * all available redirects should be loaded in a single query where possible.
+ *
+ * The $types parameter allows for your module to have an early return (for
+ * efficiency) if your module only supports certain redirect types.
+ *}
+ * @param $redirects
+ *   An array of the redirects being loaded, keyed by rid.
+ * @param $types
+ *   An array containing the types of the redirects.
+ *
+ * @ingroup redirect_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_redirect_load(array &$redirects, $types) {
+$0
+}

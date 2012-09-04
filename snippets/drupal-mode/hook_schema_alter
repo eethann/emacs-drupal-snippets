@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_schema_alter
+# key: hook_schema_alter
+# --
+/**
+ * ${2:Perform alterations to existing database schemas.
+ *
+ * When a module modifies the database structure of another module (by
+ * changing, adding or removing fields, keys or indexes), it should
+ * implement hook_schema_alter() to update the default $schema to take its
+ * changes into account.
+ *
+ * See hook_schema() for details on the schema definition structure.
+ *}
+ * @param $schema
+ *   Nested array describing the schemas for all modules.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_schema_alter(&$schema) {
+$0  // Add field to existing schema.
+  $schema['users']['fields']['timezone_id'] = array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+    'description' => 'Per-user timezone configuration.',
+  );
+}

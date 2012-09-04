@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_updater_info_alter
+# key: hook_updater_info_alter
+# --
+/**
+ * ${2:Alter the Updater information array.
+ *
+ * An Updater is a class that knows how to update various parts of the Drupal
+ * file system, for example to update modules that have newer releases, or to
+ * install a new theme.
+ *}
+ * @param array $updaters
+ *   Associative array of updaters as defined through hook_updater_info().
+ *   Alter this array directly.
+ *
+ * @see drupal_get_updaters()
+ * @see hook_updater_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_updater_info_alter(&$updaters) {
+$0  // Adjust weight so that the theme Updater gets a chance to handle a given
+  // update task before module updaters.
+  $updaters['theme']['weight'] = -1;
+}

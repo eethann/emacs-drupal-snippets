@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_xmlsitemap_engine_info
+# key: hook_xmlsitemap_engine_info
+# --
+/**
+ * ${2:Provide a list of supported sitemap engines.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_xmlsitemap_engine_info() {
+$0  $engines['example'] = array(
+    'name' => t('Example search engine'),
+    'url' => 'http://example.com/ping?sitemap=[sitemap]'
+  );
+  return $engines;
+}

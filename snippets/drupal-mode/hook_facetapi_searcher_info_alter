@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_searcher_info_alter
+# key: hook_facetapi_searcher_info_alter
+# --
+/**
+ * ${2:Allows for alterations to the searcher definitions.
+ *}
+ * @param array &$searcher_info
+ *   The return values of hook_facetapi_searcher_info() implementations.
+ *
+ * @see hook_facetapi_searcher_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_searcher_info_alter(array &$searcher_info) {
+$0  $searcher_info['search']['label'] = t('Core search module');
+}

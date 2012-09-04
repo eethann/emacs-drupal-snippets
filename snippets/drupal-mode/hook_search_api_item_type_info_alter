@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_item_type_info_alter
+# key: hook_search_api_item_type_info_alter
+# --
+/**
+ * ${2:Alter the item type info.
+ *
+ * Modules may implement this hook to alter the information that defines an
+ * item type. All properties that are available in
+ * hook_search_api_item_type_info() can be altered here.
+ *}
+ * @param array $infos
+ *   The item type info array, keyed by type identifier.
+ *
+ * @see hook_search_api_item_type_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_item_type_info_alter(array &$infos) {
+$0  // Adds a boolean value is_entity to all type options telling whether the item
+  // type represents an entity type.
+  foreach ($infos as $type => $info) {
+    $info['is_entity'] = (bool) entity_get_info($type);
+  }
+}

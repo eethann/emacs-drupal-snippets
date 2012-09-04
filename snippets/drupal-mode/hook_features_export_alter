@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_features_export_alter
+# key: hook_features_export_alter
+# --
+/**
+ * ${2:Alter the final export array just prior to the rendering of defaults. Allows
+ * modules a final say in altering what component objects are exported.
+ *}
+ * @param array &$export
+ *   By reference. An array of all components to be exported with a given
+ *   feature.
+ * @param array $module_name
+ *   The name of the feature module to be generated.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_features_export_alter(&$export, $module_name) {
+$0  // Example: do not allow the page content type to be exported, ever.
+  if (!empty($export['features']['node']['page'])) {
+    unset($export['features']['node']['page']);
+  }
+}

@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_filters
+# key: hook_facetapi_filters
+# --
+/**
+ * ${2:Define all filter plugins provided by the module.
+ *
+ * Filter plugins provide last minute modifications to the facet's render array
+ * prior to being acted on by the widget plugin. Filters are also an alter
+ * mechanism for the facet that developers can use to make any customizations
+ * prior to the widget being rendered.
+ *}
+ * @return array
+ *   An associative array keyed by unique name of the filter. Each filter is an
+ *   associative array keyed by "handler" containing:
+ *   - label: The human readable name of the plugin displayed in the admin UI.
+ *   - class: The name of the plugin class.
+ *
+ * @see FacetapiFilter
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_filters() {
+$0  return array(
+    'active_items' => array(
+      'handler' => array(
+        'label' => t('Do not display active items'),
+        'class' => 'FacetapiFilterActiveItems',
+      ),
+    ),
+  );
+}

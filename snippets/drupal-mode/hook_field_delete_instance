@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_field_delete_instance
+# key: hook_field_delete_instance
+# --
+/**
+ * ${2:Act on a field instance being deleted.
+ *
+ * This hook is invoked from field_delete_instance() after the instance is
+ * deleted.
+ *}
+ * @param $instance
+ *   The instance just deleted.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_delete_instance($instance) {
+$0  // @todo Needs function body.
+}

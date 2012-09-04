@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_processor_info
+# key: hook_search_api_processor_info
+# --
+/**
+ * ${2:Registers one or more processors. These are classes implementing the
+ * SearchApiProcessorInterface interface which can be used at index and search
+ * time to pre-process item data or the search query, and at search time to
+ * post-process the returned search results.
+ *}
+ * @see SearchApiProcessorInterface
+ *
+ * @return array
+ *   An associative array keyed by the processor id and containing arrays
+ *   with the following keys:
+ *   - name: The name to display for this processor.
+ *   - description: A short description of what the processor does at each
+ *     phase.
+ *   - class: The processor class, which has to implement the
+ *     SearchApiProcessorInterface interface.
+ *   - weight: (optional) Defines the order in which processors are displayed
+ *     (and, therefore, invoked) by default. Defaults to 0.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_processor_info() {
+$0  $callbacks['example_processor'] = array(
+    'name' => t('Example processor'),
+    'description' => t('Pre- and post-processes data in really cool ways.'),
+    'class' => 'ExampleSearchApiProcessor',
+    'weight' => -1,
+  );
+  $callbacks['example_processor_minimal'] = array(
+    'name' => t('Example processor 2'),
+    'description' => t('Processor with minimal description.'),
+    'class' => 'ExampleSearchApiProcessor2',
+  );
+
+  return $callbacks;
+}

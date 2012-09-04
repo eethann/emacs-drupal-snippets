@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_trigger_info_alter
+# key: hook_trigger_info_alter
+# --
+/**
+ * ${2:Alter triggers declared by hook_trigger_info().
+ *}
+ * @param $triggers
+ *   Array of trigger information returned by hook_trigger_info()
+ *   implementations. Modify this array in place. See hook_trigger_info()
+ *   for information on what this might contain.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_trigger_info_alter(&$triggers) {
+$0  $triggers['node']['node_insert']['label'] = t('When content is saved');
+}

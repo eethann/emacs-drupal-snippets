@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_redirect_insert
+# key: hook_redirect_insert
+# --
+/**
+ * ${2:Respond to creation of a new redirect.
+ *
+ * This hook is invoked from redirect_save() after the redirect is inserted
+ * into the redirect table in the database.
+ *}
+ * @param $redirect
+ *   The redirect that is being created.
+ *
+ * @see redirect_save()
+ * @ingroup redirect_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_redirect_insert($redirect) {
+$0
+}

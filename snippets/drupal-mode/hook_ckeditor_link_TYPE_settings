@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_ckeditor_link_TYPE_settings
+# key: hook_ckeditor_link_TYPE_settings
+# --
+/**
+ * ${2:Add settings to the CKEditor Link settings form.
+ *}
+ * @return
+ *   An array containing the form elements to add.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ckeditor_link_TYPE_settings() {
+$0  $form = array(
+    //
+  );
+  return $form;
+}

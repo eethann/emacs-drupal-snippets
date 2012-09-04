@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_themes_enabled
+# key: hook_themes_enabled
+# --
+/**
+ * ${2:Respond to themes being enabled.
+ *}
+ * @param array $theme_list
+ *   Array containing the names of the themes being enabled.
+ *
+ * @see theme_enable()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_themes_enabled($theme_list) {
+$0  foreach ($theme_list as $theme) {
+    block_theme_initialize($theme);
+  }
+}

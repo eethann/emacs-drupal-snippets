@@ -1,0 +1,48 @@
+# -*- mode: snippet -*-
+# name: hook_language_negotiation_info
+# key: hook_language_negotiation_info
+# --
+/**
+ * ${2:Allow modules to define their own language providers.
+ *}
+ * @return
+ *   An array of language provider definitions. Each language provider has an
+ *   identifier key. The language provider definition is an associative array
+ *   that may contain the following key-value pairs:
+ *   - "types": An array of allowed language types. If a language provider does
+ *     not specify which language types it should be used with, it will be
+ *     available for all the configurable language types.
+ *   - "callbacks": An array of functions that will be called to perform various
+ *     tasks. Possible key-value pairs are:
+ *     - "language": Required. The callback that will determine the language
+ *       value.
+ *     - "switcher": The callback that will determine the language switch links
+ *       associated to the current language provider.
+ *     - "url_rewrite": The callback that will provide URL rewriting.
+ *   - "file": A file that will be included before the callback is invoked; this
+ *     allows callback functions to be in separate files.
+ *   - "weight": The default weight the language provider has.
+ *   - "name": A human-readable identifier.
+ *   - "description": A description of the language provider.
+ *   - "config": An internal path pointing to the language provider
+ *     configuration page.
+ *   - "cache": The value Drupal's page cache should be set to for the current
+ *     language provider to be invoked.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_language_negotiation_info() {
+$0  return array(
+    'custom_language_provider' => array(
+      'callbacks' => array(
+        'language' => 'custom_language_provider_callback',
+        'switcher' => 'custom_language_switcher_callback',
+        'url_rewrite' => 'custom_language_url_rewrite_callback',
+      ),
+      'file' => drupal_get_path('module', 'custom') . '/custom.module',
+      'weight' => -4,
+      'types' => array('custom_language_type'),
+      'name' => t('Custom language provider'),
+      'description' => t('This is a custom language provider.'),
+      'cache' => 0,
+    ),
+  );
+}

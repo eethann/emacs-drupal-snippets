@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: hook_field_storage_delete_revision
+# key: hook_field_storage_delete_revision
+# --
+/**
+ * ${2:Delete a single revision of field data for an entity.
+ *
+ * This hook is invoked from field_attach_delete_revision() to ask the field
+ * storage module to delete field revision data.
+ *
+ * Deleting the current (most recently written) revision is not
+ * allowed as has undefined results.
+ *}
+ * @param $entity_type
+ *   The entity type of entity, such as 'node' or 'user'.
+ * @param $entity
+ *   The entity on which to operate. The revision to delete is
+ *   indicated by the entity's revision ID property, as identified by
+ *   hook_fieldable_info() for $entity_type.
+ * @param $fields
+ *   An array listing the fields to delete. The keys and values of the
+ *   array are field IDs.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_storage_delete_revision($entity_type, $entity, $fields) {
+$0  list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
+
+  if (isset($vid)) {
+    foreach ($fields as $field_id) {
+      $field = field_info_field_by_id($field_id);
+      $revision_name = _field_sql_storage_revision_tablename($field);
+      db_delete($revision_name)
+        ->condition('entity_type', $entity_type)
+        ->condition('entity_id', $id)
+        ->condition('revision_id', $vid)
+        ->execute();
+    }
+  }
+}

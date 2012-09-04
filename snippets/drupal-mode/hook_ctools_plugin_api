@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_ctools_plugin_api
+# key: hook_ctools_plugin_api
+# --
+/**
+ * ${2:Implement hook_ctools_plugin_api().
+ * This hook is needed to let ctools know about exportables.
+ * If you create field groups by using hook_field_group_info, you
+ * will need to include the ctools api hook as well.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ctools_plugin_api($module, $api) {
+$0  if ($module == 'field_group' && $api == 'field_group') {
+    return array('version' => 1);
+  }
+}

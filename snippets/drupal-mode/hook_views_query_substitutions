@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: hook_views_query_substitutions
+# key: hook_views_query_substitutions
+# --
+/**
+ * ${2:Stub hook documentation}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_query_substitutions() {
+$0  // example code here
+}

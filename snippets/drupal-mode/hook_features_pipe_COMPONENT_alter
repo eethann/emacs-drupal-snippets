@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_features_pipe_COMPONENT_alter
+# key: hook_features_pipe_COMPONENT_alter
+# --
+/**
+ * ${2:Alter the pipe array for a given component. This hook should be implemented
+ * with the name of the component type in place of `component` in the function
+ * name, e.g. `features_pipe_views_alter()` will alter the pipe for the Views
+ * component.
+ *}
+ * @param array &$pipe
+ *   By reference. The pipe array of further processors that should be called.
+ * @param array $data
+ *   An array of machine names for the component in question to be exported.
+ * @param array &$export
+ *   By reference. An array of all components to be exported with a given
+ *   feature.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_features_pipe_COMPONENT_alter(&$pipe, $data, $export) {
+$0  if (in_array($data, 'my-node-type')) {
+    $pipe['dependencies'][] = 'mymodule';
+  }
+}

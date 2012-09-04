@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_field_attach_load
+# key: hook_field_attach_load
+# --
+/**
+ * ${2:Act on field_attach_load().
+ *
+ * This hook is invoked after the field module has performed the operation.
+ *
+ * Unlike other field_attach hooks, this hook accounts for 'multiple loads'.
+ * Instead of the usual $entity parameter, it accepts an array of entities,
+ * indexed by entity ID. For performance reasons, information for all available
+ * entities should be loaded in a single query where possible.
+ *
+ * The changes made to the entities' field values get cached by the field cache
+ * for subsequent loads.
+ *
+ * See field_attach_load() for details and arguments.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_attach_load($entity_type, $entities, $age, $options) {
+$0  // @todo Needs function body.
+}

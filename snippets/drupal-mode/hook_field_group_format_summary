@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_field_group_format_summary
+# key: hook_field_group_format_summary
+# --
+/**
+ * ${2:Implements hook_field_group_format_summary().
+ *
+ * Place to override or change default summary behavior. In most
+ * cases the implementation of field group itself will be enough.
+ *
+ * TODO It might be better to change this hook with already created summaries,
+ * giving the ability to alter or add it later on.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_group_format_summary($group) {
+$0  $output = '';
+  // Create additional summary or change the default setting.
+  return $output;
+}

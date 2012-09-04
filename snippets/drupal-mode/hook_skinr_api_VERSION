@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: hook_skinr_api_VERSION
+# key: hook_skinr_api_VERSION
+# --
+/**
+ * ${2:Define the API version of Skinr your code is compatible with.
+ *
+ * This is required when creating a new Skinr plugin. It checks to make sure
+ * your Skins are compatible with the installed version of Skinr and takes care
+ * of loading the include files.
+ *}
+ * @return
+ *   An associative array describing Skinr API integration:
+ *   - directory: (optional) The name of a sub-directory, in which include files
+ *     containing skin or group definitions may be found.
+ *   - path: (optional) The path to the directory containing the directory
+ *     specified in 'directory'. Defaults to the path of the module or theme
+ *     implementing the hook.
+ *   In case no Skinr plugin include files exist for your implementation, simply
+ *   define the function with an empty function body.
+ *
+ * The "hook" prefix is substituted with the name of the module or theme that
+ * implements it, e.g. THEME_skinr_api_VERSION() in template.php, or
+ * MODULE_skinr_api_VERSION() in MODULE.module.
+ *
+ * VERSION is normally identical to Skinr's major version; e.g., "2".
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_skinr_api_VERSION() {
+$0  return array(
+    'path' => drupal_get_path('module', 'mymodule'),
+    'directory' => 'skins',
+  );
+}

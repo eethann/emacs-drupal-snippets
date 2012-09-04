@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_system_theme_info
+# key: hook_system_theme_info
+# --
+/**
+ * ${2:Return additional themes provided by modules.
+ *
+ * Only use this hook for testing purposes. Use a hidden MYMODULE_test.module
+ * to implement this hook. Testing themes should be hidden, too.
+ *
+ * This hook is invoked from _system_rebuild_theme_data() and allows modules to
+ * register additional themes outside of the regular 'themes' directories of a
+ * Drupal installation.
+ *}
+ * @return
+ *   An associative array. Each key is the system name of a theme and each value
+ *   is the corresponding path to the theme's .info file.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_system_theme_info() {
+$0  $themes['mymodule_test_theme'] = drupal_get_path('module', 'mymodule') . '/mymodule_test_theme/mymodule_test_theme.info';
+  return $themes;
+}

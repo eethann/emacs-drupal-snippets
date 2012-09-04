@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_webform_submission_delete
+# key: hook_webform_submission_delete
+# --
+/**
+ * ${2:Respond to a Webform submission being deleted.
+ *}
+ * @param $node
+ *   The Webform node on which this submission was made.
+ * @param $submission
+ *   The Webform submission that was just deleted from the database.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_submission_delete($node, $submission) {
+$0  // Delete a record from a 3rd-party module table when a submission is deleted.
+  db_delete('mymodule_table')
+    ->condition('nid', $node->nid)
+    ->condition('sid', $submission->sid)
+    ->execute();
+}

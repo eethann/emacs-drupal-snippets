@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_server_delete
+# key: hook_search_api_server_delete
+# --
+/**
+ * ${2:A search server was deleted.
+ *}
+ * @param SearchApiServer $server
+ *   The deleted server.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_server_delete(SearchApiServer $server) {
+$0  db_insert('example_search_server_update')
+    ->fields(array(
+      'server' => $server->machine_name,
+      'update_time' => REQUEST_TIME,
+    ))
+    ->execute();
+  db_delete('example_search_server')
+    ->condition('server', $server->machine_name)
+    ->execute();
+}

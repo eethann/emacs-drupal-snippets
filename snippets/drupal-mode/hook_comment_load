@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_comment_load
+# key: hook_comment_load
+# --
+/**
+ * ${2:Comments are being loaded from the database.
+ *}
+ * @param $comments
+ *  An array of comment objects indexed by cid.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_comment_load($comments) {
+$0  $result = db_query('SELECT cid, foo FROM {mytable} WHERE cid IN (:cids)', array(':cids' => array_keys($comments)));
+  foreach ($result as $record) {
+    $comments[$record->cid]->foo = $record->foo;
+  }
+}

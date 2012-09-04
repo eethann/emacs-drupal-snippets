@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: hook_features_export_render
+# key: hook_features_export_render
+# --
+/**
+ * ${2:Component hook. The hook should be implemented using the name ot the
+ * component, not the module, eg. [component]_features_export() rather than
+ * [module]_features_export().
+ *
+ * Render one or more component objects to code.
+ *}
+ * @param string $module_name
+ *   The name of the feature module to be exported.
+ * @param array $data
+ *   An array of machine name identifiers for the objects to be rendered.
+ * @param array $export
+ *   The full export array of the current feature being exported. This is only
+ *   passed when hook_features_export_render() is invoked for an actual feature
+ *   update or recreate, not during state checks or other operations.
+ * @return array
+ *   An associative array of rendered PHP code where the key is the name of the
+ *   hook that should wrap the PHP code. The hook should not include the name
+ *   of the module, e.g. the key for `hook_example` should simply be `example`.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_features_export_render($module_name, $data, $export = NULL) {
+$0  $code = array();
+  $code[] = '$mycomponents = array();';
+  foreach ($data as $name) {
+    $code[] = "  \$mycomponents['{$name}'] = " . features_var_export(mycomponent_load($name)) .";";
+  }
+  $code[] = "return \$mycomponents;";
+  $code = implode("\n", $mycomponents);
+  return array('mycomponent_defaults' => $code);
+}

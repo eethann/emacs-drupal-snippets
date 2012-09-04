@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_query_xmlsitemap_generate_alter
+# key: hook_query_xmlsitemap_generate_alter
+# --
+/**
+ * ${2:Alter the query selecting data from {xmlsitemap} during sitemap generation.
+ *}
+ * @param $query
+ *   A Query object describing the composite parts of a SQL query.
+ *
+ * @see hook_query_TAG_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_query_xmlsitemap_generate_alter(QueryAlterableInterface $query) {
+$0  $sitemap = $query->getMetaData('sitemap');
+  if (!empty($sitemap->context['vocabulary'])) {
+    $node_condition = db_and();
+    $node_condition->condition('type', 'taxonomy_term');
+    $node_condition->condition('subtype', $sitemap->context['vocabulary']);
+    $normal_condition = db_and();
+    $normal_condition->condition('type', 'taxonomy_term', '<>');
+    $condition = db_or();
+    $condition->condition($node_condition);
+    $condition->condition($normal_condition);
+    $query->condition($condition);
+  }
+}

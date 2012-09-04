@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_language_types_info_alter
+# key: hook_language_types_info_alter
+# --
+/**
+ * ${2:Perform alterations on language types.
+ *}
+ * @param $language_types
+ *   Array of language type definitions.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_language_types_info_alter(array &$language_types) {
+$0  if (isset($language_types['custom_language_type'])) {
+    $language_types['custom_language_type_custom']['description'] = t('A far better description.');
+  }
+}

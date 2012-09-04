@@ -1,0 +1,50 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_searcher_info
+# key: hook_facetapi_searcher_info
+# --
+/**
+ * ${2:Define all searchers provided by the module.
+ *
+ * Searchers are synonymous with search pages, or environments. Each searcher is
+ * associated with an adapter instance. Multiple searchers can share the same
+ * adapter class, but each searcher will spawn a separate instance of the
+ * adapter. Each searcher must be unique, so it is common practice to prefix the
+ * name with the module implementing the hook, such as "apachesolr@searcher-1",
+ * "apachesolr@searcher-2", "search_api@searcher-1", etc.
+ *}
+ * @return array
+ *   An associative array keyed by unique name of the searcher. Each searcher is
+ *   an associative array containing:
+ *   - label: The human readable name of the searcher displayed in the admin UI.
+ *   - adapter: The adapter plugin ID associated with the searcher.
+ *   - url processor: (optional) The URL processor plugin ID associated with the
+ *     searcher. Defaults to "standard".
+ *   - types: (optional) An array containing the types of content indexed by the
+ *     searcher. A type is usually an entity such as 'node', but it can contain
+ *     non-entities as well. Defaults to array('node').
+ *   - path: (optional) The MENU_DEFAULT_LOCAL_TASK item which the admin UI page
+ *     is added to as a MENU_LOCAL_TASK. An empty string if the backend manages
+ *     the admin UI menu items internally. Defaults to an empty string meaning
+ *     the backend is responsible for adding the admin UI menu items.
+ *   - supports facet missing: (optional) TRUE if the searcher supports
+ *     "missing" facets. Defaults to FALSE.
+ *   - supports facet mincount: (optional) TRUE if the searcher supports the
+ *     minimum facet count setting. Defaults to FALSE.
+ *   - include default facets: (optional) TRUE if the searcher should include
+ *     the facets defined in facetapi_facetapi_facet_info() when indexing node
+ *     content, FALSE if they should be skipped.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_searcher_info() {
+$0  return array(
+    'search' => array(
+      'label' => t('Search'),
+      'adapter' => 'search',
+      'url processor' => 'standard',
+      'types' => array('node'),
+      'path' => 'admin/config/search/settings',
+      'supports facet missing' => TRUE,
+      'supports facet mincount' => TRUE,
+      'include default facets' => TRUE,
+    ),
+  );
+}

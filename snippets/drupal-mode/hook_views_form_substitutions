@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: hook_views_form_substitutions
+# key: hook_views_form_substitutions
+# --
+/**
+ * ${2:This hook is called to get a list of placeholders and their substitutions,
+ * used when preprocessing a View with form elements.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_form_substitutions() {
+$0  return array(
+    '<!--views-form-example-substitutions-->' => 'Example Substitution',
+  );
+}

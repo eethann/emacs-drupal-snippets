@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: hook_field_storage_delete_field
+# key: hook_field_storage_delete_field
+# --
+/**
+ * ${2:Act on deletion of a field.
+ *
+ * This hook is invoked from field_delete_field() to ask the field storage
+ * module to mark all information stored in the field for deletion.
+ *}
+ * @param $field
+ *   The field being deleted.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_storage_delete_field($field) {
+$0  // Mark all data associated with the field for deletion.
+  $field['deleted'] = 0;
+  $table = _field_sql_storage_tablename($field);
+  $revision_table = _field_sql_storage_revision_tablename($field);
+  db_update($table)
+    ->fields(array('deleted' => 1))
+    ->execute();
+
+  // Move the table to a unique name while the table contents are being deleted.
+  $field['deleted'] = 1;
+  $new_table = _field_sql_storage_tablename($field);
+  $revision_new_table = _field_sql_storage_revision_tablename($field);
+  db_rename_table($table, $new_table);
+  db_rename_table($revision_table, $revision_new_table);
+  drupal_get_schema(NULL, TRUE);
+}

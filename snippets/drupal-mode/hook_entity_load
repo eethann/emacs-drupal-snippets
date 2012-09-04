@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_entity_load
+# key: hook_entity_load
+# --
+/**
+ * ${2:Act on entities when loaded.
+ *
+ * This is a generic load hook called for all entity types loaded via the
+ * entity API.
+ *}
+ * @param $entities
+ *   The entities keyed by entity ID.
+ * @param $type
+ *   The type of entities being loaded (i.e. node, user, comment).
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_entity_load($entities, $type) {
+$0  foreach ($entities as $entity) {
+    $entity->foo = mymodule_add_something($entity, $type);
+  }
+}

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: hook_taxonomy_term_insert
+# key: hook_taxonomy_term_insert
+# --
+/**
+ * ${2:Act on taxonomy terms when inserted.
+ *
+ * Modules implementing this hook can act on the term object when saved to
+ * the database.
+ *}
+ * @param $term
+ *   A taxonomy term object.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_taxonomy_term_insert($term) {
+$0  if (!empty($term->synonyms)) {
+    foreach (explode ("\n", str_replace("\r", '', $term->synonyms)) as $synonym) {
+      if ($synonym) {
+        db_insert('taxonomy_term_synonym')
+        ->fields(array(
+          'tid' => $term->tid,
+          'name' => rtrim($synonym),
+        ))
+        ->execute();
+      }
+    }
+  }
+}

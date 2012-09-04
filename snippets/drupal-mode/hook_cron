@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: hook_cron
+# key: hook_cron
+# --
+/**
+ * ${2:Perform periodic actions.
+ *
+ * Modules that require some commands to be executed periodically can
+ * implement hook_cron(). The engine will then call the hook whenever a cron
+ * run happens, as defined by the administrator. Typical tasks managed by
+ * hook_cron() are database maintenance, backups, recalculation of settings
+ * or parameters, automated mailing, and retrieving remote data.
+ *
+ * Short-running or non-resource-intensive tasks can be executed directly in
+ * the hook_cron() implementation.
+ *
+ * Long-running tasks and tasks that could time out, such as retrieving remote
+ * data, sending email, and intensive file tasks, should use the queue API
+ * instead of executing the tasks directly. To do this, first define one or
+ * more queues via hook_cron_queue_info(). Then, add items that need to be
+ * processed to the defined queues.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_cron() {
+$0  // Short-running operation example, not using a queue:
+  // Delete all expired records since the last cron run.
+  $expires = variable_get('mymodule_cron_last_run', REQUEST_TIME);
+  db_delete('mymodule_table')
+    ->condition('expires', $expires, '>=')
+    ->execute();
+  variable_set('mymodule_cron_last_run', REQUEST_TIME);
+
+  // Long-running operation example, leveraging a queue:
+  // Fetch feeds from other sites.
+  $result = db_query('SELECT * FROM {aggregator_feed} WHERE checked + refresh < :time AND refresh <> :never', array(
+    ':time' => REQUEST_TIME,
+    ':never' => AGGREGATOR_CLEAR_NEVER,
+  ));
+  $queue = DrupalQueue::get('aggregator_feeds');
+  foreach ($result as $feed) {
+    $queue->createItem($feed);
+  }
+}

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_ds_field_settings_alter
+# key: hook_ds_field_settings_alter
+# --
+/**
+ * ${2:Modify the field settings before they get saved.
+ *}
+ * @param $field_settings
+ *   A collection of field settings which keys are fields.
+ * @param $form
+ *   The current form which is submitted.
+ * @param $form_state
+ *   The form state with all its values.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ds_field_settings_alter(&$field_settings, $form, $form_state) {
+$0  $field_settings['title']['region'] = 'left';
+}

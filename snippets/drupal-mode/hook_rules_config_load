@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_rules_config_load
+# key: hook_rules_config_load
+# --
+/**
+ * ${2:Act on rules configuration being loaded from the database.
+ *
+ * This hook is invoked during rules configuration loading, which is handled
+ * by entity_load(), via classes RulesEntityController and EntityCRUDController.
+ *}
+ * @param $configs
+ *   An array of rules configurations being loaded, keyed by id.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_config_load($configs) {
+$0  $result = db_query('SELECT id, foo FROM {mytable} WHERE id IN(:ids)', array(':ids' => array_keys($configs)));
+  foreach ($result as $record) {
+    $configs[$record->id]->foo = $record->foo;
+  }
+}

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_rules_file_info
+# key: hook_rules_file_info
+# --
+/**
+ * ${2:Specify files containing rules integration code.
+ *
+ * All files specified in that hook will be included when rules looks for
+ * existing callbacks for any plugin. Rules remembers which callback is found in
+ * which file and automatically includes the right file before it is executing
+ * a plugin method callback. The file yourmodule.rules.inc is added by default
+ * and need not be specified here.
+ * This allows you to add new include files only containing functions serving as
+ * plugin method callbacks in any file without having to care about file
+ * inclusion.
+ *}
+ * @return
+ *   An array of file names without the file ending which defaults to '.inc'.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_file_info() {
+$0  return array('yourmodule.rules-eval');
+}

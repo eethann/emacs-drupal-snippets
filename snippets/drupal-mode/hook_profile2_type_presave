@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_profile2_type_presave
+# key: hook_profile2_type_presave
+# --
+/**
+ * ${2:Act on a profile type being inserted or updated.
+ *
+ * This hook is invoked before the profile type is saved to the database.
+ *}
+ * @param $type
+ *   The profile type that is being inserted or updated.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_profile2_type_presave($type) {
+$0  $type->extra = 'foo';
+}

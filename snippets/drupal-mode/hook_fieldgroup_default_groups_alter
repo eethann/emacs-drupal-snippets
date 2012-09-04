@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_fieldgroup_default_groups_alter
+# key: hook_fieldgroup_default_groups_alter
+# --
+/**
+ * ${2:Alter the default fieldgroup groups right before they are cached into the
+ * database.
+ *}
+ * @param &$groups
+ *   By reference. The fieldgroup groups that have been declared by another
+ *   feature.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_fieldgroup_default_groups_alter(&$groups) {
+$0}

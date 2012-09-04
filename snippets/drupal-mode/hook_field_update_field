@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_field_update_field
+# key: hook_field_update_field
+# --
+/**
+ * ${2:Act on a field being updated.
+ *
+ * This hook is invoked just after field is updated in field_update_field().
+ *}
+ * @param $field
+ *   The field as it is post-update.
+ * @param $prior_field
+ *   The field as it was pre-update.
+ * @param $has_data
+ *   Whether any data already exists for this field.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_update_field($field, $prior_field, $has_data) {
+$0  // Reset the static value that keeps track of allowed values for list fields.
+  drupal_static_reset('list_allowed_values');
+}

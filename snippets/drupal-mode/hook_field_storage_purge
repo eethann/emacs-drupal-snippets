@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: hook_field_storage_purge
+# key: hook_field_storage_purge
+# --
+/**
+ * ${2:Remove field storage information when field data is purged.
+ *
+ * Called from field_purge_data() to allow the field storage
+ * module to delete field data information.
+ *}
+ * @param $entity_type
+ *   The type of $entity; for example, 'node' or 'user'.
+ * @param $entity
+ *   The pseudo-entity whose field data to delete.
+ * @param $field
+ *   The (possibly deleted) field whose data is being purged.
+ * @param $instance
+ *   The deleted field instance whose data is being purged.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_storage_purge($entity_type, $entity, $field, $instance) {
+$0  list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
+
+  $table_name = _field_sql_storage_tablename($field);
+  $revision_name = _field_sql_storage_revision_tablename($field);
+  db_delete($table_name)
+    ->condition('entity_type', $entity_type)
+    ->condition('entity_id', $id)
+    ->execute();
+  db_delete($revision_name)
+    ->condition('entity_type', $entity_type)
+    ->condition('entity_id', $id)
+    ->execute();
+}

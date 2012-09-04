@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_skinr_skin_info_alter
+# key: hook_skinr_skin_info_alter
+# --
+/**
+ * ${2:Perform alterations on Skinr skins.
+ *}
+ * @param $skins
+ *   An array of skin information exposed by hook_skinr_skin_info()
+ *   implementations.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_skinr_skin_info_alter(&$skins) {
+$0  // Remove restrictions on theme hooks the skin works with.
+  unset($skins['skinr_menus']['theme hooks']);
+}

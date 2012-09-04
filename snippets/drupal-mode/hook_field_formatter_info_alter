@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_field_formatter_info_alter
+# key: hook_field_formatter_info_alter
+# --
+/**
+ * ${2:Perform alterations on Field API formatter types.
+ *}
+ * @param $info
+ *   Array of informations on formatter types exposed by
+ *   hook_field_field_formatter_info() implementations.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_formatter_info_alter(&$info) {
+$0  // Add a setting to a formatter type.
+  $info['text_default']['settings'] += array(
+    'mymodule_additional_setting' => 'default value',
+  );
+
+  // Let a new field type re-use an existing formatter.
+  $info['text_default']['field types'][] = 'my_field_type';
+}

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_field_extra_fields_alter
+# key: hook_field_extra_fields_alter
+# --
+/**
+ * ${2:Alter "pseudo-field" components on fieldable entities.
+ *}
+ * @param $info
+ *   The associative array of 'pseudo-field' components.
+ *
+ * @see hook_field_extra_fields()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_extra_fields_alter(&$info) {
+$0  // Force node title to always be at the top of the list by default.
+  foreach (node_type_get_types() as $bundle) {
+    if (isset($info['node'][$bundle->type]['form']['title'])) {
+      $info['node'][$bundle->type]['form']['title']['weight'] = -20;
+    }
+  }
+}

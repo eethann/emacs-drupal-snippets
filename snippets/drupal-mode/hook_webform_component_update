@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_webform_component_update
+# key: hook_webform_component_update
+# --
+/**
+ * ${2:Respond to a Webform component being updated in the database.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_component_update($component) {
+$0  // Update a record in a 3rd-party module table when a component is updated.
+  db_update('mymodule_table')
+    ->fields(array(
+      'foo' => 'foo_data',
+    ))
+    ->condition('nid', $component['nid'])
+    ->condition('cid', $component['cid'])
+    ->execute();
+}

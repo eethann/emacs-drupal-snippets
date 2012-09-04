@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: hook_default_rules_configuration
+# key: hook_default_rules_configuration
+# --
+/**
+ * ${2:Define default rules configurations.
+ *
+ * This hook is invoked when rules configurations are loaded. The implementation
+ * should be placed into the file MODULENAME.rules_defaults.inc, which gets
+ * automatically included when the hook is invoked.
+ *}
+ * @return
+ *   An array of rules configurations with the configuration names as keys.
+ *
+ * @see hook_default_rules_configuration_alter()
+ * @see hook_rules_config_defaults_rebuild()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_default_rules_configuration() {
+$0  $rule = rules_reaction_rule();
+  $rule->label = 'example default rule';
+  $rule->active = FALSE;
+  $rule->event('node_update')
+       ->condition(rules_condition('data_is', array('data:select' => 'node:status', 'value' => TRUE))->negate())
+       ->condition('data_is', array('data:select' => 'node:type', 'value' => 'page'))
+       ->action('drupal_message', array('message' => 'A node has been updated.'));
+
+  $configs['rules_test_default_1'] = $rule;
+  return $configs;
+}

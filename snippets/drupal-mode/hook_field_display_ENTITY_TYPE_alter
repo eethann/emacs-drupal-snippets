@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: hook_field_display_ENTITY_TYPE_alter
+# key: hook_field_display_ENTITY_TYPE_alter
+# --
+/**
+ * ${2:Alters the display settings of a field on a given entity type before it gets displayed.
+ *
+ * Modules can implement hook_field_display_ENTITY_TYPE_alter() to alter display
+ * settings for fields on a specific entity type, rather than implementing
+ * hook_field_display_alter().
+ *
+ * This hook is called once per field per displayed entity. If the result of the
+ * hook involves reading from the database, it is highly recommended to
+ * statically cache the information.
+ *}
+ * @param $display
+ *   The display settings that will be used to display the field values, as
+ *   found in the 'display' key of $instance definitions.
+ * @param $context
+ *   An associative array containing:
+ *   - entity_type: The entity type; e.g., 'node' or 'user'.
+ *   - field: The field being rendered.
+ *   - instance: The instance being rendered.
+ *   - entity: The entity being rendered.
+ *   - view_mode: The view mode, e.g. 'full', 'teaser'...
+ *
+ * @see hook_field_display_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_display_ENTITY_TYPE_alter(&$display, $context) {
+$0  // Leave field labels out of the search index.
+  if ($context['view_mode'] == 'search_index') {
+    $display['label'] = 'hidden';
+  }
+}

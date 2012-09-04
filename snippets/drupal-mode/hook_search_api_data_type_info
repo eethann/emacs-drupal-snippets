@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_data_type_info
+# key: hook_search_api_data_type_info
+# --
+/**
+ * Define new data types for indexed properties.
+ *
+ * New data types will appear as new option for the „Type“ field on indexes'
+ * „Fields“ tabs. Whether choosing a custom data type will have any effect
+ * depends on the server on which the data is indexed.
+ *
+ * @return array
+ *   An array containing custom data type definitions, keyed by their type
+ *   identifier and containing the following keys:
+ *   - name: The human-readable name of the type.
+ *   - fallback: (optional) One of the default data types (the keys from
+ *     search_api_default_field_types()) which should be used as a fallback if
+ *     the server doesn't support this data type. Defaults to "string".
+ *   - conversion callback: (optional) If specified, a callback function for
+ *     converting raw values to the given type, if possible. For the contract
+ *     of such a callback, see example_data_type_conversion().
+ *
+ * @see hook_search_api_data_type_info_alter()
+ * @see search_api_get_data_type_info()
+ * @see example_data_type_conversion()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_data_type_info() {
+$0  return array(
+    'example_type' => array(
+      'name' => t('Example type'),
+      // Could be omitted, as "string" is the default.
+      'fallback' => 'string',
+      'conversion callback' => 'example_data_type_conversion',
+    ),
+  );
+}

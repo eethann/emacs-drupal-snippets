@@ -1,0 +1,58 @@
+# -*- mode: snippet -*-
+# name: hook_node_info
+# key: hook_node_info
+# --
+/**
+ * ${2:Define module-provided node types.
+ *
+ * This hook allows a module to define one or more of its own node types. For
+ * example, the blog module uses it to define a blog node-type named "Blog
+ * entry." The name and attributes of each desired node type are specified in
+ * an array returned by the hook.
+ *
+ * Only module-provided node types should be defined through this hook. User-
+ * provided (or 'custom') node types should be defined only in the 'node_type'
+ * database table, and should be maintained by using the node_type_save() and
+ * node_type_delete() functions.
+ *}
+ * @return
+ *   An array of information defining the module's node types. The array
+ *   contains a sub-array for each node type, with the machine-readable type
+ *   name as the key. Each sub-array has up to 10 attributes. Possible
+ *   attributes:
+ *   - "name": the human-readable name of the node type. Required.
+ *   - "base": the base string used to construct callbacks corresponding to
+ *      this node type.
+ *      (i.e. if base is defined as example_foo, then example_foo_insert will
+ *      be called when inserting a node of that type). This string is usually
+ *      the name of the module, but not always. Required.
+ *   - "description": a brief description of the node type. Required.
+ *   - "help": help information shown to the user when creating a node of
+ *      this type.. Optional (defaults to '').
+ *   - "has_title": boolean indicating whether or not this node type has a title
+ *      field. Optional (defaults to TRUE).
+ *   - "title_label": the label for the title field of this content type.
+ *      Optional (defaults to 'Title').
+ *   - "locked": boolean indicating whether the administrator can change the
+ *      machine name of this type. FALSE = changeable (not locked),
+ *      TRUE = unchangeable (locked). Optional (defaults to TRUE).
+ *
+ * The machine name of a node type should contain only letters, numbers, and
+ * underscores. Underscores will be converted into hyphens for the purpose of
+ * constructing URLs.
+ *
+ * All attributes of a node type that are defined through this hook (except for
+ * 'locked') can be edited by a site administrator. This includes the
+ * machine-readable name of a node type, if 'locked' is set to FALSE.
+ *
+ * @ingroup node_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_info() {
+$0  return array(
+    'blog' => array(
+      'name' => t('Blog entry'),
+      'base' => 'blog',
+      'description' => t('Use for multi-user blogs. Every user gets a personal blog.'),
+    )
+  );
+}

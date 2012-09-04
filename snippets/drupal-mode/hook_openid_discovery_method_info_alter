@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: hook_openid_discovery_method_info_alter
+# key: hook_openid_discovery_method_info_alter
+# --
+/**
+ * ${2:Allow modules to alter discovery methods.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_openid_discovery_method_info_alter(&$methods) {
+$0  // Remove XRI discovery scheme.
+  unset($methods['xri']);
+}

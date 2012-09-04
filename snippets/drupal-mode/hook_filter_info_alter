@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_filter_info_alter
+# key: hook_filter_info_alter
+# --
+/**
+ * ${2:Perform alterations on filter definitions.
+ *}
+ * @param $info
+ *   Array of information on filters exposed by hook_filter_info()
+ *   implementations.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_filter_info_alter(&$info) {
+$0  // Replace the PHP evaluator process callback with an improved
+  // PHP evaluator provided by a module.
+  $info['php_code']['process callback'] = 'my_module_php_evaluator';
+
+  // Alter the default settings of the URL filter provided by core.
+  $info['filter_url']['default settings'] = array(
+    'filter_url_length' => 100,
+  );
+}

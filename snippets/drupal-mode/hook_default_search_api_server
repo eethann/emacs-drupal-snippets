@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_default_search_api_server
+# key: hook_default_search_api_server
+# --
+/**
+* Define default search servers.
+*
+* @return array
+*   An array of default search servers, keyed by machine names.
+*
+* @see hook_default_search_api_server_alter()
+*/
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_default_search_api_server() {
+$0  $defaults['main'] = entity_create('search_api_server', array(
+    'name' => 'Main server',
+    'machine_name' => 'main',// Must be same as the used array key.
+    // Other properties ...
+  ));
+  return $defaults;
+}

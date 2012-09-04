@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_dashboard_regions_alter
+# key: hook_dashboard_regions_alter
+# --
+/**
+ * ${2:Alter dashboard regions provided by modules.
+ *}
+ * @param $regions
+ *   An array containing all dashboard regions, in the format provided by
+ *   hook_dashboard_regions().
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_dashboard_regions_alter($regions) {
+$0  // Remove the sidebar region defined by the core dashboard module.
+  unset($regions['dashboard_sidebar']);
+}

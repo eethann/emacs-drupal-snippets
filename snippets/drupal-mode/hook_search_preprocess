@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: hook_search_preprocess
+# key: hook_search_preprocess
+# --
+/**
+ * ${2:Preprocess text for search.
+ *
+ * This hook is called to preprocess both the text added to the search index and
+ * the keywords users have submitted for searching.
+ *
+ * Possible uses:
+ * - Adding spaces between words of Chinese or Japanese text.
+ * - Stemming words down to their root words to allow matches between, for
+ *   instance, walk, walked, walking, and walks in searching.
+ * - Expanding abbreviations and acronymns that occur in text.
+ *}
+ * @param $text
+ *   The text to preprocess. This is a single piece of plain text extracted
+ *   from between two HTML tags or from the search query. It will not contain
+ *   any HTML entities or HTML tags.
+ *
+ * @return
+ *   The text after preprocessing. Note that if your module decides not to alter
+ *   the text, it should return the original text. Also, after preprocessing,
+ *   words in the text should be separated by a space.
+ *
+ * @ingroup search
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_preprocess($text) {
+$0  // Do processing on $text
+  return $text;
+}

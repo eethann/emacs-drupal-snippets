@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_server_load
+# key: hook_search_api_server_load
+# --
+/**
+ * ${2:Act on search servers when they are loaded.
+ *}
+ * @param array $servers
+ *   An array of loaded SearchApiServer objects.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_server_load(array $servers) {
+$0  foreach ($servers as $server) {
+    db_insert('example_search_server_access')
+      ->fields(array(
+        'server' => $server->machine_name,
+        'access_time' => REQUEST_TIME,
+      ))
+      ->execute();
+  }
+}

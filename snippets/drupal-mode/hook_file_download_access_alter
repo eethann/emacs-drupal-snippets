@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: hook_file_download_access_alter
+# key: hook_file_download_access_alter
+# --
+/**
+ * ${2:Alter the access rules applied to a file download.
+ *
+ * Entities that implement file management set the access rules for their
+ * individual files. Module may use this hook to create custom access rules
+ * for file downloads.
+ *}
+ * @see hook_file_download_access().
+ *
+ * @param $grants
+ *   An array of grants gathered by hook_file_download_access(). The array is
+ *   keyed by the module that defines the entity type's access control; the
+ *   values are Boolean grant responses for each module.
+ * @param array $file_item
+ *   The array of information about the file to alter access for.
+ * @param $entity_type
+ *   The type of $entity; for example, 'node' or 'user'.
+ * @param $entity
+ *   The $entity to which $file is referenced.
+ *
+ * @return
+ *   An array of grants, keyed by module name, each with a Boolean grant value.
+ *   Return an empty array to assert FALSE. You may choose to return your own
+ *   module's value in addition to other grants or to overwrite the values set
+ *   by other modules.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_download_access_alter(&$grants, $file_item, $entity_type, $entity) {
+$0  // For our example module, we always enforce the rules set by node module.
+  if (isset($grants['node'])) {
+    $grants = array('node' => $grants['node']);
+  }
+}

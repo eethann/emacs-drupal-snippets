@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_profile2_insert
+# key: hook_profile2_insert
+# --
+/**
+* Respond when a profile is inserted.
+*
+* This hook is invoked after the profile is inserted into the database.
+*
+* @param profile
+*   The profile that is being inserted.
+*
+* @see hook_entity_insert()
+*/
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_profile2_insert($profile) {
+$0  db_insert('mytable')
+    ->fields(array(
+      'pid' => $profile->pid,
+      'extra' => $profile->extra,
+    ))
+    ->execute();
+}

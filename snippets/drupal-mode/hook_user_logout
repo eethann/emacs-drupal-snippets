@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_user_logout
+# key: hook_user_logout
+# --
+/**
+ * ${2:The user just logged out.
+ *}
+ * @param $account
+ *   The user object on which the operation was just performed.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_user_logout($account) {
+$0  db_insert('logouts')
+    ->fields(array(
+      'uid' => $account->uid,
+      'time' => time(),
+    ))
+    ->execute();
+}

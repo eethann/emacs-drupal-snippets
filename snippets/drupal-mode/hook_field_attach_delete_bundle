@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: hook_field_attach_delete_bundle
+# key: hook_field_attach_delete_bundle
+# --
+/**
+ * ${2:Act on field_attach_delete_bundle.
+ *
+ * This hook is invoked after the field module has performed the operation.
+ *}
+ * @param $entity_type
+ *   The type of entity; for example, 'node' or 'user'.
+ * @param $bundle
+ *   The bundle that was just deleted.
+ * @param $instances
+ *   An array of all instances that existed for the bundle before it was
+ *   deleted.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_attach_delete_bundle($entity_type, $bundle, $instances) {
+$0  // Remove the extra weights variable information for this bundle.
+  $extra_weights = variable_get('field_extra_weights', array());
+  if (isset($extra_weights[$entity_type][$bundle])) {
+    unset($extra_weights[$entity_type][$bundle]);
+    variable_set('field_extra_weights', $extra_weights);
+  }
+}

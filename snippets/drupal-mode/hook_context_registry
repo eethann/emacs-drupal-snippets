@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_context_registry
+# key: hook_context_registry
+# --
+/**
+ * ${2:Registry hook for conditions & reactions.
+ *
+ * Each entry associates a condition or reaction with the CTools plugin to be
+ * used as its plugin class.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_context_registry() {
+$0  return array(
+    'conditions' => array(
+      'bar' => array(
+        'title' => t('Name of condition "bar"'),
+        'plugin' => 'foo_context_condition_bar',
+      ),
+    ),
+    'reactions' => array(
+      'baz' => array(
+        'title' => t('Name of reaction "baz"'),
+        'plugin' => 'foo_context_reaction_baz',
+      ),
+    ),
+  );
+}

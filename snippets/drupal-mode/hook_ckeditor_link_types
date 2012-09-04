@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_ckeditor_link_types
+# key: hook_ckeditor_link_types
+# --
+/**
+ * ${2:Declare the path types handled by the module.
+ *}
+ * @return
+ *   An array of the types handled by the module.
+ *   Each value is either a type name or a sub-array with the following
+ *   attributes:
+ *    - 'type'
+ *         The type name. Required.
+ *    - 'file'
+ *         A file that will be included before other hooks are invoked.
+ *         The file should be relative to the implementing module's directory.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ckeditor_link_types() {
+$0  return array(
+    'mytype1',
+    array('type' => 'mytype2', 'file' => 'includes/mymodule.mytype2.inc'),
+  );
+}

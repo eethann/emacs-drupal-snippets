@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_xmlsitemap_link_update
+# key: hook_xmlsitemap_link_update
+# --
+/**
+ * ${2:Inform modules that an XML sitemap link has been updated.
+ *}
+ * @param $link
+ *   Associative array defining an XML sitemap link as passed into
+ *   xmlsitemap_link_save().
+ *
+ * @see hook_xmlsitemap_link_insert()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_xmlsitemap_link_update(array $link) {
+$0  db_update('mytable')
+    ->fields(array(
+      'link_type' => $link['type'],
+      'link_id' => $link['id'],
+      'link_status' => $link['status'],
+    ))
+    ->execute();
+}

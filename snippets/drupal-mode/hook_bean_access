@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_bean_access
+# key: hook_bean_access
+# --
+/**
+ * ${2:Implements hook_bean_access().
+ *
+ * Access callback for beans
+ *}
+ * @param $bean
+ *  Tthe fully loaded bean object
+ * @param $bean
+ *  The access type of view, edit, delete, create
+ * @param $account
+ *  The user account
+ *
+ * @return boolean
+ *  True if access is allowed, FALSE if not.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_bean_access($bean, $op, $account) {
+$0  return TRUE;
+}

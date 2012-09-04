@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_service_info_alter
+# key: hook_search_api_service_info_alter
+# --
+/**
+ * ${2:Alter the Search API service info.
+ *
+ * Modules may implement this hook to alter the information that defines Search
+ * API service. All properties that are available in
+ * hook_search_api_service_info() can be altered here.
+ *}
+ * @see hook_search_api_service_info()
+ *
+ * @param array $service_info
+ *   The Search API service info array, keyed by service id.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_service_info_alter(array &$service_info) {
+$0  foreach ($service_info as $id => $info) {
+    $service_info[$id]['class'] = 'MyProxyServiceClass';
+    $service_info[$id]['example_original_class'] = $info['class'];
+  }
+}

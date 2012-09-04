@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_file_operation_info_alter
+# key: hook_file_operation_info_alter
+# --
+/**
+ * ${2:Perform alterations on bulk file operations.
+ *}
+ * @param $info
+ *   Array of information on bulk file operations exposed by
+ *   hook_file_operation_info() implementations.
+ *
+ * @see hook_file_operation_info()
+ * @see file_entity_get_file_operation_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_operation_info_alter(&$info) {
+$0  // Remove the 'Fluff selected files' operation.
+  unset($info['fluff']);
+}

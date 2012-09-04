@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: hook_skinr_theme_hooks
+# key: hook_skinr_theme_hooks
+# --
+/**
+ * ${2:Provide a list of all available theme hooks for a given element.
+ *}
+ * @param $module
+ *   The module implementing given element.
+ * @param $element
+ *   An element.
+ *
+ * @return
+ *   An array of theme hooks.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_skinr_theme_hooks($module, $element) {
+$0  $theme_hooks = array();
+
+  if ($module == 'node') {
+    $theme_hooks =  array(
+      'node_' . $element,
+      'node',
+    );
+  }
+
+  return $theme_hooks;
+}

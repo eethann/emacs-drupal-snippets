@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_menu_block_get_menus
+# key: hook_menu_block_get_menus
+# --
+/**
+ * ${2:Return a list of menus to use with the menu_block module.
+ *}
+ * @return
+ *   An array containing the menus' machine names as keys with their menu titles
+ *   as values.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_menu_block_get_menus() {
+$0  $menus = array();
+  // For each menu, add the following information:
+  $menus['menu_name'] = 'menu title';
+
+  return $menus;
+}

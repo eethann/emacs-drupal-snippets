@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: hook_verify_update_archive
+# key: hook_verify_update_archive
+# --
+/**
+ * ${2:Verify an archive after it has been downloaded and extracted.
+ *}
+ * @param string $project
+ *   The short name of the project that has been downloaded.
+ * @param string $archive_file
+ *   The filename of the unextracted archive.
+ * @param string $directory
+ *   The directory that the archive was extracted into.
+ *
+ * @return
+ *   If there are any problems, return an array of error messages. If there are
+ *   no problems, return an empty array.
+ *
+ * @see update_manager_archive_verify()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_verify_update_archive($project, $archive_file, $directory) {
+$0  $errors = array();
+  if (!file_exists($directory)) {
+    $errors[] = t('The %directory does not exist.', array('%directory' => $directory));
+  }
+  // Add other checks on the archive integrity here.
+  return $errors;
+}

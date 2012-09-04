@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_webform_submission_insert
+# key: hook_webform_submission_insert
+# --
+/**
+ * ${2:Respond to a Webform submission being inserted.
+ *
+ * Note that this hook is called after a submission has already been saved to
+ * the database. If needing to modify the submission prior to insertion, use
+ * hook_webform_submission_presave().
+ *}
+ * @param $node
+ *   The Webform node on which this submission was made.
+ * @param $submission
+ *   The Webform submission that was just inserted into the database.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_submission_insert($node, $submission) {
+$0  // Insert a record into a 3rd-party module table when a submission is added.
+  db_insert('mymodule_table')
+    ->fields(array(
+      'nid' => $node->nid,
+      'sid' => $submission->sid,
+      'foo' => 'foo_data',
+    ))
+    ->execute();
+}

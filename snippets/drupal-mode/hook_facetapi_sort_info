@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_sort_info
+# key: hook_facetapi_sort_info
+# --
+/**
+ * ${2:Define all facets sorting algorithms provided by the module.
+ *}
+ * @return array
+ *   An associative array keyed by unique name of the sort. Each sort is an
+ *   associative array containing:
+ *   - title: The human readable name of the sort displayed in the admin UI.
+ *   - callback: The uasort() callback the render array is passed to.
+ *   - description: The description of the sort displayed in the admin UI.
+ *   - weight: (optional) The default weight of the sort specifying its
+ *     default processing order. Defaults to 0.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_sort_info() {
+$0  $sorts = array();
+
+  $sorts['active'] = array(
+    'label' => t('Facet active'),
+    'callback' => 'facetapi_sort_active',
+    'description' => t('Sort by whether the facet is active or not.'),
+    'weight' => -50,
+  );
+
+  return $sorts;
+}

@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: hook_rdf_namespaces
+# key: hook_rdf_namespaces
+# --
+/**
+ * ${2:Allow modules to define namespaces for RDF mappings.
+ *
+ * Many common namespace prefixes are defined in rdf_rdf_namespaces(). However,
+ * if a module implements hook_rdf_mapping() and uses a prefix that is not
+ * defined in rdf_rdf_namespaces(), this hook should be used to define the new
+ * namespace prefix.
+ *}
+ * @return
+ *   An associative array of namespaces where the key is the namespace prefix
+ *   and the value is the namespace URI.
+ *
+ * @ingroup rdf
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rdf_namespaces() {
+$0  return array(
+    'content'  => 'http://purl.org/rss/1.0/modules/content/',
+    'dc'       => 'http://purl.org/dc/terms/',
+    'foaf'     => 'http://xmlns.com/foaf/0.1/',
+    'og'       => 'http://ogp.me/ns#',
+    'rdfs'     => 'http://www.w3.org/2000/01/rdf-schema#',
+    'sioc'     => 'http://rdfs.org/sioc/ns#',
+    'sioct'    => 'http://rdfs.org/sioc/types#',
+    'skos'     => 'http://www.w3.org/2004/02/skos/core#',
+    'xsd'      => 'http://www.w3.org/2001/XMLSchema#',
+  );
+}

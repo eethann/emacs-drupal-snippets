@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_default_search_api_server_alter
+# key: hook_default_search_api_server_alter
+# --
+/**
+* Alter default search servers.
+*
+* @param array $defaults
+*   An array of default search servers, keyed by machine names.
+*
+* @see hook_default_search_api_server()
+*/
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_default_search_api_server_alter(array &$defaults) {
+$0  $defaults['main']->name = 'Customized main server';
+}

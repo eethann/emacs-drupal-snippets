@@ -1,0 +1,78 @@
+# -*- mode: snippet -*-
+# name: hook_field_formatter_prepare_view
+# key: hook_field_formatter_prepare_view
+# --
+/**
+ * ${2:Allow formatters to load information for field values being displayed.
+ *
+ * This should be used when a formatter needs to load additional information
+ * from the database in order to render a field, for example a reference field
+ * which displays properties of the referenced entities such as name or type.
+ *
+ * This hook is called after the field type's own hook_field_prepare_view().
+ *
+ * Unlike most other field hooks, this hook operates on multiple entities. The
+ * $entities, $instances and $items parameters are arrays keyed by entity ID.
+ * For performance reasons, information for all available entities should be
+ * loaded in a single query where possible.
+ *}
+ * @param $entity_type
+ *   The type of $entity.
+ * @param $entities
+ *   Array of entities being displayed, keyed by entity ID.
+ * @param $field
+ *   The field structure for the operation.
+ * @param $instances
+ *   Array of instance structures for $field for each entity, keyed by entity
+ *   ID.
+ * @param $langcode
+ *   The language the field values are to be shown in. If no language is
+ *   provided the current language is used.
+ * @param $items
+ *   Array of field values for the entities, keyed by entity ID.
+ * @param $displays
+ *   Array of display settings to use for each entity, keyed by entity ID.
+ *
+ * @return
+ *   Changes or additions to field values are done by altering the $items
+ *   parameter by reference.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_formatter_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items, $displays) {
+$0  $tids = array();
+
+  // Collect every possible term attached to any of the fieldable entities.
+  foreach ($entities as $id => $entity) {
+    foreach ($items[$id] as $delta => $item) {
+      // Force the array key to prevent duplicates.
+      $tids[$item['tid']] = $item['tid'];
+    }
+  }
+
+  if ($tids) {
+    $terms = taxonomy_term_load_multiple($tids);
+
+    // Iterate through the fieldable entities again to attach the loaded term
+    // data.
+    foreach ($entities as $id => $entity) {
+      $rekey = FALSE;
+
+      foreach ($items[$id] as $delta => $item) {
+        // Check whether the taxonomy term field instance value could be loaded.
+        if (isset($terms[$item['tid']])) {
+          // Replace the instance value with the term data.
+          $items[$id][$delta]['taxonomy_term'] = $terms[$item['tid']];
+        }
+        // Otherwise, unset the instance value, since the term does not exist.
+        else {
+          unset($items[$id][$delta]);
+          $rekey = TRUE;
+        }
+      }
+
+      if ($rekey) {
+        // Rekey the items array.
+        $items[$id] = array_values($items[$id]);
+      }
+    }
+  }
+}

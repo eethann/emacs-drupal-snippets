@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_rules_data_processor_info_alter
+# key: hook_rules_data_processor_info_alter
+# --
+/**
+ * ${2:Alter rules data_processor info.
+ *
+ * The implementation should be placed into the file MODULENAME.rules.inc, which
+ * gets automatically included when the hook is invoked.
+ *}
+ * @param $processor_info
+ *   The items of all modules as returned from hook_rules_data_processor_info().
+ *
+ * @see hook_rules_data_processor_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_data_processor_info_alter(&$processor_info) {
+$0  // Change processor info.
+}

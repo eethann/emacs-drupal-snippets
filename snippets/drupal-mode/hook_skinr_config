@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_skinr_config
+# key: hook_skinr_config
+# --
+/**
+ * ${2:Configure Skinr for this module.
+ *
+ * This hook should be placed in MODULENAME.skinr.inc and it will be auto-loaded.
+ * This must either be in the same directory as the .module file or in a subdirectory
+ * named 'includes'.
+ *}
+ * @return
+ *   An array of element types this module supports.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_skinr_config() {
+$0  return array('block');
+}

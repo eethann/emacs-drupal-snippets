@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: hook_skinr_elements
+# key: hook_skinr_elements
+# --
+/**
+ * ${2:Return an array of element ids.
+ *}
+ * @todo Needs a better description.
+ *
+ * @param $variables
+ *   The variables array from skinr_preprocess().
+ * @param $hook
+ *   The name of the theme hook.
+ * @param $op
+ *   The operation being performed:
+ *   - 'preprocess'
+ *   - 'contextual_links'
+ *
+ * @return
+ *   An array of element arrays, keyed by element type. Example:
+ * @code
+ *   array(
+ *     'block' => array('system__navigation'),
+ *   );
+ * @endcode
+ *
+ * @see skinr_preprocess()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_skinr_elements(&$variables, $hook, $op) {
+$0  $elements = array();
+  if ($hook == 'block') {
+    $elements['block'] = array($variables['block']->module . '__' . $variables['block']->delta);
+  }
+  return $elements;
+}

@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_custom_formatters_engine_info
+# key: hook_custom_formatters_engine_info
+# --
+/**
+ * ${2:Implements hook_custom_formatters_engine().}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_custom_formatters_engine_info() {
+$0  $engines = array();
+
+  $engines['MY_MODULE'] = array(
+    'label' => t('MY_MODULE'),
+    'callbacks' => array(
+      'settings form' => 'MYMODULE_engine_settings_form',
+      'render' => 'MYMODULE_engine_render',
+    ),
+    'file' => drupal_get_path('module', 'MYMODULE') . '/engines/MYMODULE.inc',
+  );
+
+  return $engines;
+}

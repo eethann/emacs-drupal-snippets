@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_views_query_alter
+# key: hook_views_query_alter
+# --
+/**
+ * ${2:Stub hook documentation
+ *
+ * This hook should be placed in MODULENAME.views.inc and it will be auto-loaded.
+ * MODULENAME.views.inc must be in the directory specified by the 'path' key
+ * returned by MODULENAME_views_api(), or the same directory as the .module
+ * file, if 'path' is unspecified.
+ *}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_query_alter(&$view, &$query) {
+$0  // example code here
+}

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_profile2_type_insert
+# key: hook_profile2_type_insert
+# --
+/**
+ * ${2:Respond when a profile type is inserted.
+ *
+ * This hook is invoked after the profile type is inserted into the database.
+ *}
+ * @param $type
+ *   The profile type that is being inserted.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_profile2_type_insert($type) {
+$0  db_insert('mytable')
+    ->fields(array(
+      'id' => $type->id,
+      'extra' => $type->extra,
+    ))
+    ->execute();
+}

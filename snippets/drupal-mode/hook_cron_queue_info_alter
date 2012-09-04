@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_cron_queue_info_alter
+# key: hook_cron_queue_info_alter
+# --
+/**
+ * ${2:Alter cron queue information before cron runs.
+ *
+ * Called by drupal_cron_run() to allow modules to alter cron queue settings
+ * before any jobs are processesed.
+ *}
+ * @param array $queues
+ *   An array of cron queue information.
+ *
+ * @see hook_cron_queue_info()
+ * @see drupal_cron_run()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_cron_queue_info_alter(&$queues) {
+$0  // This site has many feeds so let's spend 90 seconds on each cron run
+  // updating feeds instead of the default 60.
+  $queues['aggregator_feeds']['time'] = 90;
+}

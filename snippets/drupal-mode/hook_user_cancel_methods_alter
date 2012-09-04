@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: hook_user_cancel_methods_alter
+# key: hook_user_cancel_methods_alter
+# --
+/**
+ * ${2:Modify account cancellation methods.
+ *
+ * By implementing this hook, modules are able to add, customize, or remove
+ * account cancellation methods. All defined methods are turned into radio
+ * button form elements by user_cancel_methods() after this hook is invoked.
+ * The following properties can be defined for each method:
+ * - title: The radio button's title.
+ * - description: (optional) A description to display on the confirmation form
+ *   if the user is not allowed to select the account cancellation method. The
+ *   description is NOT used for the radio button, but instead should provide
+ *   additional explanation to the user seeking to cancel their account.
+ * - access: (optional) A boolean value indicating whether the user can access
+ *   a method. If #access is defined, the method cannot be configured as default
+ *   method.
+ *}
+ * @param $methods
+ *   An array containing user account cancellation methods, keyed by method id.
+ *
+ * @see user_cancel_methods()
+ * @see user_cancel_confirm_form()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_user_cancel_methods_alter(&$methods) {
+$0  // Limit access to disable account and unpublish content method.
+  $methods['user_cancel_block_unpublish']['access'] = user_access('administer site configuration');
+
+  // Remove the content re-assigning method.
+  unset($methods['user_cancel_reassign']);
+
+  // Add a custom zero-out method.
+  $methods['mymodule_zero_out'] = array(
+    'title' => t('Delete the account and remove all content.'),
+    'description' => t('All your content will be replaced by empty strings.'),
+    // access should be used for administrative methods only.
+    'access' => user_access('access zero-out account cancellation method'),
+  );
+}

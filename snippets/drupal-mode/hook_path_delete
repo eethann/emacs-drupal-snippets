@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_path_delete
+# key: hook_path_delete
+# --
+/**
+ * ${2:Respond to a path being deleted.
+ *}
+ * @param $path
+ *   An associative array containing the following keys:
+ *   - source: The internal system path.
+ *   - alias: The URL alias.
+ *   - pid: Unique path alias identifier.
+ *   - language: The language of the alias.
+ *
+ * @see path_delete()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_path_delete($path) {
+$0  db_delete('mytable')
+    ->condition('pid', $path['pid'])
+    ->execute();
+}

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: hook_user_default_roles_alter
+# key: hook_user_default_roles_alter
+# --
+/**
+ * ${2:Alter the default roles right before they are cached into the database.
+ *}
+ * @param &$roles
+ *   By reference. The roles that have been declared by another feature.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_user_default_roles_alter(&$roles) {
+$0}

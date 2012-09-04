@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: hook_menu_default_menu_custom_alter
+# key: hook_menu_default_menu_custom_alter
+# --
+/**
+ * ${2:Alter the default menus right before they are cached into the database.
+ *}
+ * @param &$menus
+ *   By reference. The menus that have been declared by another feature.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_menu_default_menu_custom_alter(&$menus) {
+$0}

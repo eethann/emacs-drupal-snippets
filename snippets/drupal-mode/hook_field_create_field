@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_field_create_field
+# key: hook_field_create_field
+# --
+/**
+ * ${2:Act on a field being created.
+ *
+ * This hook is invoked from field_create_field() after the field is created, to
+ * allow modules to act on field creation.
+ *}
+ * @param $field
+ *   The field just created.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_create_field($field) {
+$0  // @todo Needs function body.
+}

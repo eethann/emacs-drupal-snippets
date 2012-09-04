@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: hook_views_form_submit
+# key: hook_views_form_submit
+# --
+/**
+ * ${2:Views form (View with form elements) submit handler.
+ * Called for all steps ($form_state['step']) of the multistep form.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_form_submit($form, &$form_state) {
+$0  // example code here
+}

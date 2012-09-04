@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: hook_menu_delete
+# key: hook_menu_delete
+# --
+/**
+ * ${2:Informs modules that a custom menu was deleted.
+ *
+ * This hook is used to notify modules that a custom menu along with all links
+ * contained in it (if any) has been deleted. Contributed modules may use the
+ * information to perform actions based on the information entered into the menu
+ * system.
+ *}
+ * @param $link
+ *   An array representing a custom menu:
+ *   - menu_name: The unique name of the custom menu.
+ *   - title: The human readable menu title.
+ *   - description: The custom menu description.
+ *
+ * @see hook_menu_insert()
+ * @see hook_menu_update()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_menu_delete($menu) {
+$0  // Delete the record from our variable.
+  $my_menus = variable_get('my_module_menus', array());
+  unset($my_menus[$menu['menu_name']]);
+  variable_set('my_module_menus', $my_menus);
+}

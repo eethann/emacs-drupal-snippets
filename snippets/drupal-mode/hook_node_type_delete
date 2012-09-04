@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_node_type_delete
+# key: hook_node_type_delete
+# --
+/**
+ * ${2:Respond to node type deletion.
+ *
+ * This hook is invoked from node_type_delete() after the node type is removed
+ * from the database.
+ *}
+ * @param $info
+ *   The node type object that is being deleted.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_type_delete($info) {
+$0  variable_del('comment_' . $info->type);
+}

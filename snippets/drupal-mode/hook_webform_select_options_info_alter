@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: hook_webform_select_options_info_alter
+# key: hook_webform_select_options_info_alter
+# --
+/**
+ * ${2:Alter the list of select list options provided by Webform and other modules.
+ *}
+ * @see hook_webform_select_options_info().
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_select_options_info_alter(&$items) {
+$0  // Remove the days of the week options.
+  unset($items['days']);
+}

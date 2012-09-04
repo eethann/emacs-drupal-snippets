@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: hook_field_storage_delete_instance
+# key: hook_field_storage_delete_instance
+# --
+/**
+ * ${2:Act on deletion of a field instance.
+ *
+ * This hook is invoked from field_delete_instance() to ask the field storage
+ * module to mark all information stored for the field instance for deletion.
+ *}
+ * @param $instance
+ *   The instance being deleted.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_storage_delete_instance($instance) {
+$0  $field = field_info_field($instance['field_name']);
+  $table_name = _field_sql_storage_tablename($field);
+  $revision_name = _field_sql_storage_revision_tablename($field);
+  db_update($table_name)
+    ->fields(array('deleted' => 1))
+    ->condition('entity_type', $instance['entity_type'])
+    ->condition('bundle', $instance['bundle'])
+    ->execute();
+  db_update($revision_name)
+    ->fields(array('deleted' => 1))
+    ->condition('entity_type', $instance['entity_type'])
+    ->condition('bundle', $instance['bundle'])
+    ->execute();
+}

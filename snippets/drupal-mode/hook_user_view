@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: hook_user_view
+# key: hook_user_view
+# --
+/**
+ * ${2:The user's account information is being displayed.
+ *
+ * The module should format its custom additions for display and add them to the
+ * $account->content array.
+ *}
+ * @param $account
+ *   The user object on which the operation is being performed.
+ * @param $view_mode
+ *   View mode, e.g. 'full'.
+ * @param $langcode
+ *   The language code used for rendering.
+ *
+ * @see hook_user_view_alter()
+ * @see hook_entity_view()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_user_view($account, $view_mode, $langcode) {
+$0  if (user_access('create blog content', $account)) {
+    $account->content['summary']['blog'] =  array(
+      '#type' => 'user_profile_item',
+      '#title' => t('Blog'),
+      '#markup' => l(t('View recent blog entries'), "blog/$account->uid", array('attributes' => array('title' => t("Read !username's latest blog entries.", array('!username' => format_username($account)))))),
+      '#attributes' => array('class' => array('blog')),
+    );
+  }
+}

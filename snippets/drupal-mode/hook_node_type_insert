@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_node_type_insert
+# key: hook_node_type_insert
+# --
+/**
+ * ${2:Respond to node type creation.
+ *
+ * This hook is invoked from node_type_save() after the node type is added
+ * to the database.
+ *}
+ * @param $info
+ *   The node type object that is being created.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_type_insert($info) {
+$0  drupal_set_message(t('You have just created a content type with a machine name %type.', array('%type' => $info->type)));
+}

@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_media_internet_providers
+# key: hook_media_internet_providers
+# --
+/**
+ * ${2:Implementors return an multidim array, keyed by a class name
+ * with the following elements:
+ *
+ * - title
+ * - image (optional)
+ * - hidden: bool If the logo should be shown on form. (optional)
+ * - weight (optional)}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_media_internet_providers() {
+$0  return array(
+    'youtube' => array(
+      'title' => 'youtube',
+      'image' => 'youtube.jpg'
+    ),
+  );
+}

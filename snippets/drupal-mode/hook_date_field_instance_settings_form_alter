@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: hook_date_field_instance_settings_form_alter
+# key: hook_date_field_instance_settings_form_alter
+# --
+/**
+ * ${2:Alter a date field instance settings form.
+ *}
+ * @param array $form
+ *   Nested array of form elements that comprise the form.
+ * @param array $context
+ *   An associative array containing the following keys:
+ *   - field: The $field array.
+ *   - instance: The $instance array.
+ *
+ * @see hook_field_instance_settings_form()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_date_field_instance_settings_form_alter(&$form, $context) {
+$0  $field = $context['field'];
+  $instance = $context['instance'];
+  $form['new_setting'] = array(
+    '#type' => 'textfield',
+    '#default_value' => '',
+    '#title' => t('My new setting'),
+  );
+}

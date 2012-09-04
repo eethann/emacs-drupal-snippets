@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_filter_format_insert
+# key: hook_filter_format_insert
+# --
+/**
+ * ${2:Perform actions when a new text format has been created.
+ *}
+ * @param $format
+ *   The format object of the format being updated.
+ *
+ * @see hook_filter_format_update()
+ * @see hook_filter_format_disable()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_filter_format_insert($format) {
+$0  mymodule_cache_rebuild();
+}

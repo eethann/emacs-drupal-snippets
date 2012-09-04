@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_field_attach_prepare_translation_alter
+# key: hook_field_attach_prepare_translation_alter
+# --
+/**
+ * ${2:Perform alterations on field_attach_prepare_translation().
+ *
+ * This hook is invoked after the field module has performed the operation.
+ *}
+ * @param $entity
+ *   The entity being prepared for translation.
+ * @param $context
+ *   An associative array containing:
+ *   - entity_type: The type of $entity; e.g. 'node' or 'user'.
+ *   - langcode: The language the entity has to be translated in.
+ *   - source_entity: The entity holding the field values to be translated.
+ *   - source_langcode: The source language from which translate.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_attach_prepare_translation_alter(&$entity, $context) {
+$0  if ($context['entity_type'] == 'custom_entity_type') {
+    $entity->custom_field = $context['source_entity']->custom_field;
+  }
+}

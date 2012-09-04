@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_xmlsitemap_sitemap_delete
+# key: hook_xmlsitemap_sitemap_delete
+# --
+/**
+ * ${2:Respond to XML sitemap deletion.
+ *
+ * This hook is invoked from xmlsitemap_sitemap_delete_multiple() after the XML
+ * sitemap has been removed from the table in the database.
+ *}
+ * @param $sitemap
+ *   The XML sitemap object that was deleted.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_xmlsitemap_sitemap_delete(stdClass $sitemap) {
+$0  db_query("DELETE FROM {mytable} WHERE smid = '%s'", $sitemap->smid);
+}

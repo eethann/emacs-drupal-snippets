@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_rules_config_presave
+# key: hook_rules_config_presave
+# --
+/**
+ * ${2:Act on a rules configuration being inserted or updated.
+ *
+ * This hook is invoked before the rules configuration is saved to the
+ * database.
+ *}
+ * @param RulesPlugin $config
+ *   The rules configuration that is being inserted or updated.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_config_presave($config) {
+$0  if ($config->id && $config->module == 'yours') {
+    // Add custom condition.
+    $config->conditon(/* Your condition */);
+  }
+}

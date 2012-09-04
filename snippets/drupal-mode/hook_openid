@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_openid
+# key: hook_openid
+# --
+/**
+ * ${2:Allow modules to modify the OpenID request parameters.
+ *}
+ * @param $op
+ *   The operation to be performed.
+ *   Possible values:
+ *   - request: Modify parameters before they are sent to the OpenID provider.
+ * @param $request
+ *   An associative array of parameter defaults to which to modify or append.
+ * @return
+ *   An associative array of parameters to be merged with the default list.
+ *
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_openid($op, $request) {
+$0  if ($op == 'request') {
+    $request['openid.identity'] = 'http://myname.myopenid.com/';
+  }
+  return $request;
+}

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_entity_property_info_alter
+# key: hook_entity_property_info_alter
+# --
+/**
+ * ${2:Allow modules to alter metadata about entity properties.
+ *}
+ * @see hook_entity_property_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_entity_property_info_alter(&$info) {
+$0  $properties = &$info['node']['bundles']['poll']['properties'];
+
+  $properties['poll-votes'] = array(
+    'label' => t("Poll votes"),
+    'description' => t("The number of votes that have been cast on a poll node."),
+    'type' => 'integer',
+    'getter callback' => 'entity_property_poll_node_get_properties',
+  );
+}

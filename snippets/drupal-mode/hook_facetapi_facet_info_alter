@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_facet_info_alter
+# key: hook_facetapi_facet_info_alter
+# --
+/**
+ * ${2:Allows for alterations to the facet definitions.
+ *}
+ * @param array &$facet_info
+ *   The return values of hook_facetapi_facet_info() implementations.
+ * @param array $searcher_info
+ *   The definition of the searcher that facets are being collected for.
+ *
+ * @see hook_facetapi_facet_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_facet_info_alter(array &$facet_info, array $searcher_info) {
+$0  // Change the author index field for Apache Solr searchers indexing node data.
+  if ('apachesolr' == $searcher_info['adapter'] && isset($searcher_info['types']['node'])) {
+    $facet_info['author']['field'] = 'is_uid';
+  }
+}

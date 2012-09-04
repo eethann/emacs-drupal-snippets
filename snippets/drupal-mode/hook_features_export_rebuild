@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: hook_features_export_rebuild
+# key: hook_features_export_rebuild
+# --
+/**
+ * ${2:Component hook. The hook should be implemented using the name ot the
+ * component, not the module, eg. [component]_features_export() rather than
+ * [module]_features_export().
+ *
+ * Rebuild all component objects for a given feature module. Should only be
+ * implemented for 'faux-exportable' components.
+ *
+ * This hook is called at points where Features determines that it is safe
+ * (ie. the feature is in state `FEATURES_REBUILDABLE`) for your module to
+ * replace objects in the database with defaults that you collect from your
+ * own defaults hook. See API.txt for how Features determines whether a
+ * rebuild of components is possible.
+ *}
+ * @param string $module_name
+ *   The name of the feature module whose components should be rebuilt.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_features_export_rebuild($module_name) {
+$0  $mycomponents = module_invoke_all($module_name, 'mycomponent_defaults');
+  if (!empty($$mycomponents)) {
+    foreach ($mycomponents as $mycomponent) {
+      mycomponent_save($mycomponent);
+    }
+  }
+}

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_context_page_reaction
+# key: hook_context_page_reaction
+# --
+/**
+ * ${2:Execute Context page reactions
+ *
+ * Allows modules to hook into Context's hook_page_build to execute their
+ * reactions at an appropriate time after the firing of conditions.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_context_page_reaction() {
+$0  if ($plugin = context_get_plugin('reaction', 'baz')) {
+    $plugin->execute();
+  }
+}

@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_ds_fields_ui_alter
+# key: hook_ds_fields_ui_alter
+# --
+/**
+ * ${2:Alter fields defined by Display Suite just before they get
+ * rendered on the Field UI. Use this hook to inject fields
+ * which you can't alter with hook_ds_fields_info_alter().
+ *
+ * Use this in edge cases, see ds_extras_ds_fields_ui_alter()
+ * which adds fields chosen in Views UI. This also runs
+ * when a layout has been chosen.
+ *}
+ * @param $fields
+ *   An array with fields which can be altered just before they get cached.
+ * @param $entity_type
+ *   The name of the entity type.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ds_fields_ui_alter(&$fields, $context) {
+$0  $fields['title'] = t('Extra title');
+}

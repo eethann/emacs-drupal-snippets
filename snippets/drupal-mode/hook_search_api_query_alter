@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_query_alter
+# key: hook_search_api_query_alter
+# --
+/**
+ * ${2:Lets modules alter a search query before executing it.
+ *}
+ * @param SearchApiQueryInterface $query
+ *   The SearchApiQueryInterface object representing the search query.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_query_alter(SearchApiQueryInterface $query) {
+$0  $info = entity_get_info($index->item_type);
+  $query->condition($info['entity keys']['id'], 0, '!=');
+}

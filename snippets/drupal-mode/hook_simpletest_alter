@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_simpletest_alter
+# key: hook_simpletest_alter
+# --
+/**
+ * ${2:Alter the list of tests.
+ *}
+ * @param $groups
+ *   A two dimension array, the first key is the test group (as defined in
+ *   getInfo) the second is the name of the class and the value is the return
+ *   value of the getInfo method.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_simpletest_alter(&$groups) {
+$0  // An alternative session handler module would not want to run the original
+  // Session https handling test because it checks the sessions table in the
+  // database.
+  unset($groups['Session']['testHttpsSession']);
+}

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_node_type_update
+# key: hook_node_type_update
+# --
+/**
+ * ${2:Respond to node type updates.
+ *
+ * This hook is invoked from node_type_save() after the node type is updated
+ * in the database.
+ *}
+ * @param $info
+ *   The node type object that is being updated.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_type_update($info) {
+$0  if (!empty($info->old_type) && $info->old_type != $info->type) {
+    $setting = variable_get('comment_' . $info->old_type, COMMENT_NODE_OPEN);
+    variable_del('comment_' . $info->old_type);
+    variable_set('comment_' . $info->type, $setting);
+  }
+}

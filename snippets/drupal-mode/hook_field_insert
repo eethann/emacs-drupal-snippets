@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: hook_field_insert
+# key: hook_field_insert
+# --
+/**
+ * ${2:Define custom insert behavior for this module's field data.
+ *
+ * This hook is invoked from field_attach_insert() on the module that defines a
+ * field, during the process of inserting an entity object (node, taxonomy term,
+ * etc.). It is invoked just before the data for this field on the particular
+ * entity object is inserted into field storage. Only field modules that are
+ * storing or tracking information outside the standard field storage mechanism
+ * need to implement this hook.
+ *}
+ * @param $entity_type
+ *   The type of $entity.
+ * @param $entity
+ *   The entity for the operation.
+ * @param $field
+ *   The field structure for the operation.
+ * @param $instance
+ *   The instance structure for $field on $entity's bundle.
+ * @param $langcode
+ *   The language associated with $items.
+ * @param $items
+ *   $entity->{$field['field_name']}[$langcode], or an empty array if unset.
+ *
+ * @see hook_field_update()
+ * @see hook_field_delete()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_insert($entity_type, $entity, $field, $instance, $langcode, &$items) {
+$0  if (variable_get('taxonomy_maintain_index_table', TRUE) && $field['storage']['type'] == 'field_sql_storage' && $entity_type == 'node' && $entity->status) {
+    $query = db_insert('taxonomy_index')->fields(array('nid', 'tid', 'sticky', 'created', ));
+    foreach ($items as $item) {
+      $query->values(array(
+        'nid' => $entity->nid,
+        'tid' => $item['tid'],
+        'sticky' => $entity->sticky,
+        'created' => $entity->created,
+      ));
+    }
+    $query->execute();
+  }
+}

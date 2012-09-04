@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_node_revision_delete
+# key: hook_node_revision_delete
+# --
+/**
+ * ${2:Respond to deletion of a node revision.
+ *
+ * This hook is invoked from node_revision_delete() after the revision has been
+ * removed from the node_revision table, and before
+ * field_attach_delete_revision() is called.
+ *}
+ * @param $node
+ *   The node revision (node object) that is being deleted.
+ *
+ * @ingroup node_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_revision_delete($node) {
+$0  db_delete('mytable')
+    ->condition('vid', $node->vid)
+    ->execute();
+}

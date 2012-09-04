@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_enable
+# key: hook_enable
+# --
+/**
+ * ${2:Perform necessary actions after module is enabled.
+ *
+ * The hook is called every time the module is enabled. It should be
+ * implemented in the module's .install file. The implementation can
+ * rely on the .module file being loaded.
+ *}
+ * @see module_enable()
+ * @see hook_install()
+ * @see hook_modules_enabled()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_enable() {
+$0  mymodule_cache_rebuild();
+}

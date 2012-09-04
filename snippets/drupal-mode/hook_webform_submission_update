@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_webform_submission_update
+# key: hook_webform_submission_update
+# --
+/**
+ * ${2:Respond to a Webform submission being updated.
+ *
+ * Note that this hook is called after a submission has already been saved to
+ * the database. If needing to modify the submission prior to updating, use
+ * hook_webform_submission_presave().
+ *}
+ * @param $node
+ *   The Webform node on which this submission was made.
+ * @param $submission
+ *   The Webform submission that was just updated in the database.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_submission_update($node, $submission) {
+$0  // Update a record in a 3rd-party module table when a submission is updated.
+  db_update('mymodule_table')
+    ->fields(array(
+      'foo' => 'foo_data',
+    ))
+    ->condition('nid', $node->nid)
+    ->condition('sid', $submission->sid)
+    ->execute();
+}

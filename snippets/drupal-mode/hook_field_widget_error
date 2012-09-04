@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_field_widget_error
+# key: hook_field_widget_error
+# --
+/**
+ * ${2:Flag a field-level validation error.
+ *}
+ * @param $element
+ *   An array containing the form element for the widget. The error needs to be
+ *   flagged on the right sub-element, according to the widget's internal
+ *   structure.
+ * @param $error
+ *   An associative array with the following key-value pairs, as returned by
+ *   hook_field_validate():
+ *   - error: the error code. Complex widgets might need to report different
+ *     errors to different form elements inside the widget.
+ *   - message: the human readable message to be displayed.
+ * @param $form
+ *   The form structure where field elements are attached to. This might be a
+ *   full form structure, or a sub-element of a larger form.
+ * @param $form_state
+ *   An associative array containing the current state of the form.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_widget_error($element, $error, $form, &$form_state) {
+$0  form_error($element['value'], $error['message']);
+}

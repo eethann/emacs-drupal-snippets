@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: hook_field_group_info
+# key: hook_field_group_info
+# --
+/**
+ * ${2:Implements hook_field_group_info().
+ * Don't forget to include the ctools hook to notify that
+ * your modules has field group exports.}
+ * @see hook_ctools_plugin_api.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_group_info() {
+$0
+}

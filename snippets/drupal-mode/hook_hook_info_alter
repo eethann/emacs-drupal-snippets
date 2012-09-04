@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_hook_info_alter
+# key: hook_hook_info_alter
+# --
+/**
+ * ${2:Alter information from hook_hook_info().
+ *}
+ * @param $hooks
+ *   Information gathered by module_hook_info() from other modules'
+ *   implementations of hook_hook_info(). Alter this array directly.
+ *   See hook_hook_info() for information on what this may contain.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_hook_info_alter(&$hooks) {
+$0  // Our module wants to completely override the core tokens, so make
+  // sure the core token hooks are not found.
+  $hooks['token_info']['group'] = 'mytokens';
+  $hooks['tokens']['group'] = 'mytokens';
+}

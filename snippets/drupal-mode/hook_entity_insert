@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: hook_entity_insert
+# key: hook_entity_insert
+# --
+/**
+ * ${2:Act on entities when inserted.
+ *}
+ * @param $entity
+ *   The entity object.
+ * @param $type
+ *   The type of entity being inserted (i.e. node, user, comment).
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_entity_insert($entity, $type) {
+$0  // Insert the new entity into a fictional table of all entities.
+  $info = entity_get_info($type);
+  list($id) = entity_extract_ids($type, $entity);
+  db_insert('example_entity')
+    ->fields(array(
+      'type' => $type,
+      'id' => $id,
+      'created' => REQUEST_TIME,
+      'updated' => REQUEST_TIME,
+    ))
+    ->execute();
+}

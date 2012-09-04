@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: hook_entity_update
+# key: hook_entity_update
+# --
+/**
+ * ${2:Act on entities when updated.
+ *}
+ * @param $entity
+ *   The entity object.
+ * @param $type
+ *   The type of entity being updated (i.e. node, user, comment).
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_entity_update($entity, $type) {
+$0  // Update the entity's entry in a fictional table of all entities.
+  $info = entity_get_info($type);
+  list($id) = entity_extract_ids($type, $entity);
+  db_update('example_entity')
+    ->fields(array(
+      'updated' => REQUEST_TIME,
+    ))
+    ->condition('type', $type)
+    ->condition('id', $id)
+    ->execute();
+}

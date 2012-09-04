@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: hook_uninstall
+# key: hook_uninstall
+# --
+/**
+ * ${2:Remove any information that the module sets.
+ *
+ * The information that the module should remove includes:
+ * - variables that the module has set using variable_set() or system_settings_form()
+ * - modifications to existing tables
+ *
+ * The module should not remove its entry from the {system} table. Database
+ * tables defined by hook_schema() will be removed automatically.
+ *
+ * The uninstall hook must be implemented in the module's .install file. It
+ * will fire when the module gets uninstalled but before the module's database
+ * tables are removed, allowing your module to query its own tables during
+ * this routine.
+ *
+ * When hook_uninstall() is called, your module will already be disabled, so
+ * its .module file will not be automatically included. If you need to call API
+ * functions from your .module file in this hook, use drupal_load() to make
+ * them available. (Keep this usage to a minimum, though, especially when
+ * calling API functions that invoke hooks, or API functions from modules
+ * listed as dependencies, since these may not be available or work as expected
+ * when the module is disabled.)
+ *}
+ * @see hook_install()
+ * @see hook_schema()
+ * @see hook_disable()
+ * @see hook_modules_uninstalled()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_uninstall() {
+$0  variable_del('upload_file_types');
+}

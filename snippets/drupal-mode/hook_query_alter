@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_query_alter
+# key: hook_query_alter
+# --
+/**
+ * ${2:Perform alterations to a structured query.
+ *
+ * Structured (aka dynamic) queries that have tags associated may be altered by any module
+ * before the query is executed.
+ *}
+ * @param $query
+ *   A Query object describing the composite parts of a SQL query.
+ *
+ * @see hook_query_TAG_alter()
+ * @see node_query_node_access_alter()
+ * @see QueryAlterableInterface
+ * @see SelectQueryInterface
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_query_alter(QueryAlterableInterface $query) {
+$0  if ($query->hasTag('micro_limit')) {
+    $query->range(0, 2);
+  }
+}

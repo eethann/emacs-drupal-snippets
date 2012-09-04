@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: hook_user_update
+# key: hook_user_update
+# --
+/**
+ * ${2:A user account was updated.
+ *
+ * Modules may use this hook to update their user data in a custom storage
+ * after a user account has been updated.
+ *}
+ * @param $edit
+ *   The array of form values submitted by the user.
+ * @param $account
+ *   The user object on which the operation is performed.
+ * @param $category
+ *   The active category of user information being edited.
+ *
+ * @see hook_user_presave()
+ * @see hook_user_insert()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_user_update(&$edit, $account, $category) {
+$0  db_insert('user_changes')
+    ->fields(array(
+      'uid' => $account->uid,
+      'changed' => time(),
+    ))
+    ->execute();
+}

@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: hook_user_role_insert
+# key: hook_user_role_insert
+# --
+/**
+ * ${2:Inform other modules that a user role has been added.
+ *
+ * Modules implementing this hook can act on the user role object when saved to
+ * the database. It's recommended that you implement this hook if your module
+ * adds additional data to user roles object. The module should save its custom
+ * additions to the database.
+ *}
+ * @param $role
+ *   A user role object.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_user_role_insert($role) {
+$0  // Save extra fields provided by the module to user roles.
+  db_insert('my_module_table')
+    ->fields(array(
+      'rid' => $role->rid,
+      'role_description' => $role->description,
+    ))
+    ->execute();
+}

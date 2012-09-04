@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_language_fallback_candidates_alter
+# key: hook_language_fallback_candidates_alter
+# --
+/**
+ * ${2:Perform alterations on the language fallback candidates.
+ *}
+ * @param $fallback_candidates
+ *   An array of language codes whose order will determine the language fallback
+ *   order.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_language_fallback_candidates_alter(array &$fallback_candidates) {
+$0  $fallback_candidates = array_reverse($fallback_candidates);
+}

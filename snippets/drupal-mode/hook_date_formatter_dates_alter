@@ -1,0 +1,58 @@
+# -*- mode: snippet -*-
+# name: hook_date_formatter_dates_alter
+# key: hook_date_formatter_dates_alter
+# --
+/**
+ * ${2:Alter the dates array created by date_formatter_process().
+ *}
+ * @param array $dates
+ *   The $dates array created by the Date module.
+ * @param array $context
+ *   An associative array containing the following keys:
+ *   - field: The $field array.
+ *   - instance: The $instance array.
+ *   - format: The string $format.
+ *   - entity_type: The $entity_type.
+ *   - entity: The $entity object.
+ *   - langcode: The string $langcode.
+ *   - item: The $item array.
+ *   - display: The $display array.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_date_formatter_dates_alter(&$dates, $context) {
+$0  $field = $context['field'];
+  $instance = $context['instance'];
+  $format = $context['format'];
+  $entity_type = $context['entity_type'];
+  $entity = $context['entity'];
+  $date1 = $dates['value']['local']['object'];
+  $date2 = $dates['value2']['local']['object'];
+
+  $is_all_day = date_all_day_field($field, $instance, $date1, $date2);
+
+  $all_day1 = '';
+  $all_day2 = '';
+  if ($format != 'format_interval' && $is_all_day) {
+    $all_day1 = theme('date_all_day', array(
+      'field' => $field,
+      'instance' => $instance,
+      'which' => 'date1',
+      'date1' => $date1,
+      'date2' => $date2,
+      'format' => $format,
+      'entity_type' => $entity_type,
+      'entity' => $entity));
+    $all_day2 = theme('date_all_day', array(
+      'field' => $field,
+      'instance' => $instance,
+      'which' => 'date2',
+      'date1' => $date1,
+      'date2' => $date2,
+      'format' => $format,
+      'entity_type' => $entity_type,
+      'entity' => $entity));
+    $dates['value']['formatted_time'] = theme('date_all_day_label');
+    $dates['value2']['formatted_time'] = theme('date_all_day_label');
+    $dates['value']['formatted'] = $all_day1;
+    $dates['value2']['formatted'] = $all_day2;
+  }
+}

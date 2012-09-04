@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_ctools_plugin_post_alter
+# key: hook_ctools_plugin_post_alter
+# --
+/**
+ * ${2:Alter a plugin after it has been processed.
+ *
+ * This hook is useful for overriding the final values for a plugin after it
+ * has been processed.
+ *}
+ * @param $plugin
+ *   An associative array defining a plugin.
+ * @param $info
+ *   An associative array of plugin type info.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ctools_plugin_post_alter(&$plugin, &$info) {
+$0  // Override a function defined by the plugin.
+  if ($info['type'] == 'my_type') {
+    $plugin['my_function'] = 'new_function';
+  }
+}

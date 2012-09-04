@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_server_insert
+# key: hook_search_api_server_insert
+# --
+/**
+ * ${2:A new search server was created.
+ *}
+ * @param SearchApiServer $server
+ *   The new server.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_server_insert(SearchApiServer $server) {
+$0  db_insert('example_search_server')
+    ->fields(array(
+      'server' => $server->machine_name,
+      'insert_time' => REQUEST_TIME,
+    ))
+    ->execute();
+}

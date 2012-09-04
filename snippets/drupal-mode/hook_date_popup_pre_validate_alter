@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_date_popup_pre_validate_alter
+# key: hook_date_popup_pre_validate_alter
+# --
+/**
+ * ${2:Alter the date_popup element before the rest of the validation is run.
+ *}
+ * @param array $element
+ *   The $element array.
+ * @param array $form_state
+ *   A keyed array containing the current state of the form.
+ * @param array $input
+ *   The array of input values to be validated.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_date_popup_pre_validate_alter(&$element, &$form_state, &$input) {
+$0  // Let Date module massage the format for all day values so they will pass
+  // validation. The All day flag, if used, actually exists on the parent
+  // element.
+  date_all_day_value($element, $form_state);
+}

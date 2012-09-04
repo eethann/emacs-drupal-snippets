@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: hook_date_field_formatter_settings_form_alter
+# key: hook_date_field_formatter_settings_form_alter
+# --
+/**
+ * ${2:Alter a date field formatter settings form.
+ *}
+ * @param array $form
+ *   Nested array of form elements that comprise the form.
+ * @param array $form_state
+ *   A keyed array containing the current state of the form.
+ * @param array $context
+ *   An associative array containing the following keys:
+ *   - field: The $field array.
+ *   - instance: The $instance array.
+ *   - view_mode: The formatter view mode.
+ *
+ * @see hook_field_formatter_settings_form()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_date_field_formatter_settings_form_alter(&$form, &$form_state, $context) {
+$0  $field = $context['field'];
+  $instance = $context['instance'];
+  $view_mode = $context['view_mode'];
+  $display = $instance['display'][$view_mode];
+  $formatter = $display['type'];
+  if ($formatter == 'date_default') {
+    $form['show_repeat_rule'] = array(
+      '#title' => t('Repeat rule:'),
+      '#type' => 'select',
+      '#options' => array(
+        'show' => t('Show repeat rule'),
+        'hide' => t('Hide repeat rule')),
+      '#default_value' => $settings['show_repeat_rule'],
+      '#access' => $field['settings']['repeat'],
+      '#weight' => 5,
+    );
+  }
+}

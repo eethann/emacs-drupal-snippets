@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_filter_format_update
+# key: hook_filter_format_update
+# --
+/**
+ * ${2:Perform actions when a text format has been updated.
+ *
+ * This hook allows modules to act when a text format has been updated in any
+ * way. For example, when filters have been reconfigured, disabled, or
+ * re-arranged in the text format.
+ *}
+ * @param $format
+ *   The format object of the format being updated.
+ *
+ * @see hook_filter_format_insert()
+ * @see hook_filter_format_disable()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_filter_format_update($format) {
+$0  mymodule_cache_rebuild();
+}

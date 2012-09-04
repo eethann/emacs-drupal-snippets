@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: hook_xmlsitemap_index_links
+# key: hook_xmlsitemap_index_links
+# --
+/**
+ * ${2:Index links for the XML sitemaps.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_xmlsitemap_index_links($limit) {
+$0}

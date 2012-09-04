@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_context_page_condition
+# key: hook_context_page_condition
+# --
+/**
+ * ${2:Execute Context page conditions
+ *
+ * Allows modules to hook into Context's hook_page_build to execute their
+ * conditions at an appropriate time before the firing of reactions.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_context_page_condition() {
+$0  if ($plugin = context_get_plugin('condition', 'bar')) {
+    $plugin->execute();
+  }
+}

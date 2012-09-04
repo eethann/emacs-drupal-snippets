@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_user_load
+# key: hook_user_load
+# --
+/**
+ * ${2:Act on user objects when loaded from the database.
+ *
+ * Due to the static cache in user_load_multiple() you should not use this
+ * hook to modify the user properties returned by the {users} table itself
+ * since this may result in unreliable results when loading from cache.
+ *}
+ * @param $users
+ *   An array of user objects, indexed by uid.
+ *
+ * @see user_load_multiple()
+ * @see profile_user_load()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_user_load($users) {
+$0  $result = db_query('SELECT uid, foo FROM {my_table} WHERE uid IN (:uids)', array(':uids' => array_keys($users)));
+  foreach ($result as $record) {
+    $users[$record->uid]->foo = $record->foo;
+  }
+}

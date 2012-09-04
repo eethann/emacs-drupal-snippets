@@ -1,0 +1,60 @@
+# -*- mode: snippet -*-
+# name: hook_features_export
+# key: hook_features_export
+# --
+/**
+ * ${2:Component hook. The hook should be implemented using the name ot the
+ * component, not the module, eg. [component]_features_export() rather than
+ * [module]_features_export().
+ *
+ * Process the export array for a given component. Implementations of this hook
+ * have three key tasks:
+ *
+ * 1. Determine module dependencies for any of the components passed to it
+ *   e.g. the views implementation iterates over each views' handlers and
+ *   plugins to determine which modules need to be added as dependencies.
+ *
+ * 2. Correctly add components to the export array. In general this is usually
+ *   adding all of the items in $data to $export['features']['my_key'], but
+ *   can become more complicated if components are shared between features
+ *   or modules.
+ *
+ * 3. Delegating further detection and export tasks to related or derivative
+ *   components.
+ *
+ * Each export processor can kickoff further export processors by returning a
+ * keyed array (aka the "pipe") where the key is the next export processor hook
+ * to call and the value is an array to be passed to that processor's $data
+ * argument. This allows an export process to start simply at a few objects:
+ *
+ * [context]
+ *
+ * And then branch out, delegating each component to its appropriate hook:
+ *
+ * [context]--------+------------+
+ *     |            |            |
+ *   [node]      [block]      [views]
+ *     |
+ *   [CCK]
+ *     |
+ * [imagecache]
+ *}
+ * @param array $data
+ *   An array of machine names for the component in question to be exported.
+ * @param array &$export
+ *   By reference. An array of all components to be exported with a given
+ *   feature. Component objects that should be exported should be added to
+ *   this array.
+ * @param string $module_name
+ *   The name of the feature module to be generated.
+ * @return array
+ *   The pipe array of further processors that should be called.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_features_export($data, &$export, $module_name) {
+$0  // The following is the simplest implementation of a straight object export
+  // with no further export processors called.
+  foreach ($data as $component) {
+    $export['mycomponent'][$component] = $component;
+  }
+  return array();
+}

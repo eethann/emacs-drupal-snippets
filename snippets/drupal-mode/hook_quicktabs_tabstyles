@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_quicktabs_tabstyles
+# key: hook_quicktabs_tabstyles
+# --
+/**
+ * ${2:This hook allows other modules to create additional tab styles for
+ * the quicktabs module.
+ *}
+ * @return array
+ *   An array of key => value pairs suitable for inclusion as the #options in a
+ *   select or radios form element. Each key must be the location of a css
+ *   file for a quick tabs style. Each value should be the name of the style.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_quicktabs_tabstyles() {
+$0}

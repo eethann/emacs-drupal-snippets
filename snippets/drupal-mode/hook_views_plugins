@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_views_plugins
+# key: hook_views_plugins
+# --
+/**
+ * ${2:The full documentation for this hook is now in the advanced help.
+ *
+ * This hook should be placed in MODULENAME.views.inc and it will be auto-loaded.
+ * MODULENAME.views.inc must be in the directory specified by the 'path' key
+ * returned by MODULENAME_views_api(), or the same directory as the .module
+ * file, if 'path' is unspecified.
+ *
+ * This is a stub list as a reminder that this needs to be doc'd and is not used
+ * in views anywhere so might not be remembered when this is formally documented:
+ * - style: 'even empty'}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_plugins() {
+$0  // example code here
+}

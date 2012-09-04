@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: hook_menu_default_menu_links_alter
+# key: hook_menu_default_menu_links_alter
+# --
+/**
+ * ${2:Alter the default menu links right before they are cached into the database.
+ *}
+ * @param &$links
+ *   By reference. The menu links that have been declared by another feature.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_menu_default_menu_links_alter(&$links) {
+$0}

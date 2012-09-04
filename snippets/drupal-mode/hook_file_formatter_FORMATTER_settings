@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: hook_file_formatter_FORMATTER_settings
+# key: hook_file_formatter_FORMATTER_settings
+# --
+/**
+ * ${2:@todo Add documentation.
+ *
+ * Note: This is not really a hook. The function name is manually specified via
+ * 'settings callback' in hook_file_formatter_info(), with this recommended
+ * callback name pattern.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_formatter_FORMATTER_settings($form, &$form_state, $settings) {
+$0}

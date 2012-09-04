@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_menu_insert
+# key: hook_menu_insert
+# --
+/**
+ * ${2:Informs modules that a custom menu was created.
+ *
+ * This hook is used to notify modules that a custom menu has been created.
+ * Contributed modules may use the information to perform actions based on the
+ * information entered into the menu system.
+ *}
+ * @param $menu
+ *   An array representing a custom menu:
+ *   - menu_name: The unique name of the custom menu.
+ *   - title: The human readable menu title.
+ *   - description: The custom menu description.
+ *
+ * @see hook_menu_update()
+ * @see hook_menu_delete()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_menu_insert($menu) {
+$0  // For example, we track available menus in a variable.
+  $my_menus = variable_get('my_module_menus', array());
+  $my_menus[$menu['menu_name']] = $menu['menu_name'];
+  variable_set('my_module_menus', $my_menus);
+}

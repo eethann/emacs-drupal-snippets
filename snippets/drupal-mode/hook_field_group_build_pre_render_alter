@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: hook_field_group_build_pre_render_alter
+# key: hook_field_group_build_pre_render_alter
+# --
+/**
+ * ${2:Implements hook_field_group_build_pre_render_alter().
+ *
+ * Function that fungates as last resort where you can alter things. It is
+ * expected that when you need this function, you have most likely a very custom
+ * case or it is a fix that can be put in field_group core.
+ *}
+ * @param Array $elements by address.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_group_build_pre_render_alter(& $element) {
+$0
+  // Prepare variables.
+  $display = isset($element['#view_mode']);
+  $groups = array_keys($element['#groups']);
+
+  // Example from field_group itself to unset empty elements.
+  if ($display) {
+    foreach (element_children($element) as $name) {
+      if (in_array($name, $groups)) {
+        if (field_group_field_group_is_empty($element[$name], $groups)) {
+          unset($element[$name]);
+        }
+      }
+    }
+  }
+
+  // You might include additional javascript files and stylesheets.
+  $element['#attached']['js'][] = drupal_get_path('module', 'field_group') . '/field_group.js';
+  $element['#attached']['css'][] = drupal_get_path('module', 'field_group') . '/field_group.css';
+
+}

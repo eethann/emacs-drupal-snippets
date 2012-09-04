@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_taxonomy_vocabulary_insert
+# key: hook_taxonomy_vocabulary_insert
+# --
+/**
+ * ${2:Act on taxonomy vocabularies when inserted.
+ *
+ * Modules implementing this hook can act on the vocabulary object when saved
+ * to the database.
+ *}
+ * @param $vocabulary
+ *   A taxonomy vocabulary object.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_taxonomy_vocabulary_insert($vocabulary) {
+$0  if ($vocabulary->synonyms) {
+    variable_set('taxonomy_' . $vocabulary->vid . '_synonyms', TRUE);
+  }
+}

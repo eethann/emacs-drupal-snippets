@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: hook_field_widget_form_alter
+# key: hook_field_widget_form_alter
+# --
+/**
+ * ${2:Alter forms for field widgets provided by other modules.
+ *}
+ * @param $element
+ *   The field widget form element as constructed by hook_field_widget_form().
+ * @param $form_state
+ *   An associative array containing the current state of the form.
+ * @param $context
+ *   An associative array containing the following key-value pairs, matching the
+ *   arguments received by hook_field_widget_form():
+ *   - form: The form structure to which widgets are being attached. This may be
+ *     a full form structure, or a sub-element of a larger form.
+ *   - field: The field structure.
+ *   - instance: The field instance structure.
+ *   - langcode: The language associated with $items.
+ *   - items: Array of default values for this field.
+ *   - delta: The order of this item in the array of subelements (0, 1, 2, etc).
+ *
+ * @see hook_field_widget_form()
+ * @see hook_field_widget_WIDGET_TYPE_form_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_widget_form_alter(&$element, &$form_state, $context) {
+$0  // Add a css class to widget form elements for all fields of type mytype.
+  if ($context['field']['type'] == 'mytype') {
+    // Be sure not to overwrite existing attributes.
+    $element['#attributes']['class'][] = 'myclass';
+  }
+}

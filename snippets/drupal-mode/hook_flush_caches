@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_flush_caches
+# key: hook_flush_caches
+# --
+/**
+ * ${2:Add a list of cache tables to be cleared.
+ *
+ * This hook allows your module to add cache table names to the list of cache
+ * tables that will be cleared by the Clear button on the Performance page or
+ * whenever drupal_flush_all_caches is invoked.
+ *}
+ * @return
+ *   An array of cache table names.
+ *
+ * @see drupal_flush_all_caches()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_flush_caches() {
+$0  return array('cache_example');
+}

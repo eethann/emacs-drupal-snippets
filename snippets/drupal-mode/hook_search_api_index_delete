@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_index_delete
+# key: hook_search_api_index_delete
+# --
+/**
+ * ${2:A search index was deleted.
+ *}
+ * @param SearchApiIndex $index
+ *   The deleted index.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_index_delete(SearchApiIndex $index) {
+$0  db_insert('example_search_index_update')
+    ->fields(array(
+      'index' => $index->machine_name,
+      'update_time' => REQUEST_TIME,
+    ))
+    ->execute();
+  db_delete('example_search_index')
+    ->condition('index', $index->machine_name)
+    ->execute();
+}

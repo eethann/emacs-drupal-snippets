@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_boot
+# key: hook_boot
+# --
+/**
+ * ${2:Perform setup tasks for all page requests.
+ *
+ * This hook is run at the beginning of the page request. It is typically
+ * used to set up global parameters that are needed later in the request.
+ *
+ * Only use this hook if your code must run even for cached page views. This
+ * hook is called before modules or most include files are loaded into memory.
+ * It happens while Drupal is still in bootstrap mode.
+ *}
+ * @see hook_init()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_boot() {
+$0  // We need user_access() in the shutdown function. Make sure it gets loaded.
+  drupal_load('module', 'user');
+  drupal_register_shutdown_function('devel_shutdown');
+}

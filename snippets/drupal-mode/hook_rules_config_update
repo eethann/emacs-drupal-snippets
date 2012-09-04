@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_rules_config_update
+# key: hook_rules_config_update
+# --
+/**
+ * ${2:Respond to updates to a rules configuration.
+ *
+ * This hook is invoked after the configuration has been updated in the
+ * database.
+ *}
+ * @param RulesPlugin $config
+ *   The rules configuration that is being updated.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_config_update($config) {
+$0  db_update('mytable')
+    ->fields(array('plugin' => $config->plugin))
+    ->condition('id', $config->id)
+    ->execute();
+}

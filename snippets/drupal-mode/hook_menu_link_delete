@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_menu_link_delete
+# key: hook_menu_link_delete
+# --
+/**
+ * ${2:Inform modules that a menu link has been deleted.
+ *
+ * This hook is used to notify modules that menu items have been
+ * deleted. Contributed modules may use the information to perform
+ * actions based on the information entered into the menu system.
+ *}
+ * @param $link
+ *   Associative array defining a menu link as passed into menu_link_save().
+ *
+ * @see hook_menu_link_insert()
+ * @see hook_menu_link_update()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_menu_link_delete($link) {
+$0  // Delete the record from our table.
+  db_delete('menu_example')
+    ->condition('mlid', $link['mlid'])
+    ->execute();
+}

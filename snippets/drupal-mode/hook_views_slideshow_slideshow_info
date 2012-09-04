@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: hook_views_slideshow_slideshow_info
+# key: hook_views_slideshow_slideshow_info
+# --
+/**
+ * ${2:Define the type of the slideshow (eg.: cycle, imageflow, ddblock).
+ *}
+ * @return
+ *  Associative array of slideshow type and its information.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_slideshow_slideshow_info() {
+$0  $options = array(
+    'views_slideshow_cycle' => array(
+      'name' => t('Cycle'),
+      'accepts' => array(
+        'goToSlide',
+        'nextSlide',
+        'pause',
+        'play',
+        'previousSlide',
+      ),
+      'calls' => array(
+        'transitionBegin',
+        'transitionEnd',
+        'goToSlide',
+        'pause',
+        'play',
+        'nextSlide',
+        'previousSlide',
+      ),
+    ),
+  );
+  return $options;
+}

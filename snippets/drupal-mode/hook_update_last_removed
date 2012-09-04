@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: hook_update_last_removed
+# key: hook_update_last_removed
+# --
+/**
+ * ${2:Return a number which is no longer available as hook_update_N().
+ *
+ * If you remove some update functions from your mymodule.install file, you
+ * should notify Drupal of those missing functions. This way, Drupal can
+ * ensure that no update is accidentally skipped.
+ *
+ * Implementations of this hook should be placed in a mymodule.install file in
+ * the same directory as mymodule.module.
+ *}
+ * @return
+ *   An integer, corresponding to hook_update_N() which has been removed from
+ *   mymodule.install.
+ *
+ * @see hook_update_N()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_update_last_removed() {
+$0  // We've removed the 5.x-1.x version of mymodule, including database updates.
+  // The next update function is mymodule_update_5200().
+  return 5103;
+}

@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: hook_rules_action_base_upgrade_map_name
+# key: hook_rules_action_base_upgrade_map_name
+# --
+/**
+ * ${2:D6 to D7 upgrade procedure hook for mapping action or condition names.
+ *
+ * If for a module the action or condition name changed since Drupal 6, this
+ * "hook" can be implemented in order to map to the new name of the action or
+ * condition.
+ *
+ * This is no real hook, but a callback that is invoked for each Drupal 6
+ * action or condition that is to be upgraded to Drupal 7. E.g. the function
+ * name called for the action "rules_action_set_node_title" would be
+ * "rules_action_set_node_title_upgrade_map_name".
+ *}
+ * @param $element
+ *   The element array of a configured condition or action which is to be
+ *   upgraded.
+ * @return
+ *   The name of the action or condition which should be used.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_action_base_upgrade_map_name($element) {
+$0  return 'data_set';
+}

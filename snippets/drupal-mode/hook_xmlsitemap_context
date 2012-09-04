@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_xmlsitemap_context
+# key: hook_xmlsitemap_context
+# --
+/**
+ * ${2:Provide information about the current context on the site.
+ *}
+ * @see hook_xmlsitemap_context_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_xmlsitemap_context() {
+$0  $context = array();
+  if ($vid = mymodule_get_current_vocabulary()) {
+    $context['vocabulary'] = $vid;
+  }
+  return $context;
+}

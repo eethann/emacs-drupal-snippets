@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: hook_user_insert
+# key: hook_user_insert
+# --
+/**
+ * ${2:A user account was created.
+ *
+ * The module should save its custom additions to the user object into the
+ * database.
+ *}
+ * @param $edit
+ *   The array of form values submitted by the user.
+ * @param $account
+ *   The user object on which the operation is being performed.
+ * @param $category
+ *   The active category of user information being edited.
+ *
+ * @see hook_user_presave()
+ * @see hook_user_update()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_user_insert(&$edit, $account, $category) {
+$0  db_insert('mytable')
+    ->fields(array(
+      'myfield' => $edit['myfield'],
+      'uid' => $account->uid,
+    ))
+    ->execute();
+}

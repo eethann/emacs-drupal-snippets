@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_realm_info_alter
+# key: hook_facetapi_realm_info_alter
+# --
+/**
+ * ${2:Allows for alterations to the realm definitions.
+ *}
+ * @param array &$realm_info
+ *   The return values of hook_facetapi_realm_info() implementations.
+ *
+ * @see hook_facetapi_realm_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_realm_info_alter(array &$realm_info) {
+$0  $realm_info['block']['weight'] = 5;
+}

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_archiver_info_alter
+# key: hook_archiver_info_alter
+# --
+/**
+ * ${2:Alter archiver information declared by other modules.
+ *
+ * See hook_archiver_info() for a description of archivers and the archiver
+ * information structure.
+ *}
+ * @param $info
+ *   Archiver information to alter (return values from hook_archiver_info()).
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_archiver_info_alter(&$info) {
+$0  $info['tar']['extensions'][] = 'tgz';
+}

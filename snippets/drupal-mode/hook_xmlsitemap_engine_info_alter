@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: hook_xmlsitemap_engine_info_alter
+# key: hook_xmlsitemap_engine_info_alter
+# --
+/**
+ * ${2:Alter the list of sitemap engines.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_xmlsitemap_engine_info_alter(&$engines) {
+$0  $engines['example']['name'] = t('Kitten Search');
+  $engines['example']['url'] = 'http://kittens.com/ping?sitemap=[sitemap]';
+}

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_views_ajax_data_alter
+# key: hook_views_ajax_data_alter
+# --
+/**
+ * ${2:This hook allows to alter the commands which are used on a views ajax
+ * request.
+ *}
+ * @param $commands
+ *   An array of ajax commands
+ * @param $view view
+ *   The view which is requested.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_ajax_data_alter(&$commands, $view) {
+$0}

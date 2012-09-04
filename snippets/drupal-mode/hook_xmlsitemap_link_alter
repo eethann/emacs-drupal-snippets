@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_xmlsitemap_link_alter
+# key: hook_xmlsitemap_link_alter
+# --
+/**
+ * ${2:Alter the data of a sitemap link before the link is saved.
+ *}
+ * @param $link
+ *   An array with the data of the sitemap link.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_xmlsitemap_link_alter(&$link) {
+$0  if ($link['type'] == 'mymodule') {
+    $link['priority'] += 0.5;
+  }
+}

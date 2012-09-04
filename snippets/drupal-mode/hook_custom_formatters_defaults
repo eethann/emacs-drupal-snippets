@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: hook_custom_formatters_defaults
+# key: hook_custom_formatters_defaults
+# --
+/**
+ * ${2:Implements hook_custom_formatters_defaults().}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_custom_formatters_defaults() {
+$0  $formatters = array();
+
+  $formatter = new stdClass;
+  $formatter->disabled = FALSE; /* Edit this to true to make a default formatter disabled initially */
+  $formatter->api_version = 2;
+  $formatter->name = 'MYMODULE';
+  $formatter->label = 'MYMODULE';
+  $formatter->description = 'A PHP example formatter; Display a Thumbnail image linked to a Large image.';
+  $formatter->mode = 'php';
+  $formatter->field_types = 'image';
+  $formatter->code = 'foreach (element_children($variables[\'#items\']) as $delta) {
+  $item = $variables[\'#items\'][$delta];
+  $thumbnail = theme(\'image_style\', array(\'style_name\' => \'thumbnail\', \'path\' => $item[\'uri\']));
+  $large = image_style_path(\'large\', $item[\'uri\']);
+
+  print l($thumbnail, file_create_url($large), array(\'html\' => TRUE));
+}';
+  $formatters['example_php_image'] = $formatter;
+
+  return $formatters;
+}

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_default_profile2_type
+# key: hook_default_profile2_type
+# --
+/**
+ * ${2:Define default profile type configurations.
+ *}
+ * @return
+ *   An array of default profile types, keyed by profile type names.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_default_profile2_type() {
+$0  $types['main'] = new ProfileType(array(
+      'type' => 'main',
+      'label' => t('Profile'),
+      'weight' => 0,
+      'locked' => TRUE,
+  ));
+  return $types;
+}

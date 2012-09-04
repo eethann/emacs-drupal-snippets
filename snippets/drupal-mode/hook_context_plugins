@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: hook_context_plugins
+# key: hook_context_plugins
+# --
+/**
+ * ${2:CTools plugin API hook for Context. Note that a proper entry in
+ * hook_ctools_plugin_api() must exist for this hook to be called.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_context_plugins() {
+$0  $plugins = array();
+  $plugins['foo_context_condition_bar'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'foo') .'/plugins',
+      'file' => 'foo_context_condition_bar.inc',
+      'class' => 'foo_context_condition_bar',
+      'parent' => 'context_condition',
+    ),
+  );
+  $plugins['foo_context_reaction_baz'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'foo') .'/plugins',
+      'file' => 'foo_context_reaction_baz.inc',
+      'class' => 'foo_context_reaction_baz',
+      'parent' => 'context_reaction',
+    ),
+  );
+  return $plugins;
+}

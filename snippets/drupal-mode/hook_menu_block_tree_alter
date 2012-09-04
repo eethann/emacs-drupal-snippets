@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_menu_block_tree_alter
+# key: hook_menu_block_tree_alter
+# --
+/**
+ * ${2:Alter the menu tree and its configuration before the tree is rendered.
+ *}
+ * @param $tree
+ *   An array containing the unrendered menu tree.
+ * @param $config
+ *   An array containing the configuration of the tree.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_menu_block_tree_alter(&$tree, &$config) {
+$0}

@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: hook_ds_custom_fields_info
+# key: hook_ds_custom_fields_info
+# --
+/**
+ * ${2:Define custom fields which can be overridden through the UI and which
+ * are exportable. The keys are almost the same as in hook_ds_fields_info()
+ * except that field_type is limited and you need an entities key.
+ *
+ * This hook is called by CTools. For this hook to work, you need
+ * hook_ctools_plugin_api(). The values of this hook can be overridden
+ * and reverted through the UI.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ds_custom_fields_info() {
+$0  $ds_fields = array();
+
+  $ds_field = new stdClass;
+  $ds_field->api_version = 1;
+  $ds_field->field = 'custom_field';
+  $ds_field->label = 'Custom field';
+
+  // Field type: either block or code
+  // DS_FIELD_TYPE_CODE: 5
+  // DS_FIELD_TYPE_BLOCK: 6
+  $ds_field->field_type = 5;
+
+  // Collection of entities on which this custom field can work on.
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->properties = array(
+    'code' => array(
+      'value' => '<? print "this is a custom field"; ?>',
+      'format' => 'ds_code',
+    ),
+    'use_token' => 0,
+  );
+  $ds_fields['custom_field'] = $ds_field;
+
+  return $ds_fields;
+}

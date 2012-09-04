@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_locale
+# key: hook_locale
+# --
+/**
+ * ${2:Allows modules to define their own text groups that can be translated.
+ *}
+ * @param $op
+ *   Type of operation. Currently, only supports 'groups'.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_locale($op = 'groups') {
+$0  switch ($op) {
+    case 'groups':
+      return array('custom' => t('Custom'));
+  }
+}

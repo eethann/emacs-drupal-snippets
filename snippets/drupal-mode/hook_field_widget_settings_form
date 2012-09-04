@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: hook_field_widget_settings_form
+# key: hook_field_widget_settings_form
+# --
+/**
+ * ${2:Add settings to a widget settings form.
+ *
+ * Invoked from field_ui_field_edit_form() to allow the module defining the
+ * widget to add settings for a widget instance.
+ *}
+ * @param $field
+ *   The field structure being configured.
+ * @param $instance
+ *   The instance structure being configured.
+ *
+ * @return
+ *   The form definition for the widget settings.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_widget_settings_form($field, $instance) {
+$0  $widget = $instance['widget'];
+  $settings = $widget['settings'];
+
+  if ($widget['type'] == 'text_textfield') {
+    $form['size'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Size of textfield'),
+      '#default_value' => $settings['size'],
+      '#element_validate' => array('element_validate_integer_positive'),
+      '#required' => TRUE,
+    );
+  }
+  else {
+    $form['rows'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Rows'),
+      '#default_value' => $settings['rows'],
+      '#element_validate' => array('element_validate_integer_positive'),
+      '#required' => TRUE,
+    );
+  }
+
+  return $form;
+}

@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: hook_rules_config_defaults_rebuild
+# key: hook_rules_config_defaults_rebuild
+# --
+/**
+ * ${2:Act after rebuilding default configurations.
+ *
+ * This hook is invoked by the entity module after default rules configurations
+ * have been rebuilt; i.e. defaults have been saved to the database.
+ *}
+ * @param $rules_configs
+ *   The array of default rules configurations which have been inserted or
+ *   updated, keyed by name.
+ * @param $originals
+ *   An array of original rules configurations keyed by name; i.e. the rules
+ *   configurations before the current defaults have been applied. For inserted
+ *   rules configurations no original is available.
+ *
+ * @see hook_default_rules_configuration()
+ * @see entity_defaults_rebuild()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_config_defaults_rebuild($rules_configs, $originals) {
+$0  // Once all defaults have been rebuilt, update all i18n strings at once. That
+  // way we build the rules cache once the rebuild is complete and avoid
+  // rebuilding caches for each updated rule.
+  foreach ($rules_configs as $name => $rule_config) {
+    if (empty($originals[$name])) {
+      rules_i18n_rules_config_insert($rule_config);
+    }
+    else {
+      rules_i18n_rules_config_update($rule_config, $originals[$name]);
+    }
+  }
+}

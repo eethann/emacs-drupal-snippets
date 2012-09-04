@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_views_slideshow_skin_info
+# key: hook_views_slideshow_skin_info
+# --
+/**
+ * ${2:Define slideshow skins to be available to the end user.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_slideshow_skin_info() {
+$0  return array(
+    'default' => array(
+      'name' => t('Default'),
+    ),
+  );
+}

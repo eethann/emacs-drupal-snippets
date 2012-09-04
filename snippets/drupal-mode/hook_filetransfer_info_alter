@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_filetransfer_info_alter
+# key: hook_filetransfer_info_alter
+# --
+/**
+ * ${2:Alter the FileTransfer class registry.
+ *}
+ * @param array $filetransfer_info
+ *   Reference to a nested array containing information about the FileTransfer
+ *   class registry.
+ *
+ * @see hook_filetransfer_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_filetransfer_info_alter(&$filetransfer_info) {
+$0  if (variable_get('paranoia', FALSE)) {
+    // Remove the FTP option entirely.
+    unset($filetransfer_info['ftp']);
+    // Make sure the SSH option is listed first.
+    $filetransfer_info['ssh']['weight'] = -10;
+  }
+}

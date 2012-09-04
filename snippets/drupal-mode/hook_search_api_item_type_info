@@ -1,0 +1,55 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_item_type_info
+# key: hook_search_api_item_type_info
+# --
+/**
+ * ${2:Define new types of items that can be searched.
+ *
+ * This hook allows modules to define their own item types, for which indexes
+ * can then be created. (Note that the Search API natively provides support for
+ * all entity types that specify property information, so they should not be
+ * added here. You should therefore also not use an existing entity type as the
+ * identifier of a new item type.)
+ *
+ * The main part of defining a new item type is implementing its data source
+ * controller class, which is responsible for loading items, providing metadata
+ * and tracking existing items. The module defining a certain item type is also
+ * responsible for observing creations, updates and deletions of items of that
+ * type and notifying the Search API of them by calling
+ * search_api_track_item_insert(), search_api_track_item_change() and
+ * search_api_track_item_delete(), as appropriate.
+ * The only other restriction for item types is that they have to have a single
+ * item ID field, with a scalar value. This is, e.g., used to track indexed
+ * items.
+ *
+ * Note, however, that you can also define item types where some of these
+ * conditions are not met, as long as you are aware that some functionality of
+ * the Search API and related modules might then not be available for that type.
+ *}
+ * @return array
+ *   An associative array keyed by item type identifier, and containing type
+ *   information arrays with at least the following keys:
+ *   - name: A human-readable name for the type.
+ *   - datasource controller: A class implementing the
+ *     SearchApiDataSourceControllerInterface interface which will be used as
+ *     the data source controller for this type.
+ *   Other, datasource-specific settings might also be placed here. These should
+ *   be specified with the data source controller in question.
+ *
+ * @see hook_search_api_item_type_info_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_item_type_info() {
+$0  // Copied from search_api_search_api_item_type_info().
+  $types = array();
+
+  foreach (entity_get_property_info() as $type => $property_info) {
+    if ($info = entity_get_info($type)) {
+      $types[$type] = array(
+        'name' => $info['label'],
+        'datasource controller' => 'SearchApiEntityDataSourceController',
+      );
+    }
+  }
+
+  return $types;
+}

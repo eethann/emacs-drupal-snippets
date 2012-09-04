@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_field_create_instance
+# key: hook_field_create_instance
+# --
+/**
+ * ${2:Act on a field instance being created.
+ *
+ * This hook is invoked from field_create_instance() after the instance record
+ * is saved, so it cannot be used to modify the instance itself.
+ *}
+ * @param $instance
+ *   The instance just created.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_create_instance($instance) {
+$0  // @todo Needs function body.
+}

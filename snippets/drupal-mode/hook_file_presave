@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_file_presave
+# key: hook_file_presave
+# --
+/**
+ * ${2:Act on a file being inserted or updated.
+ *
+ * This hook is called when a file has been added to the database. The hook
+ * doesn't distinguish between files created as a result of a copy or those
+ * created by an upload.
+ *}
+ * @param $file
+ *   The file that has just been created.
+ *
+ * @see file_save()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_presave($file) {
+$0  // Change the file timestamp to an hour prior.
+  $file->timestamp -= 3600;
+}

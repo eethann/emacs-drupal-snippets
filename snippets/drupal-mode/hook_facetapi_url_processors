@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_url_processors
+# key: hook_facetapi_url_processors
+# --
+/**
+ * ${2:Define all URL processor plugins provided by the module.
+ *
+ * URL processors are responsible for building and formatting facet URLs. The
+ * standard processor passes all facet filters through the "f" query string
+ * variable.
+ *}
+ * @return array
+ *   An associative array keyed by unique name of the URL processor. Each URL
+ *   processor is an associative array keyed by "handler" containing:
+ *   - label: The human readable name of the plugin displayed in the admin UI.
+ *   - class: The name of the plugin class.
+ *
+ * @see FacetapiFilter
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_url_processors() {
+$0  return array(
+    'standard' => array(
+      'handler' => array(
+        'label' => t('Standard URL processors'),
+        'class' => 'FacetapiUrlProcessorStandard',
+      ),
+    ),
+  );
+}

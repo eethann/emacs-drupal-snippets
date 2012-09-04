@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_rules_config_insert
+# key: hook_rules_config_insert
+# --
+/**
+ * ${2:Respond to creation of a new rules configuration.
+ *
+ * This hook is invoked after the rules configuration is inserted into the
+ * the database.
+ *}
+ * @param RulesPlugin $config
+ *   The rules configuration that is being created.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_config_insert($config) {
+$0  db_insert('mytable')
+    ->fields(array(
+      'nid' => $config->id,
+      'plugin' => $config->plugin,
+    ))
+    ->execute();
+}

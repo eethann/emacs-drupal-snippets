@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: hook_date_format_types
+# key: hook_date_format_types
+# --
+/**
+ * ${2:Define additional date types.
+ *
+ * Next to the 'long', 'medium' and 'short' date types defined in core, any
+ * module can define additional types that can be used when displaying dates,
+ * by implementing this hook. A date type is basically just a name for a date
+ * format.
+ *
+ * Date types are used in the administration interface: a user can assign
+ * date format types defined in hook_date_formats() to date types defined in
+ * this hook. Once a format has been assigned by a user, the machine name of a
+ * type can be used in the format_date() function to format a date using the
+ * chosen formatting.
+ *
+ * To define a date type in a module and make sure a format has been assigned to
+ * it, without requiring a user to visit the administrative interface, use}
+ * @code variable_set('date_format_' . $type, $format); @endcode
+ * where $type is the machine-readable name defined here, and $format is a PHP
+ * date format string.
+ *
+ * To avoid namespace collisions with date types defined by other modules, it is
+ * recommended that each date type starts with the module name. A date type
+ * can consist of letters, numbers and underscores.
+ *
+ * @return
+ *   An array of date types where the keys are the machine-readable names and
+ *   the values are the human-readable labels.
+ *
+ * @see hook_date_formats()
+ * @see format_date()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_date_format_types() {
+$0  // Define the core date format types.
+  return array(
+    'long' => t('Long'),
+    'medium' => t('Medium'),
+    'short' => t('Short'),
+  );
+}

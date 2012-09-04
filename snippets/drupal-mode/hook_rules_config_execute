@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_rules_config_execute
+# key: hook_rules_config_execute
+# --
+/**
+ * ${2:Respond to rules configuration execution.
+ *
+ * This hook is invoked right before the rules configuration is executed.
+ *}
+ * @param RulesPlugin $config
+ *   The rules configuration that is being executed.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_config_execute($config) {
+$0
+}

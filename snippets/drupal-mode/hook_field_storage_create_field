@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_field_storage_create_field
+# key: hook_field_storage_create_field
+# --
+/**
+ * ${2:Act on creation of a new field.
+ *
+ * This hook is invoked from field_create_field() to ask the field storage
+ * module to save field information and prepare for storing field instances.
+ * If there is a problem, the field storage module should throw an exception.
+ *}
+ * @param $field
+ *   The field structure being created.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_storage_create_field($field) {
+$0  $schema = _field_sql_storage_schema($field);
+  foreach ($schema as $name => $table) {
+    db_create_table($name, $table);
+  }
+  drupal_get_schema(NULL, TRUE);
+}

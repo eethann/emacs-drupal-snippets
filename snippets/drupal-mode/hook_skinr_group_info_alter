@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_skinr_group_info_alter
+# key: hook_skinr_group_info_alter
+# --
+/**
+ * ${2:Perform alterations on Skinr groups.
+ *}
+ * @param $groups
+ *   An array of group information exposed by hook_skinr_group_info()
+ *   implementations.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_skinr_group_info_alter(&$groups) {
+$0  // Show this tab group at the top of the Skinr settings form.
+  $groups['skinr_menus']['weight'] = -1;
+}

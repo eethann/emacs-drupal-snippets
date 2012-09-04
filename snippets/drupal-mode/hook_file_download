@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: hook_file_download
+# key: hook_file_download
+# --
+/**
+ * ${2:Control access to private file downloads and specify HTTP headers.
+ *
+ * This hook allows modules enforce permissions on file downloads when the
+ * private file download method is selected. Modules can also provide headers
+ * to specify information like the file's name or MIME type.
+ *}
+ * @param $uri
+ *   The URI of the file.
+ * @return
+ *   If the user does not have permission to access the file, return -1. If the
+ *   user has permission, return an array with the appropriate headers. If the
+ *   file is not controlled by the current module, the return value should be
+ *   NULL.
+ *
+ * @see file_download()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_download($uri) {
+$0  // Check if the file is controlled by the current module.
+  if (!file_prepare_directory($uri)) {
+    $uri = FALSE;
+  }
+  if (strpos(file_uri_target($uri), variable_get('user_picture_path', 'pictures') . '/picture-') === 0) {
+    if (!user_access('access user profiles')) {
+      // Access to the file is denied.
+      return -1;
+    }
+    else {
+      $info = image_get_info($uri);
+      return array('Content-Type' => $info['mime_type']);
+    }
+  }
+}

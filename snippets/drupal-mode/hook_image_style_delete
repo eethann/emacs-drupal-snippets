@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_image_style_delete
+# key: hook_image_style_delete
+# --
+/**
+ * ${2:Respond to image style deletion.
+ *
+ * This hook enables modules to update settings when a image style is being
+ * deleted. If a style is deleted, a replacement name may be specified in
+ * $style['name'] and the style being deleted will be specified in
+ * $style['old_name'].
+ *}
+ * @param $style
+ *   The image style array that being deleted.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_image_style_delete($style) {
+$0  // Administrators can choose an optional replacement style when deleting.
+  // Update the modules style variable accordingly.
+  if (isset($style['old_name']) && $style['old_name'] == variable_get('mymodule_image_style', '')) {
+    variable_set('mymodule_image_style', $style['name']);
+  }
+}

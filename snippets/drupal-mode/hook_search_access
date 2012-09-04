@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_search_access
+# key: hook_search_access
+# --
+/**
+ * ${2:Define access to a custom search routine.
+ *
+ * This hook allows a module to define permissions for a search tab.
+ *}
+ * @ingroup search
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_access() {
+$0  return user_access('access content');
+}

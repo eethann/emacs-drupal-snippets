@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: hook_modules_uninstalled
+# key: hook_modules_uninstalled
+# --
+/**
+ * ${2:Perform necessary actions after modules are uninstalled.
+ *
+ * This function differs from hook_uninstall() in that it gives all other
+ * modules a chance to perform actions when a module is uninstalled, whereas
+ * hook_uninstall() is only called on the module actually being uninstalled.
+ *
+ * It is recommended that you implement this hook if your module stores
+ * data that may have been set by other modules.
+ *}
+ * @param $modules
+ *   An array of the modules that were uninstalled.
+ *
+ * @see hook_uninstall()
+ * @see hook_modules_disabled()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_modules_uninstalled($modules) {
+$0  foreach ($modules as $module) {
+    db_delete('mymodule_table')
+      ->condition('module', $module)
+      ->execute();
+  }
+  mymodule_cache_rebuild();
+}

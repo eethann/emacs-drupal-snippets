@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: hook_xmlsitemap_sitemap_operations
+# key: hook_xmlsitemap_sitemap_operations
+# --
+/**
+ * ${2:Provide information about XML sitemap bulk operations.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_xmlsitemap_sitemap_operations() {
+$0}

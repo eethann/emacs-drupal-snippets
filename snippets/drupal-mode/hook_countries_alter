@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_countries_alter
+# key: hook_countries_alter
+# --
+/**
+ * ${2:Alter the default country list.
+ *}
+ * @param $countries
+ *   The associative array of countries keyed by ISO 3166-1 country code.
+ *
+ * @see country_get_list()
+ * @see _country_get_predefined_list()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_countries_alter(&$countries) {
+$0  // Elbonia is now independent, so add it to the country list.
+  $countries['EB'] = 'Elbonia';
+}

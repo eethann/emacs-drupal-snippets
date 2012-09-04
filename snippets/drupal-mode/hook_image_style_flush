@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_image_style_flush
+# key: hook_image_style_flush
+# --
+/**
+ * ${2:Respond to image style flushing.
+ *
+ * This hook enables modules to take effect when a style is being flushed (all
+ * images are being deleted from the server and regenerated). Any
+ * module-specific caches that contain information related to the style should
+ * be cleared using this hook. This hook is called whenever a style is updated,
+ * deleted, or any effect associated with the style is update or deleted.
+ *}
+ * @param $style
+ *   The image style array that is being flushed.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_image_style_flush($style) {
+$0  // Empty cached data that contains information about the style.
+  cache_clear_all('*', 'cache_mymodule', TRUE);
+}

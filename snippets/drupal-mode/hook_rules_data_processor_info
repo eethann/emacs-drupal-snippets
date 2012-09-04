@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: hook_rules_data_processor_info
+# key: hook_rules_data_processor_info
+# --
+/**
+ * ${2:Declare provided rules data processors.
+ *
+ * The hook implementation should be placed into the file MODULENAME.rules.inc,
+ * which gets automatically included when the hook is invoked.
+ * For implementing a data processors a class has to be provided which
+ * extends the abstract RulesDataProcessor class. Therefore the abstract
+ * method process() has to be implemented, but also the methods form() and
+ * access() could be overridden in order to provide a configuration form or
+ * to control access permissions.
+ *}
+ * @return
+ *   An array of information about the module's provided data processors. The
+ *   array contains a sub-array for each processor, with the processor name as
+ *   the key. The name may only contain lower case alpha-numeric characters and
+ *   underscores and should be prefixed with the providing module name, whereas
+ *   'select' is reserved as well.
+ *   Possible attributes for each sub-array are:
+ *   - class: The implementation class, which has to extend the
+ *     RulesDataProcessor class. Required.
+ *   - weight: A weight for controlling the processing order of multiple data
+ *     processors. Required.
+ *   - type: Optionally, the data types for which the data processor should be
+ *     used. Defaults to 'text'. Multiple data types may be specified using an
+ *     array.
+ *
+ *  @see class RulesDataProcessor
+ *  @see hook_rules_data_processor_info_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_data_processor_info() {
+$0  return array(
+    'date_offset' => array(
+      'class' => 'RulesDateOffsetProcessor',
+      'type' => 'date',
+      'weight' => -2,
+     ),
+  );
+}

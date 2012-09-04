@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_file_update
+# key: hook_file_update
+# --
+/**
+ * ${2:Respond to a file being updated.
+ *
+ * This hook is called when file_save() is called on an existing file.
+ *}
+ * @param $file
+ *   The file that has just been updated.
+ *
+ * @see file_save()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_update($file) {
+$0
+}

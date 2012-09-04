@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_file_insert
+# key: hook_file_insert
+# --
+/**
+ * ${2:Respond to a file being added.
+ *
+ * This hook is called after a file has been added to the database. The hook
+ * doesn't distinguish between files created as a result of a copy or those
+ * created by an upload.
+ *}
+ * @param $file
+ *   The file that has been added.
+ *
+ * @see file_save()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_insert($file) {
+$0  // Add a message to the log, if the file is a jpg
+  $validate = file_validate_extensions($file, 'jpg');
+  if (empty($validate)) {
+    watchdog('file', 'A jpg has been added.');
+  }
+}

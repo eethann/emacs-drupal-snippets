@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_openid_response
+# key: hook_openid_response
+# --
+/**
+ * ${2:Allow modules to act upon a successful OpenID login.
+ *}
+ * @param $response
+ *   Response values from the OpenID Provider.
+ * @param $account
+ *   The Drupal user account that logged in
+ *
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_openid_response($response, $account) {
+$0  if (isset($response['openid.ns.ax'])) {
+    _mymodule_store_ax_fields($response, $account);
+  }
+}

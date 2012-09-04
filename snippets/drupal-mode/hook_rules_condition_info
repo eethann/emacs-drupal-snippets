@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: hook_rules_condition_info
+# key: hook_rules_condition_info
+# --
+/**
+ * ${2:Define rules conditions.
+ *
+ * This hook is required in order to add a new rules condition. It should be
+ * placed into the file MODULENAME.rules.inc, which gets automatically included
+ * when the hook is invoked.
+ *
+ * Adding conditions works exactly the same way as adding actions, with the
+ * exception that conditions can't provide variables and cannot save parameters.
+ * Thus the 'provides' attribute is not supported. Furthermore the condition
+ * implementation callback has to return a boolean value.
+ *}
+ * @see hook_rules_action_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_condition_info() {
+$0  return array(
+    'rules_condition_text_compare' => array(
+      'label' => t('Textual comparison'),
+      'parameter' => array(
+        'text1' => array('label' => t('Text 1'), 'type' => 'text'),
+        'text2' => array('label' => t('Text 2'), 'type' => 'text'),
+      ),
+      'group' => t('Rules'),
+    ),
+  );
+}

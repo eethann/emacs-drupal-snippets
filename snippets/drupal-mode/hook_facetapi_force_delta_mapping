@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_force_delta_mapping
+# key: hook_facetapi_force_delta_mapping
+# --
+/**
+ * ${2:Forces delta mapping of a facet block.
+ *
+ * This obscure hook is useful for cases where facets are disabled, but their
+ * block positioning needs to be set anyways. If a facet is enabled via the
+ * facetapi_set_facet_enabled() API function, its block needs to be enabled
+ * and assigned to a region despite the facet not being enabled in the Facet API
+ * interface, which would normally prevent the block from being listed.
+ *}
+ * @return array
+ *   An associative array keyed by searcher. Each sub array is an associative
+ *   array keyed by realm name to facet names whose delta mappings are forced.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_force_delta_mapping() {
+$0  return array(
+    // The machine-readable name of the searcher.
+    'my_searcher' => array(
+      // The realm we are mapping, usually block.
+      'block' => array(
+        // Machine readable names of facets whose mappping are being forced.
+        // Regardless of whether they are enabled via the Facet API interface,
+        // their blocks will be available to enable and position via
+        // admin/structure/block.
+        'facet_one',
+        'facet_two',
+      ),
+    ),
+  );
+}

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: hook_menu_link_update
+# key: hook_menu_link_update
+# --
+/**
+ * ${2:Inform modules that a menu link has been updated.
+ *
+ * This hook is used to notify modules that menu items have been
+ * updated. Contributed modules may use the information to perform
+ * actions based on the information entered into the menu system.
+ *}
+ * @param $link
+ *   Associative array defining a menu link as passed into menu_link_save().
+ *
+ * @see hook_menu_link_insert()
+ * @see hook_menu_link_delete()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_menu_link_update($link) {
+$0  // If the parent menu has changed, update our record.
+  $menu_name = db_query("SELECT menu_name FROM {menu_example} WHERE mlid = :mlid", array(':mlid' => $link['mlid']))->fetchField();
+  if ($menu_name != $link['menu_name']) {
+    db_update('menu_example')
+      ->fields(array('menu_name' => $link['menu_name']))
+      ->condition('mlid', $link['mlid'])
+      ->execute();
+  }
+}

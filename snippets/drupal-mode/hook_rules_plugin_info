@@ -1,0 +1,83 @@
+# -*- mode: snippet -*-
+# name: hook_rules_plugin_info
+# key: hook_rules_plugin_info
+# --
+/**
+ * ${2:Defines rules plugins.
+ *
+ * A rules configuration may consist of elements being instances of any rules
+ * plugin. This hook can be used to define new or to extend rules plugins.
+ *}
+ * @return
+ *   An array of information about the module's provided rules plugins. The
+ *   array contains a sub-array for each plugin, with the plugin name as the
+ *   key. The name may only contain lower case alpha-numeric characters,
+ *   underscores and spaces and should be prefixed with the providing module
+ *   name. Possible attributes for
+ *   each sub-array are:
+ *   - label: A label for the plugin. Start capitalized. Required only for
+ *     components (see below).
+ *   - class: The implementation class. Has to extend the RulesPlugin class.
+ *   - embeddable: A container class in which elements of those plugin may be
+ *     embedded or FALSE to disallow embedding. Common classes that are used
+ *     here are RulesConditionContainer and RulesActionContainer.
+ *   - component: If set to TRUE, the rules admin UI will list elements of those
+ *     plugin in the components UI and allows the creation of new components
+ *     based upon this plugin. Optional.
+ *   - extenders: This allows one to specify faces extenders, which may be used
+ *     to dynamically implement interfaces. Optional. All extenders specified
+ *     here are setup automatically by rules once the object is created. To
+ *     specify set this to an array, where the keys are the implemented
+ *     interfaces pointing to another array with the keys:
+ *     - class: The class of the extender, implementing the FacesExtender
+ *       and the specified interface. Either 'class' or 'methods' has to exist.
+ *     - methods: An array of callbacks that implement the methods of the
+ *       interface where the method names are the keys and the callback names
+ *       the values. There has to be a callback for each defined method.
+ *     - file: An optional array describing the file to include when a method
+ *       of the interface is invoked. The array entries known are 'type',
+ *       'module', and 'name' matching the parameters of module_load_include().
+ *       Only 'module' is required as 'type' defaults to 'inc' and 'name' to
+ *       NULL.
+ *   - overrides: An optional array, which may be used to specify callbacks to
+ *     override specific methods. For that the following keys are supported:
+ *     - methods: As in the extenders array, but you may specify as many methods
+ *       here as you like.
+ *     - file: Optionally an array specifying a file to include for a method.
+ *       For each method appearing in methods a file may be specified by using
+ *       the method name as key and another array as value, which describes the
+ *       file to include - looking like the file array supported by 'extenders'.
+ *   - import keys: (optional) Embeddable plugins may specify an array of import
+ *     keys, which the plugin make use for exporting. Defaults to the upper
+ *     case plugin name, thus the key 'OR' in an export triggers the creation
+ *     of the 'or' plugin. Note that only uppercase values are allowed, as
+ *     lower case values are treated as action or condition exports.
+ *
+ *  @see class RulesPlugin
+ *  @see hook_rules_plugin_info_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_plugin_info() {
+$0  return array(
+    'or' => array(
+      'label' => t('Condition set (OR)'),
+      'class' => 'RulesOr',
+      'embeddable' => 'RulesConditionContainer',
+      'component' => TRUE,
+      'extenders' => array(
+        'RulesPluginUIInterface' => array(
+          'class' => 'RulesConditionContainerUI',
+        ),
+      ),
+    ),
+    'rule' => array(
+      'class' => 'Rule',
+      'embeddable' => 'RulesRuleSet',
+      'extenders' => array(
+        'RulesPluginUIInterface' => array(
+          'class' => 'RulesRuleUI',
+        ),
+      ),
+      'import keys' => array('DO', 'IF'),
+    ),
+  );
+}

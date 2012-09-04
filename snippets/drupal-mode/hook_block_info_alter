@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: hook_block_info_alter
+# key: hook_block_info_alter
+# --
+/**
+ * ${2:Change block definition before saving to the database.
+ *}
+ * @param $blocks
+ *   A multidimensional array of blocks keyed by the defining module and delta;
+ *   the values are blocks returned by hook_block_info(). This hook is fired
+ *   after the blocks are collected from hook_block_info() and the database,
+ *   right before saving back to the database.
+ * @param $theme
+ *   The theme these blocks belong to.
+ * @param $code_blocks
+ *   The blocks as defined in hook_block_info() before being overwritten by the
+ *   database data.
+ *
+ * @see hook_block_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_block_info_alter(&$blocks, $theme, $code_blocks) {
+$0  // Disable the login block.
+  $blocks['user']['login']['status'] = 0;
+}

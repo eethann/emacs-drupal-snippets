@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: hook_test_group_finished
+# key: hook_test_group_finished
+# --
+/**
+ * ${2:A test group has finished.
+ *
+ * This hook is called just once at the end of a test group.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_test_group_finished() {
+$0}

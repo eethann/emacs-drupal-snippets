@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_profile2_delete
+# key: hook_profile2_delete
+# --
+/**
+* Respond to profile deletion.
+*
+* This hook is invoked after the profile has been removed from the database.
+*
+* @param $profile
+*   The profile that is being deleted.
+*
+* @see hook_entity_delete()
+*/
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_profile2_delete($profile) {
+$0  db_delete('mytable')
+    ->condition('pid', $profile->pid)
+    ->execute();
+}

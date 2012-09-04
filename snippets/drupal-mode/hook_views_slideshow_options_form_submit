@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: hook_views_slideshow_options_form_submit
+# key: hook_views_slideshow_options_form_submit
+# --
+/**
+ * ${2:Form submission callback for the slideshow settings.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_slideshow_options_form_submit($form, &$form_state) {
+$0  // Act on option submission.
+}

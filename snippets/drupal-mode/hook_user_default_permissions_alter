@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: hook_user_default_permissions_alter
+# key: hook_user_default_permissions_alter
+# --
+/**
+ * ${2:Alter the default permissions right before they are cached into the
+ * database.
+ *}
+ * @param &$permissions
+ *   By reference. The permissions that have been declared by another feature.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_user_default_permissions_alter(&$permissions) {
+$0}

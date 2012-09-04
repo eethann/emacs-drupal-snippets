@@ -1,0 +1,52 @@
+# -*- mode: snippet -*-
+# name: hook_form_BASE_FORM_ID_alter
+# key: hook_form_BASE_FORM_ID_alter
+# --
+/**
+ * ${2:Provide a form-specific alteration for shared ('base') forms.
+ *
+ * By default, when drupal_get_form() is called, Drupal looks for a function
+ * with the same name as the form ID, and uses that function to build the form.
+ * In contrast, base forms allow multiple form IDs to be mapped to a single base
+ * (also called 'factory') form function.
+ *
+ * Modules can implement hook_form_BASE_FORM_ID_alter() to modify a specific
+ * base form, rather than implementing hook_form_alter() and checking for
+ * conditions that would identify the shared form constructor.
+ *
+ * To identify the base form ID for a particular form (or to determine whether
+ * one exists) check the $form_state. The base form ID is stored under
+ * $form_state['build_info']['base_form_id'].
+ *
+ * See hook_forms() for more information on how to implement base forms in
+ * Drupal.
+ *
+ * Form alter hooks are called in the following order: hook_form_alter(),
+ * hook_form_BASE_FORM_ID_alter(), hook_form_FORM_ID_alter(). See
+ * hook_form_alter() for more details.
+ *}
+ * @param $form
+ *   Nested array of form elements that comprise the form.
+ * @param $form_state
+ *   A keyed array containing the current state of the form.
+ * @param $form_id
+ *   String representing the name of the form itself. Typically this is the
+ *   name of the function that generated the form.
+ *
+ * @see hook_form_alter()
+ * @see hook_form_FORM_ID_alter()
+ * @see drupal_prepare_form()
+ * @see hook_forms()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_form_BASE_FORM_ID_alter(&$form, &$form_state, $form_id) {
+$0  // Modification for the form with the given BASE_FORM_ID goes here. For
+  // example, if BASE_FORM_ID is "node_form", this code would run on every
+  // node form, regardless of node type.
+
+  // Add a checkbox to the node form about agreeing to terms of use.
+  $form['terms_of_use'] = array(
+    '#type' => 'checkbox',
+    '#title' => t("I agree with the website's terms and conditions."),
+    '#required' => TRUE,
+  );
+}

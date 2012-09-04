@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_ds_field_format_summary
+# key: hook_ds_field_format_summary
+# --
+/**
+ * ${2:Return configuration summary for the field format.
+ *
+ * As soon as you have hook_ds_fields and one of the fields
+ * has a settings key, Display Suite will call this hook for the summary.
+ *}
+ * @param $field
+ *   The configuration of the field.
+ *
+ * @return $summary
+ *   The summary to show on the Field UI.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ds_field_format_summary($field) {
+$0  return 'Field summary';
+}

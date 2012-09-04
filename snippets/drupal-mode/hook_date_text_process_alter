@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: hook_date_text_process_alter
+# key: hook_date_text_process_alter
+# --
+/**
+ * ${2:Alter the date_text widget element.
+ *}
+ * @param array $element
+ *   An associative array containing the properties of the date_text element.
+ * @param array $form_state
+ *   A keyed array containing the current state of the form.
+ * @param array $context
+ *   An associative array containing the following keys:
+ *   - form: Nested array of form elements that comprise the form.
+ *
+ * @see date_text_element_process()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_date_text_process_alter(&$element, &$form_state, $context) {
+$0  $all_day_id = !empty($element['#date_all_day_id']) ? $element['#date_all_day_id'] : '';
+  if ($all_day_id != '') {
+    // All Day handling on text dates works only if the user leaves the time out
+    // of the input value. There is no element to hide or show.
+  }
+}

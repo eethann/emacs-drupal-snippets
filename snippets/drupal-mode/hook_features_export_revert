@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: hook_features_export_revert
+# key: hook_features_export_revert
+# --
+/**
+ * ${2:Component hook. The hook should be implemented using the name ot the
+ * component, not the module, eg. [component]_features_export() rather than
+ * [module]_features_export().
+ *
+ * Revert all component objects for a given feature module.
+ *}
+ * @param string $module_name
+ *   The name of the feature module whose components should be reverted.
+ * @return boolean
+ *   TRUE or FALSE for whether the components were successfully reverted.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_features_export_revert($module_name) {
+$0  $mycomponents = module_invoke_all($module_name, 'mycomponent_defaults');
+  if (!empty($$mycomponents)) {
+    foreach ($mycomponents as $mycomponent) {
+      mycomponent_delete($mycomponent);
+    }
+  }
+}

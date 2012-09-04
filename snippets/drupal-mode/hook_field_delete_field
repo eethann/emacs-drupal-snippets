@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_field_delete_field
+# key: hook_field_delete_field
+# --
+/**
+ * ${2:Act on a field being deleted.
+ *
+ * This hook is invoked just after a field is deleted by field_delete_field().
+ *}
+ * @param $field
+ *   The field just deleted.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_delete_field($field) {
+$0  // @todo Needs function body.
+}

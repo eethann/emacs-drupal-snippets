@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_element_info_alter
+# key: hook_element_info_alter
+# --
+/**
+ * ${2:Alter the element type information returned from modules.
+ *
+ * A module may implement this hook in order to alter the element type defaults
+ * defined by a module.
+ *}
+ * @param $type
+ *   All element type defaults as collected by hook_element_info().
+ *
+ * @see hook_element_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_element_info_alter(&$type) {
+$0  // Decrease the default size of textfields.
+  if (isset($type['textfield']['#size'])) {
+    $type['textfield']['#size'] = 40;
+  }
+}

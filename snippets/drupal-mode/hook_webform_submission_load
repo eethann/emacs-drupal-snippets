@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_webform_submission_load
+# key: hook_webform_submission_load
+# --
+/**
+ * ${2:Respond to the loading of Webform submissions.
+ *}
+ * @param $submissions
+ *   An array of Webform submissions that are being loaded, keyed by the
+ *   submission ID. Modifications to the submissions are done by reference.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_submission_load(&$submissions) {
+$0  foreach ($submissions as $sid => $submission) {
+    $submissions[$sid]->new_property = 'foo';
+  }
+}

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: hook_views_slideshow_widget_controls_info
+# key: hook_views_slideshow_widget_controls_info
+# --
+/**
+ * ${2:Hook called by the controls widget to configure it, the fields that should be shown.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_slideshow_widget_controls_info($view) {
+$0}

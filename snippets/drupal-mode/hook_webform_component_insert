@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_webform_component_insert
+# key: hook_webform_component_insert
+# --
+/**
+ * ${2:Respond to a Webform component being inserted into the database.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_component_insert($component) {
+$0  // Insert a record into a 3rd-party module table when a component is inserted.
+  db_insert('mymodule_table')
+    ->fields(array(
+      'nid' => $component['nid'],
+      'cid' => $component['cid'],
+      'foo' => 'foo_data',
+    ))
+    ->execute();
+}

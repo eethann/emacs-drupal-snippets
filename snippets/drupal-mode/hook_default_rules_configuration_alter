@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_default_rules_configuration_alter
+# key: hook_default_rules_configuration_alter
+# --
+/**
+ * ${2:Alter default rules configurations.
+ *
+ * The implementation should be placed into the file
+ * MODULENAME.rules_defaults.inc, which gets automatically included when the
+ * hook is invoked.
+ *}
+ * @param $configs
+ *   The default configurations of all modules as returned from
+ *   hook_default_rules_configuration().
+ *
+ * @see hook_default_rules_configuration()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_default_rules_configuration_alter(&$configs) {
+$0  // Add custom condition.
+  $configs['foo']->condition('bar');
+}

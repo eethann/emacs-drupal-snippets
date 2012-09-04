@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: hook_page_build
+# key: hook_page_build
+# --
+/**
+ * ${2:Add elements to a page before it is rendered.
+ *
+ * Use this hook when you want to add elements at the page level. For your
+ * additions to be printed, they have to be placed below a top level array key
+ * of the $page array that has the name of a region of the active theme.
+ *
+ * By default, valid region keys are 'page_top', 'header', 'sidebar_first',
+ * 'content', 'sidebar_second' and 'page_bottom'. To get a list of all regions
+ * of the active theme, use system_region_list($theme). Note that $theme is a
+ * global variable.
+ *
+ * If you want to alter the elements added by other modules or if your module
+ * depends on the elements of other modules, use hook_page_alter() instead which
+ * runs after this hook.
+ *}
+ * @param $page
+ *   Nested array of renderable elements that make up the page.
+ *
+ * @see hook_page_alter()
+ * @see drupal_render_page()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_page_build(&$page) {
+$0  if (menu_get_object('node', 1)) {
+    // We are on a node detail page. Append a standard disclaimer to the
+    // content region.
+    $page['content']['disclaimer'] = array(
+      '#markup' => t('Acme, Inc. is not responsible for the contents of this sample code.'),
+      '#weight' => 25,
+    );
+  }
+}

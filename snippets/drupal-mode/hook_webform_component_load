@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_webform_component_load
+# key: hook_webform_component_load
+# --
+/**
+ * ${2:Modify a loaded Webform component.
+ *
+ * IMPORTANT: This hook does not actually exist because components are loaded
+ * in bulk as part of webform_node_load(). Use hook_node_load() to modify loaded
+ * components when the node is loaded. This example is provided merely to point
+ * to hook_node_load().
+ *}
+ * @see hook_nodeapi()
+ * @see webform_node_load()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_component_load() {
+$0  // This hook does not exist. Instead use hook_node_load().
+}

@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: hook_filter_FILTER_tips
+# key: hook_filter_FILTER_tips
+# --
+/**
+ * ${2:Tips callback for hook_filter_info().
+ *
+ * Note: This is not really a hook. The function name is manually specified via
+ * 'tips callback' in hook_filter_info(), with this recommended callback
+ * name pattern. It is called from _filter_tips().
+ *
+ * A filter's tips should be informative and to the point. Short tips are
+ * preferably one-liners.
+ *}
+ * @param $filter
+ *   An object representing the filter.
+ * @param $format
+ *   An object representing the text format the filter is contained in.
+ * @param $long
+ *   Whether this callback should return a short tip to display in a form
+ *   (FALSE), or whether a more elaborate filter tips should be returned for
+ *   theme_filter_tips() (TRUE).
+ *
+ * @return
+ *   Translated text to display as a tip.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_filter_FILTER_tips($filter, $format, $long) {
+$0 if ($long) {
+    return t('Lines and paragraphs are automatically recognized. The &lt;br /&gt; line break, &lt;p&gt; paragraph and &lt;/p&gt; close paragraph tags are inserted automatically. If paragraphs are not recognized simply add a couple blank lines.');
+  }
+  else {
+    return t('Lines and paragraphs break automatically.');
+  }
+}

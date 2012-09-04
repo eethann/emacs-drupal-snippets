@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: hook_xmlrpc_alter
+# key: hook_xmlrpc_alter
+# --
+/**
+ * ${2:Alters the definition of XML-RPC methods before they are called.
+ *
+ * This hook allows modules to modify the callback definition of declared
+ * XML-RPC methods, right before they are invoked by a client. Methods may be
+ * added, or existing methods may be altered.
+ *
+ * Note that hook_xmlrpc() supports two distinct and incompatible formats to
+ * define a callback, so care must be taken when altering other methods.
+ *}
+ * @param $methods
+ *   An asssociative array of method callback definitions, as returned from
+ *   hook_xmlrpc() implementations.
+ *
+ * @see hook_xmlrpc()
+ * @see xmlrpc_server()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_xmlrpc_alter(&$methods) {
+$0  // Directly change a simple method.
+  $methods['drupal.login'] = 'mymodule_login';
+
+  // Alter complex definitions.
+  foreach ($methods as $key => &$method) {
+    // Skip simple method definitions.
+    if (!is_int($key)) {
+      continue;
+    }
+    // Perform the wanted manipulation.
+    if ($method[0] == 'drupal.site.ping') {
+      $method[1] = 'mymodule_directory_ping';
+    }
+  }
+}

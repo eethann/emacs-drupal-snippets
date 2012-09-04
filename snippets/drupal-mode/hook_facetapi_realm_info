@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_realm_info
+# key: hook_facetapi_realm_info
+# --
+/**
+ * ${2:Define all realms provided by the module.
+ *
+ * A realm is a group of facets that are rendered in a similar fashion. For
+ * example, the "block" realm displays each facet in a separate block, whereas
+ * the "fieldset" realm displays facets as form elements in a fieldset under the
+ * search form.
+ *}
+ * @return array
+ *   An associative array keyed by unique name of the realm. Each realm is an
+ *   associative array containing:
+ *   - label: The human readable name of the realm displayed in the admin UI.
+ *   - description: The description of the realm displayed in the admin UI.
+ *   - element type: The type of element facets are rendered as, such as "links"
+ *     or "form elements".
+ *   - default widget: The default widget plugin id for facets.
+ *   - settings callback: (optional) A callback that alters the realm settings
+ *     form, defaults to FALSE meaning no callback is defined.
+ *   - sortable: (optional) Whether the facets can be sorted via the admin UI,
+ *     defaults to TRUE.
+ *   - weight: (optional) The weight of the realm's menu item in comparison to
+ *     the others, defaults to 0.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_realm_info() {
+$0  return array(
+    'block' => array(
+      'label' => t('Blocks'),
+      'sortable' => FALSE,
+      'weight' => -10,
+      'default widget' => 'facetapi_links',
+      'element type' => 'links',
+      'settings callback' => 'facetapi_block_realm_settings',
+      'description' => t(
+        'The <em>Blocks</em> realm displays each facet in a separate <a href="@block-page">block</a>. Users are able to refine their searches in a drill-down fashion.',
+        array('@block-page' => url('admin/structure/block', array('query' => array('destination' => current_path()))))
+      ),
+    ),
+  );
+}

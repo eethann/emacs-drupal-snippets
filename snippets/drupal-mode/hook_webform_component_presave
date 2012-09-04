@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_webform_component_presave
+# key: hook_webform_component_presave
+# --
+/**
+ * ${2:Modify a Webform component before it is saved to the database.
+ *
+ * Note that most of the time this hook is not necessary, because Webform will
+ * automatically add data to the component based on the component form. Using
+ * hook_form_alter() will be sufficient in most cases.
+ *}
+ * @see hook_form_alter()
+ * @see webform_component_edit_form()
+ *
+ * @param $component
+ *   The Webform component being saved.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_component_presave(&$component) {
+$0  $component['extra']['new_option'] = 'foo';
+}

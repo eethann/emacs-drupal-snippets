@@ -1,0 +1,26 @@
+* Drupal 7 Hook Snippets for Emacs YASnippet
+
+** Overview
+   This is a collection of snippets that have been auto-generated from a typical Drupal install using the hook files aggregated by the Drush Module Builder tool.
+
+   It's basically rough and untested at the moment, so patches and suggestions are welcome.
+
+   Also included is the script used to process the snippet files. This can be used to generate additional snippets for modules not covered, to extend the snippet functionality (pull request please!), etc.
+
+** Installation
+   I install these with el-get. First add the recipe
+
+   #+BEGIN_SRC emacs-lisp
+   (:name "emacs-drupal-snippets"
+      :type git
+      :url git@github.com:eethann/emacs-drupal-snippets.git
+      )
+   #+END_SRC
+
+   then el-get-sync and el-get-install emacs-drupal-snippets.
+
+   Alternately you should be able to put it into your site-lisp dir.
+
+** Todo List
+
+*** TODO Add exceptions for hook_x_HOOK forms

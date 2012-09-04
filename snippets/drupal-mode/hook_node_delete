@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_node_delete
+# key: hook_node_delete
+# --
+/**
+ * ${2:Respond to node deletion.
+ *
+ * This hook is invoked from node_delete_multiple() after the type-specific
+ * hook_delete() has been invoked, but before hook_entity_delete and
+ * field_attach_delete() are called, and before the node is removed from the
+ * node table in the database.
+ *}
+ * @param $node
+ *   The node that is being deleted.
+ *
+ * @ingroup node_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_delete($node) {
+$0  db_delete('mytable')
+    ->condition('nid', $node->nid)
+    ->execute();
+}

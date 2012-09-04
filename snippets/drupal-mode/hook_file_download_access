@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: hook_file_download_access
+# key: hook_file_download_access
+# --
+/**
+ * ${2:Control download access to files.
+ *
+ * The hook is typically implemented to limit access based on the entity the
+ * file is referenced, e.g., only users with access to a node should be allowed
+ * to download files attached to that node.
+ *}
+ * @param array $file_item
+ *   The array of information about the file to check access for.
+ * @param $entity_type
+ *   The type of $entity; for example, 'node' or 'user'.
+ * @param $entity
+ *   The $entity to which $file is referenced.
+ *
+ * @return
+ *   TRUE is access should be allowed by this entity or FALSE if denied. Note
+ *   that denial may be overridden by another entity controller, making this
+ *   grant permissive rather than restrictive.
+ *
+ * @see hook_field_access().
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_download_access($file_item, $entity_type, $entity) {
+$0  if ($entity_type == 'node') {
+    return node_access('view', $entity);
+  }
+}

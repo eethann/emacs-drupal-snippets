@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_node_access_acknowledge
+# key: hook_node_access_acknowledge
+# --
+/**
+ * ${2:Acknowledge ownership of 'alien' grant records.
+ *
+ * Some node access modules store grant records directly into the {node_access}
+ * table rather than returning them through hook_node_access_records(). This
+ * practice is not recommended and DNA will flag all such records as 'alien'.
+ *
+ * If this is unavoidable, a module can confess to being the owner of these
+ * grant records, so that DNA can properly attribute them.
+ *}
+ * @see hook_node_access_records()
+ *
+ * @ingroup node_access
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_access_acknowledge($grant) {
+$0  if ($grant['realm'] == 'mymodule_all' && $grant['nid'] == 0) {
+    return TRUE;
+  }
+}

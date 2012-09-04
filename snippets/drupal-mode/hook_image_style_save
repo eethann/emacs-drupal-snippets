@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: hook_image_style_save
+# key: hook_image_style_save
+# --
+/**
+ * ${2:Respond to image style updating.
+ *
+ * This hook enables modules to update settings that might be affected by
+ * changes to an image. For example, updating a module specific variable to
+ * reflect a change in the image style's name.
+ *}
+ * @param $style
+ *   The image style array that is being updated.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_image_style_save($style) {
+$0  // If a module defines an image style and that style is renamed by the user
+  // the module should update any references to that style.
+  if (isset($style['old_name']) && $style['old_name'] == variable_get('mymodule_image_style', '')) {
+    variable_set('mymodule_image_style', $style['name']);
+  }
+}

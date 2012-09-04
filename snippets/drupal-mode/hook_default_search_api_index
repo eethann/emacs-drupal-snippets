@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_default_search_api_index
+# key: hook_default_search_api_index
+# --
+/**
+* Define default search indexes.
+*
+* @return array
+*   An array of default search indexes, keyed by machine names.
+*
+* @see hook_default_search_api_index_alter()
+*/
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_default_search_api_index() {
+$0  $defaults['main'] = entity_create('search_api_index', array(
+    'name' => 'Main index',
+    'machine_name' => 'main',// Must be same as the used array key.
+    // Other properties ...
+  ));
+  return $defaults;
+}

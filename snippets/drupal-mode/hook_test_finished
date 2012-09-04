@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_test_finished
+# key: hook_test_finished
+# --
+/**
+ * ${2:An individual test has finished.
+ *
+ * This hook is called when an individual test has finished.
+ *}
+ * @param
+ *   $results The results of the test as gathered by DrupalWebTestCase.
+ *
+ * @see DrupalWebTestCase->results
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_test_finished($results) {
+$0}

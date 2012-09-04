@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_profile2_presave
+# key: hook_profile2_presave
+# --
+/**
+* Act on a profile being inserted or updated.
+*
+* This hook is invoked before the profile is saved to the database.
+*
+* @param $profile
+*   The profile that is being inserted or updated.
+*
+* @see hook_entity_presave()
+*/
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_profile2_presave($profile) {
+$0  $profile->extra = 'foo';
+}

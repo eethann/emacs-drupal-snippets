@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_field_group_update_field_group
+# key: hook_field_group_update_field_group
+# --
+/**
+ * ${2:Implements hook_field_group_update_field_group().
+ *
+ * This hook is invoked by ctools export API.
+ * Note that this is used by ctools and the group could occasional be
+ * the group ID.
+ *}
+ * @param $object $group
+ *   The FieldGroup object.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_group_update_field_group($group) {
+$0  // Delete extra data depending on the group.
+}

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_context_registry_alter
+# key: hook_context_registry_alter
+# --
+/**
+ * ${2:Alter the registry.
+ *
+ * Allows modules to alter the registry. Default plugins can be replaced by
+ * custom ones declared in hook_context_plugins().
+ *}
+ * @param $registry
+ *   The registry, passed by reference.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_context_registry_alter(&$registry) {
+$0  if (isset($registry['reactions']['baz'])) {
+    $registry['reactions']['baz']['plugin'] = 'custom_context_reaction_baz';
+  }
+}

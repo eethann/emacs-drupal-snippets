@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: hook_xmlsitemap_context_url_options
+# key: hook_xmlsitemap_context_url_options
+# --
+/**
+ * ${2:Provide options for the url() function based on an XML sitemap context.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_xmlsitemap_context_url_options(array $context) {
+$0}

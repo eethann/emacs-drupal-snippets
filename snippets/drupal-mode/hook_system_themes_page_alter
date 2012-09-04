@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: hook_system_themes_page_alter
+# key: hook_system_themes_page_alter
+# --
+/**
+ * ${2:Alters theme operation links.
+ *}
+ * @param $theme_groups
+ *   An associative array containing groups of themes.
+ *
+ * @see system_themes_page()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_system_themes_page_alter(&$theme_groups) {
+$0  foreach ($theme_groups as $state => &$group) {
+    foreach ($theme_groups[$state] as &$theme) {
+      // Add a foo link to each list of theme operations.
+      $theme->operations[] = array(
+        'title' => t('Foo'),
+        'href' => 'admin/appearance/foo',
+        'query' => array('theme' => $theme->name)
+      );
+    }
+  }
+}

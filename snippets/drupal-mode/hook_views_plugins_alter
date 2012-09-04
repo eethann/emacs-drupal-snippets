@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: hook_views_plugins_alter
+# key: hook_views_plugins_alter
+# --
+/**
+ * ${2:Alter existing plugins data, defined by modules.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_plugins_alter(&$plugins) {
+$0  // Add apachesolr to the base of the node row plugin.
+  $plugins['row']['node']['base'][] = 'apachesolr';
+}

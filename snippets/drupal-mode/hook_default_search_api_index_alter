@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_default_search_api_index_alter
+# key: hook_default_search_api_index_alter
+# --
+/**
+* Alter default search indexes.
+*
+* @param array $defaults
+*   An array of default search indexes, keyed by machine names.
+*
+* @see hook_default_search_api_index()
+*/
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_default_search_api_index_alter(array &$defaults) {
+$0  $defaults['main']->name = 'Customized main index';
+}

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: hook_block_save
+# key: hook_block_save
+# --
+/**
+ * ${2:Save the configuration options from hook_block_configure().
+ *
+ * This hook allows you to save the block-specific configuration settings
+ * defined within your hook_block_configure().
+ *}
+ * @param $delta
+ *   Which block is being configured. This is a unique identifier for the block
+ *   within the module, defined in hook_block_info().
+ * @param $edit
+ *   The submitted form data from the configuration form.
+ *
+ * For a detailed usage example, see block_example.module.
+ *
+ * @see hook_block_configure()
+ * @see hook_block_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_block_save($delta = '', $edit = array()) {
+$0  // This example comes from node.module.
+  if ($delta == 'recent') {
+    variable_set('node_recent_block_count', $edit['node_recent_block_count']);
+  }
+}

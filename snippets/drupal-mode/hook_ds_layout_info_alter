@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_ds_layout_info_alter
+# key: hook_ds_layout_info_alter
+# --
+/**
+ * ${2:Alter layouts found by Display Suite.
+ *}
+ * @param $layouts
+ *   A array of layouts which keys are the layout and which values are
+ *   properties of that layout (label, path, regions and css).
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ds_layout_info_alter(&$layouts) {
+$0  unset($layouts['ds_2col']);
+}

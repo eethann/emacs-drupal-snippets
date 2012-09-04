@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: hook_field_validate
+# key: hook_field_validate
+# --
+/**
+ * ${2:Validate this module's field data.
+ *
+ * If there are validation problems, add to the $errors array (passed by
+ * reference). There is no return value.
+ *}
+ * @param $entity_type
+ *   The type of $entity.
+ * @param $entity
+ *   The entity for the operation.
+ * @param $field
+ *   The field structure for the operation.
+ * @param $instance
+ *   The instance structure for $field on $entity's bundle.
+ * @param $langcode
+ *   The language associated with $items.
+ * @param $items
+ *   $entity->{$field['field_name']}[$langcode], or an empty array if unset.
+ * @param $errors
+ *   The array of errors (keyed by field name, language code, and delta) that
+ *   have already been reported for the entity. The function should add its
+ *   errors to this array. Each error is an associative array with the following
+ *   keys and values:
+ *   - error: An error code (should be a string prefixed with the module name).
+ *   - message: The human readable message to be displayed.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+$0  foreach ($items as $delta => $item) {
+    if (!empty($item['value'])) {
+      if (!empty($field['settings']['max_length']) && drupal_strlen($item['value']) > $field['settings']['max_length']) {
+        $errors[$field['field_name']][$langcode][$delta][] = array(
+          'error' => 'text_max_length',
+          'message' => t('%name: the value may not be longer than %max characters.', array('%name' => $instance['label'], '%max' => $field['settings']['max_length'])),
+        );
+      }
+    }
+  }
+}

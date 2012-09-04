@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_comment_unpublish
+# key: hook_comment_unpublish
+# --
+/**
+ * ${2:The comment is being unpublished by the moderator.
+ *}
+ * @param $comment
+ *   Passes in the comment the action is being performed on.
+ * @return
+ *   Nothing.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_comment_unpublish($comment) {
+$0  drupal_set_message(t('Comment: @subject has been unpublished', array('@subject' => $comment->subject)));
+}

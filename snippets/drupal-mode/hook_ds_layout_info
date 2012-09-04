@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: hook_ds_layout_info
+# key: hook_ds_layout_info
+# --
+/**
+ * ${2:Define layouts from code.
+ *}
+ * @return $layouts
+ *   A collection of layouts.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ds_layout_info() {
+$0  $path = drupal_get_path('module', 'foo');
+
+  $layouts = array(
+    'foo_1col' => array(
+      'label' => t('Foo one column'),
+      'path' => $path . '/layouts/foo_1col',
+      'regions' => array(
+        'foo_content' => t('Content'),
+      ),
+      'css' => TRUE,
+      // optional, form only applies to node form at this point.
+      'form' => TRUE,
+    ),
+  );
+
+  return $layouts;
+}

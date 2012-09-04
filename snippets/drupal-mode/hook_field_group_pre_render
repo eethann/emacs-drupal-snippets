@@ -1,0 +1,63 @@
+# -*- mode: snippet -*-
+# name: hook_field_group_pre_render
+# key: hook_field_group_pre_render
+# --
+/**
+ * ${2:Implements hook_field_group_pre_render().
+ *
+ * This function gives you the oppertunity to create the given
+ * wrapper element that can contain the fields.
+ * In the example beneath, some variables are prepared and used when building the
+ * actual wrapper element. All elements in drupal fapi can be used.
+ *
+ * Note that at this point, the field group has no notion of the fields in it.
+ *
+ * There is also an alternative way of handling this. The default implementation
+ * within field_group calls "field_group_pre_render_<format_type>".}
+ * @see field_group_pre_render_fieldset.
+ *
+ * @param Array $elements by address.
+ * @param Object $group The Field group info.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_group_pre_render(& $element, $group, & $form) {
+$0
+  // You can prepare some variables to use in the logic.
+  $view_mode = isset($form['#view_mode']) ? $form['#view_mode'] : 'form';
+  $id = $form['#entity_type'] . '_' . $form['#bundle'] . '_' . $view_mode . '_' . $group->group_name;
+
+  // Each formatter type can have whole different set of element properties.
+  switch ($group->format_type) {
+
+    // Normal or collapsible div.
+    case 'div':
+      $effect = isset($group->format_settings['instance_settings']['effect']) ? $group->format_settings['instance_settings']['effect'] : 'none';
+      $speed = isset($group->format_settings['instance_settings']['speed']) ? $group->format_settings['instance_settings']['speed'] : 'none';
+      $add = array(
+        '#type' => 'markup',
+        '#weight' => $group->weight,
+        '#id' => $id,
+      );
+      $classes .= " speed-$speed effect-$effect";
+      if ($group->format_settings['formatter'] != 'open') {
+        $add['#prefix'] = '<div class="field-group-format ' . $classes . '">
+          <span class="field-group-format-toggler">' . check_plain(t($group->label)) . '</span>
+          <div class="field-group-format-wrapper" style="display: none;">';
+        $add['#suffix'] = '</div></div>';
+      }
+      else {
+        $add['#prefix'] = '<div class="field-group-format ' . $group->group_name . ' ' . $classes . '">';
+        $add['#suffix'] = '</div>';
+      }
+      if (!empty($description)) {
+        $add['#prefix'] .= '<div class="description">' . $description . '</div>';
+      }
+      $element += $add;
+
+      if ($effect == 'blind') {
+        drupal_add_library('system', 'effects.blind');
+      }
+
+      break;
+    break;
+  }
+}

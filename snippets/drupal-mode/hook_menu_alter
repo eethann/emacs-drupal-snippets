@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_menu_alter
+# key: hook_menu_alter
+# --
+/**
+ * ${2:Alter the data being saved to the {menu_router} table after hook_menu is invoked.
+ *
+ * This hook is invoked by menu_router_build(). The menu definitions are passed
+ * in by reference. Each element of the $items array is one item returned
+ * by a module from hook_menu. Additional items may be added, or existing items
+ * altered.
+ *}
+ * @param $items
+ *   Associative array of menu router definitions returned from hook_menu().
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_menu_alter(&$items) {
+$0  // Example - disable the page at node/add
+  $items['node/add']['access callback'] = FALSE;
+}

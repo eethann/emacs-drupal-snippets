@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: hook_process
+# key: hook_process
+# --
+/**
+ * ${2:Process theme variables.
+ *
+ * This hook allows modules to process theme variables for theme templates.
+ * It is called for all invocations of theme(), to allow modules to add to
+ * or override variables for all theme hooks.
+ *
+ * For more detailed information, see theme().
+ *}
+ * @param $variables
+ *   The variables array (modify in place).
+ * @param $hook
+ *   The name of the theme hook.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_process(&$variables, $hook) {
+$0  // Wraps variables in RDF wrappers.
+  if (!empty($variables['rdf_template_variable_attributes_array'])) {
+    foreach ($variables['rdf_template_variable_attributes_array'] as $variable_name => $attributes) {
+      $context = array(
+        'hook' => $hook,
+        'variable_name' => $variable_name,
+        'variables' => $variables,
+      );
+      $variables[$variable_name] = theme('rdf_template_variable_wrapper', array('content' => $variables[$variable_name], 'attributes' => $attributes, 'context' => $context));
+    }
+  }
+}

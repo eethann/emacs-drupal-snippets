@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_index_items_alter
+# key: hook_search_api_index_items_alter
+# --
+/**
+ * ${2:Allows you to log or alter the items that are indexed.
+ *
+ * Please be aware that generally preventing the indexing of certain items is
+ * deprecated. This is better done with data alterations, which can easily be
+ * configured and only added to indexes where this behaviour is wanted.
+ * If your module will use this hook to reject certain items from indexing,
+ * please document this clearly to avoid confusion.
+ *}
+ * @param array $items
+ *   The entities that will be indexed (before calling any data alterations).
+ * @param SearchApiIndex $index
+ *   The search index on which items will be indexed.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_index_items_alter(array &$items, SearchApiIndex $index) {
+$0  foreach ($items as $id => $item) {
+    if ($id % 5 == 0) {
+      unset($items[$id]);
+    }
+  }
+  example_store_indexed_entity_ids($index->item_type, array_keys($items));
+}

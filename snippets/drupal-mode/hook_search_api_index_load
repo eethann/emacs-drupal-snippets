@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_index_load
+# key: hook_search_api_index_load
+# --
+/**
+ * ${2:Act on search indexes when they are loaded.
+ *}
+ * @param array $indexes
+ *   An array of loaded SearchApiIndex objects.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_index_load(array $indexes) {
+$0  foreach ($indexes as $index) {
+    db_insert('example_search_index_access')
+      ->fields(array(
+        'index' => $index->machine_name,
+        'access_time' => REQUEST_TIME,
+      ))
+      ->execute();
+  }
+}

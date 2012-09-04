@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: hook_path_insert
+# key: hook_path_insert
+# --
+/**
+ * ${2:Respond to a path being inserted.
+ *}
+ * @param $path
+ *   An associative array containing the following keys:
+ *   - source: The internal system path.
+ *   - alias: The URL alias.
+ *   - pid: Unique path alias identifier.
+ *   - language: The language of the alias.
+ *
+ * @see path_save()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_path_insert($path) {
+$0  db_insert('mytable')
+    ->fields(array(
+      'alias' => $path['alias'],
+      'pid' => $path['pid'],
+    ))
+    ->execute();
+}

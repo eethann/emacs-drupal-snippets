@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: hook_entity_view
+# key: hook_entity_view
+# --
+/**
+ * ${2:Act on entities being assembled before rendering.
+ *}
+ * @param $entity
+ *   The entity object.
+ * @param $type
+ *   The type of entity being rendered (i.e. node, user, comment).
+ * @param $view_mode
+ *   The view mode the entity is rendered in.
+ * @param $langcode
+ *   The language code used for rendering.
+ *
+ * The module may add elements to $entity->content prior to rendering. The
+ * structure of $entity->content is a renderable array as expected by
+ * drupal_render().
+ *
+ * @see hook_entity_view_alter()
+ * @see hook_comment_view()
+ * @see hook_node_view()
+ * @see hook_user_view()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_entity_view($entity, $type, $view_mode, $langcode) {
+$0  $entity->content['my_additional_field'] = array(
+    '#markup' => $additional_field,
+    '#weight' => 10,
+    '#theme' => 'mymodule_my_additional_field',
+  );
+}

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: hook_filter_default_formats_alter
+# key: hook_filter_default_formats_alter
+# --
+/**
+ * ${2:Alter the default filter formats right before they are cached into the
+ * database.
+ *}
+ * @param &$formats
+ *   By reference. The formats that have been declared by another feature.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_filter_default_formats_alter(&$formats) {
+$0}

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_entity_presave
+# key: hook_entity_presave
+# --
+/**
+ * ${2:Act on an entity before it is about to be created or updated.
+ *}
+ * @param $entity
+ *   The entity object.
+ * @param $type
+ *   The type of entity being saved (i.e. node, user, comment).
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_entity_presave($entity, $type) {
+$0  $entity->changed = REQUEST_TIME;
+}

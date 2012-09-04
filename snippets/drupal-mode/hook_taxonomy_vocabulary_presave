@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_taxonomy_vocabulary_presave
+# key: hook_taxonomy_vocabulary_presave
+# --
+/**
+ * ${2:Act on taxonomy vocabularies before they are saved.
+ *
+ * Modules implementing this hook can act on the vocabulary object before it is
+ * inserted or updated.
+ *}
+ * @param $vocabulary
+ *   A taxonomy vocabulary object.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_taxonomy_vocabulary_presave($vocabulary) {
+$0  $vocabulary->foo = 'bar';
+}

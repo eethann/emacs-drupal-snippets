@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_redirect_delete
+# key: hook_redirect_delete
+# --
+/**
+ * ${2:Respond to redirect deletion.
+ *
+ * This hook is invoked from redirect_delete_multiple() after the redirect has
+ * been removed from the redirect table in the database.
+ *}
+ * @param $redirect
+ *   The redirect that is being deleted.
+ *
+ * @see redirect_delete_multiple()
+ * @ingroup redirect_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_redirect_delete($redirect) {
+$0
+}

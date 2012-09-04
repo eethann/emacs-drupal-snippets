@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_redirect_update
+# key: hook_redirect_update
+# --
+/**
+ * ${2:Respond to updates to a redirect.
+ *
+ * This hook is invoked from redirect_save() after the redirect is updated in
+ * the redirect table in the database.
+ *}
+ * @param $redirect
+ *   The redirect that is being updated.
+ *
+ * @see redirect_save()
+ * @ingroup redirect_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_redirect_update($redirect) {
+$0
+}

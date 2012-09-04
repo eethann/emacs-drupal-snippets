@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: hook_profile2_view
+# key: hook_profile2_view
+# --
+/**
+* Act on a profile that is being assembled before rendering.
+*
+* @param $profile
+*   The profile entity.
+* @param $view_mode
+*   The view mode the profile is rendered in.
+* @param $langcode
+*   The language code used for rendering.
+*
+* The module may add elements to $profile->content prior to rendering. The
+* structure of $profile->content is a renderable array as expected by
+* drupal_render().
+*
+* @see hook_entity_prepare_view()
+* @see hook_entity_view()
+*/
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_profile2_view($profile, $view_mode, $langcode) {
+$0  $profile->content['my_additional_field'] = array(
+    '#markup' => $additional_field,
+    '#weight' => 10,
+    '#theme' => 'mymodule_my_additional_field',
+  );
+}

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_features_export_options
+# key: hook_features_export_options
+# --
+/**
+ * ${2:Component hook. The hook should be implemented using the name ot the
+ * component, not the module, eg. [component]_features_export() rather than
+ * [module]_features_export().
+ *
+ * List all objects for a component that may be exported.
+ *}
+ * @return array
+ *   A keyed array of items, suitable for use with a FormAPI select or
+ *   checkboxes element.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_features_export_options() {
+$0  $options = array();
+  foreach (mycomponent_load() as $mycomponent) {
+    $options[$mycomponent->name] = $mycomponent->title;
+  }
+  return $options;
+}

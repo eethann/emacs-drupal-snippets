@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_ds_vd_info
+# key: hook_ds_vd_info
+# --
+/**
+ * ${2:Expose Views layouts definitions.
+ *
+ * This hook is called by CTools. For this hook to work, you need
+ * hook_ctools_plugin_api(). The values of this hook can be overridden
+ * and reverted through the UI.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ds_vd_info() {
+$0  $ds_vds = array();
+
+  $ds_vd = new stdClass;
+  $ds_vd->api_version = 1;
+  $ds_vd->vd = 'frontpage-page';
+  $ds_vd->label = 'Frontpage: Views displays';
+  $ds_vds['frontpage-page'] = $ds_vd;
+
+  return $ds_vds;
+}

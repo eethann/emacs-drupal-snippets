@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: hook_field_presave
+# key: hook_field_presave
+# --
+/**
+ * ${2:Define custom presave behavior for this module's field types.
+ *
+ * Make changes or additions to field values by altering the $items parameter by
+ * reference. There is no return value.
+ *}
+ * @param $entity_type
+ *   The type of $entity.
+ * @param $entity
+ *   The entity for the operation.
+ * @param $field
+ *   The field structure for the operation.
+ * @param $instance
+ *   The instance structure for $field on $entity's bundle.
+ * @param $langcode
+ *   The language associated with $items.
+ * @param $items
+ *   $entity->{$field['field_name']}[$langcode], or an empty array if unset.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_presave($entity_type, $entity, $field, $instance, $langcode, &$items) {
+$0  if ($field['type'] == 'number_decimal') {
+    // Let PHP round the value to ensure consistent behavior across storage
+    // backends.
+    foreach ($items as $delta => $item) {
+      if (isset($item['value'])) {
+        $items[$delta]['value'] = round($item['value'], $field['settings']['scale']);
+      }
+    }
+  }
+}

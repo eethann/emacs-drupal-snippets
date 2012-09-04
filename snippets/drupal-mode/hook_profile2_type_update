@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_profile2_type_update
+# key: hook_profile2_type_update
+# --
+/**
+ * ${2:Respond to updates to a profile.
+ *
+ * This hook is invoked after the profile type has been updated in the database.
+ *}
+ * @param $type
+ *   The profile type that is being updated.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_profile2_type_update($type) {
+$0  db_update('mytable')
+    ->fields(array('extra' => $type->extra))
+    ->condition('id', $type->id)
+    ->execute();
+}

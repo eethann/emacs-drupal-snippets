@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: hook_node_insert
+# key: hook_node_insert
+# --
+/**
+ * ${2:Respond to creation of a new node.
+ *
+ * This hook is invoked from node_save() after the node is inserted into the
+ * node table in the database, after the type-specific hook_insert() is invoked,
+ * and after field_attach_insert() is called.
+ *}
+ * @param $node
+ *   The node that is being created.
+ *
+ * @ingroup node_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_insert($node) {
+$0  db_insert('mytable')
+    ->fields(array(
+      'nid' => $node->nid,
+      'extra' => $node->extra,
+    ))
+    ->execute();
+}

@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_adapters
+# key: hook_facetapi_adapters
+# --
+/**
+ * ${2:Define all adapter plugins provided by the module.
+ *
+ * Adapters are the abstraction layer through which searchers integrate with
+ * Facet API and various backend functionality.
+ *}
+ * @return array
+ *   An associative array keyed by unique name of the adapter. Each adapter is
+ *   an associative array keyed by "handler" containing:
+ *   - class: The name of the plugin class.
+ *
+ * @see FacetapiApachesolr
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_adapters() {
+$0  return array(
+    'apachesolr' => array(
+      'handler' => array(
+        'class' => 'FacetapiApachesolrFacetapiAdapter',
+      ),
+    ),
+  );
+}

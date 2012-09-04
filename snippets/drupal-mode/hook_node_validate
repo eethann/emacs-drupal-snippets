@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: hook_node_validate
+# key: hook_node_validate
+# --
+/**
+ * ${2:Perform node validation before a node is created or updated.
+ *
+ * This hook is invoked from node_validate(), after a user has has finished
+ * editing the node and is previewing or submitting it. It is invoked at the
+ * end of all the standard validation steps, and after the type-specific
+ * hook_validate() is invoked.
+ *
+ * To indicate a validation error, use form_set_error().
+ *
+ * Note: Changes made to the $node object within your hook implementation will
+ * have no effect.  The preferred method to change a node's content is to use
+ * hook_node_presave() instead. If it is really necessary to change
+ * the node at the validate stage, you can use form_set_value().
+ *}
+ * @param $node
+ *   The node being validated.
+ * @param $form
+ *   The form being used to edit the node.
+ * @param $form_state
+ *   The form state array.
+ *
+ * @ingroup node_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_validate($node, $form, &$form_state) {
+$0  if (isset($node->end) && isset($node->start)) {
+    if ($node->start > $node->end) {
+      form_set_error('time', t('An event may not end before it starts.'));
+    }
+  }
+}

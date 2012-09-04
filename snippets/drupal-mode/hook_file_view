@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: hook_file_view
+# key: hook_file_view
+# --
+/**
+ * ${2:@todo Add documentation.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_view($file, $view_mode, $langcode) {
+$0}

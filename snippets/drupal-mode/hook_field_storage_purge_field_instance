@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_field_storage_purge_field_instance
+# key: hook_field_storage_purge_field_instance
+# --
+/**
+ * ${2:Remove field storage information when a field instance is purged.
+ *
+ * Called from field_purge_instance() to allow the field storage module
+ * to remove field instance information when a field instance is being
+ * purged.
+ *}
+ * @param $instance
+ *   The instance being purged.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_storage_purge_field_instance($instance) {
+$0  db_delete('my_module_field_instance_info')
+    ->condition('id', $instance['id'])
+    ->execute();
+}

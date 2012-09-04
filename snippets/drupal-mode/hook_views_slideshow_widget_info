@@ -1,0 +1,60 @@
+# -*- mode: snippet -*-
+# name: hook_views_slideshow_widget_info
+# key: hook_views_slideshow_widget_info
+# --
+/**
+ * ${2:Define new widgets (pagers, controls, counters).
+ *
+ * Available events for accepts and calls
+ *  - pause
+ *  - play
+ *  - nextSlide
+ *  - previousSlide
+ *  - goToSlide
+ *  - transitionBegin
+ *  - transitionEnd
+ *}
+ * @return
+ *  Array keyed by the widget names.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_slideshow_widget_info() {
+$0  return array(
+    'views_slideshow_pager' => array(
+      'name' => t('Pager'),
+      'accepts' => array(
+        'transitionBegin' => array('required' => TRUE),
+        'goToSlide',
+        'previousSlide',
+        'nextSlide',
+      ),
+      'calls' => array(
+        'goToSlide',
+        'pause',
+        'play',
+      ),
+    ),
+    'views_slideshow_controls' => array(
+      'name' => t('Controls'),
+      'accepts' => array(
+        'pause' => array('required' => TRUE),
+        'play' => array('required' => TRUE),
+      ),
+      'calls' => array(
+        'nextSlide',
+        'pause',
+        'play',
+        'previousSlide',
+      ),
+    ),
+    'views_slideshow_slide_counter' => array(
+      'name' => t('Slide Counter'),
+      'accepts' => array(
+        'transitionBegin' => array('required' => TRUE),
+        'goToSlide',
+        'previousSlide',
+        'nextSlide',
+      ),
+      'calls' => array(),
+    ),
+  );
+}

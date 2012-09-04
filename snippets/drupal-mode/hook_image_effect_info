@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: hook_image_effect_info
+# key: hook_image_effect_info
+# --
+/**
+ * ${2:Define information about image effects provided by a module.
+ *
+ * This hook enables modules to define image manipulation effects for use with
+ * an image style.
+ *}
+ * @return
+ *   An array of image effects. This array is keyed on the machine-readable
+ *   effect name. Each effect is defined as an associative array containing the
+ *   following items:
+ *   - "label": The human-readable name of the effect.
+ *   - "effect callback": The function to call to perform this image effect.
+ *   - "dimensions passthrough": (optional) Set this item if the effect doesn't
+ *     change the dimensions of the image.
+ *   - "dimensions callback": (optional) The function to call to transform
+ *     dimensions for this effect.
+ *   - "help": (optional) A brief description of the effect that will be shown
+ *     when adding or configuring this image effect.
+ *   - "form callback": (optional) The name of a function that will return a
+ *     $form array providing a configuration form for this image effect.
+ *   - "summary theme": (optional) The name of a theme function that will output
+ *     a summary of this image effect's configuration.
+ *
+ * @see hook_image_effect_info_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_image_effect_info() {
+$0  $effects = array();
+
+  $effects['mymodule_resize'] = array(
+    'label' => t('Resize'),
+    'help' => t('Resize an image to an exact set of dimensions, ignoring aspect ratio.'),
+    'effect callback' => 'mymodule_resize_effect',
+    'dimensions callback' => 'mymodule_resize_dimensions',
+    'form callback' => 'mymodule_resize_form',
+    'summary theme' => 'mymodule_resize_summary',
+  );
+
+  return $effects;
+}

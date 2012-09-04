@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_ckeditor_link_TYPE_revert
+# key: hook_ckeditor_link_TYPE_revert
+# --
+/**
+ * ${2:Revert a path to a user-friendly title.
+ *}
+ * @param $path
+ *   The path to revert.
+ * @param $langcode
+ *   The language code of the path if any. The implementing module may fix it
+ *   if necessary, based on the given path.
+ *
+ * @return
+ *   A title, FALSE if not found, or nothing if the implementing module is not
+ *   responsible for the given path.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ckeditor_link_TYPE_revert($path, &$langcode) {
+$0  //
+}

@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hook_user_delete
+# key: hook_user_delete
+# --
+/**
+ * ${2:Respond to user deletion.
+ *
+ * This hook is invoked from user_delete_multiple() before field_attach_delete()
+ * is called and before users are actually removed from the database.
+ *
+ * Modules should additionally implement hook_user_cancel() to process stored
+ * user data for other account cancellation methods.
+ *}
+ * @param $account
+ *   The account that is being deleted.
+ *
+ * @see user_delete_multiple()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_user_delete($account) {
+$0  db_delete('mytable')
+    ->condition('uid', $account->uid)
+    ->execute();
+}

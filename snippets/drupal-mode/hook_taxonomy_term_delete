@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_taxonomy_term_delete
+# key: hook_taxonomy_term_delete
+# --
+/**
+ * ${2:Respond to the deletion of taxonomy terms.
+ *
+ * Modules implementing this hook can respond to the deletion of taxonomy
+ * terms from the database.
+ *}
+ * @param $term
+ *   A taxonomy term object.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_taxonomy_term_delete($term) {
+$0  db_delete('term_synoynm')->condition('tid', $term->tid)->execute();
+}

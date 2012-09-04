@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_file_delete
+# key: hook_file_delete
+# --
+/**
+ * ${2:Respond to a file being deleted.
+ *}
+ * @param $file
+ *   The file that has just been deleted.
+ *
+ * @see file_delete()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_delete($file) {
+$0  // Delete all information associated with the file.
+  db_delete('upload')->condition('fid', $file->fid)->execute();
+}

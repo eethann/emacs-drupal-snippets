@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: hook_date_combo_validate_date_start_alter
+# key: hook_date_combo_validate_date_start_alter
+# --
+/**
+ * ${2:Alter the local start date objects created by the date_combo validation.
+ *
+ * This is called before the objects are converted back to the database timezone
+ * and stored.
+ *}
+ * @param object $date
+ *   The $date object.
+ * @param array $form_state
+ *   A keyed array containing the current state of the form.
+ * @param array $context
+ *   An associative array containing the following keys:
+ *  - field: The $field array.
+ *  - instance: The $instance array.
+ *  - item: The $item array.
+ *  - element: The $element array.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_date_combo_validate_date_start_alter(&$date, &$form_state, $context) {
+$0  // If this is an 'All day' value, set the time to midnight.
+  if (!empty($context['element']['#date_is_all_day'])) {
+    $date->setTime(0, 0, 0);
+  }
+}

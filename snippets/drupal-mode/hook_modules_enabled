@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_modules_enabled
+# key: hook_modules_enabled
+# --
+/**
+ * ${2:Perform necessary actions after modules are enabled.
+ *
+ * This function differs from hook_enable() in that it gives all other modules a
+ * chance to perform actions when modules are enabled, whereas hook_enable() is
+ * only called on the module actually being enabled. See module_enable() for a
+ * detailed description of the order in which install and enable hooks are
+ * invoked.
+ *}
+ * @param $modules
+ *   An array of the modules that were enabled.
+ *
+ * @see hook_enable()
+ * @see hook_modules_installed()
+ * @see module_enable()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_modules_enabled($modules) {
+$0  if (in_array('lousy_module', $modules)) {
+    drupal_set_message(t('mymodule is not compatible with lousy_module'), 'error');
+    mymodule_disable_functionality();
+  }
+}

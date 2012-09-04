@@ -1,0 +1,49 @@
+# -*- mode: snippet -*-
+# name: hook_node_access_records_alter
+# key: hook_node_access_records_alter
+# --
+/**
+ * ${2:Alter permissions for a node before it is written to the database.
+ *
+ * Node access modules establish rules for user access to content. Node access
+ * records are stored in the {node_access} table and define which permissions
+ * are required to access a node. This hook is invoked after node access modules
+ * returned their requirements via hook_node_access_records(); doing so allows
+ * modules to modify the $grants array by reference before it is stored, so
+ * custom or advanced business logic can be applied.
+ *}
+ * @see hook_node_access_records()
+ *
+ * Upon viewing, editing or deleting a node, hook_node_grants() builds a
+ * permissions array that is compared against the stored access records. The
+ * user must have one or more matching permissions in order to complete the
+ * requested operation.
+ *
+ * A module may deny all access to a node by setting $grants to an empty array.
+ *
+ * @see hook_node_grants()
+ * @see hook_node_grants_alter()
+ *
+ * @param $grants
+ *   The $grants array returned by hook_node_access_records().
+ * @param $node
+ *   The node for which the grants were acquired.
+ *
+ * The preferred use of this hook is in a module that bridges multiple node
+ * access modules with a configurable behavior, as shown in the example with the
+ * 'is_preview' field.
+ *
+ * @ingroup node_access
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_access_records_alter(&$grants, $node) {
+$0  // Our module allows editors to mark specific articles with the 'is_preview'
+  // field. If the node being saved has a TRUE value for that field, then only
+  // our grants are retained, and other grants are removed. Doing so ensures
+  // that our rules are enforced no matter what priority other grants are given.
+  if ($node->is_preview) {
+    // Our module grants are set in $grants['example'].
+    $temp = $grants['example'];
+    // Now remove all module grants but our own.
+    $grants = array('example' => $temp);
+  }
+}

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_default_profile2_type_alter
+# key: hook_default_profile2_type_alter
+# --
+/**
+* Alter default profile type configurations.
+*
+* @param $defaults
+*   An array of default profile types, keyed by type names.
+*
+* @see hook_default_profile2_type()
+*/
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_default_profile2_type_alter(&$defaults) {
+$0  $defaults['main']->label = 'custom label';
+}

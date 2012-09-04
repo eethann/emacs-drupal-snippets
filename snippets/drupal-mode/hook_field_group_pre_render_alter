@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_field_group_pre_render_alter
+# key: hook_field_group_pre_render_alter
+# --
+/**
+ * ${2:Implements hook_field_group_pre_render().
+ *
+ * Function that fungates as last resort to alter the pre_render build.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_group_pre_render_alter(&$element, $group, & $form) {
+$0
+  if ($group->format_type == 'htab') {
+    $element['#theme_wrappers'] = array('my_horizontal_tab');
+  }
+
+}

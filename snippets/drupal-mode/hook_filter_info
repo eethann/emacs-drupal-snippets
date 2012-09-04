@@ -1,0 +1,92 @@
+# -*- mode: snippet -*-
+# name: hook_filter_info
+# key: hook_filter_info
+# --
+/**
+ * ${2:Define content filters.
+ *
+ * User submitted content is passed through a group of filters before it is
+ * output in HTML, in order to remove insecure or unwanted parts, correct or
+ * enhance the formatting, transform special keywords, etc. A group of filters
+ * is referred to as a "text format". Administrators can create as many text
+ * formats as needed. Individual filters can be enabled and configured
+ * differently for each text format.
+ *
+ * This hook is invoked by filter_get_filters() and allows modules to register
+ * input filters they provide.
+ *
+ * Filtering is a two-step process. First, the content is 'prepared' by calling
+ * the 'prepare callback' function for every filter. The purpose of the 'prepare
+ * callback' is to escape HTML-like structures. For example, imagine a filter
+ * which allows the user to paste entire chunks of programming code without
+ * requiring manual escaping of special HTML characters like < or &. If the
+ * programming code were left untouched, then other filters could think it was
+ * HTML and change it. For many filters, the prepare step is not necessary.
+ *
+ * The second step is the actual processing step. The result from passing the
+ * text through all the filters' prepare steps gets passed to all the filters
+ * again, this time with the 'process callback' function. The process callbacks
+ * should then actually change the content: transform URLs into hyperlinks,
+ * convert smileys into images, etc.
+ *
+ * For performance reasons content is only filtered once; the result is stored
+ * in the cache table and retrieved from the cache the next time the same piece
+ * of content is displayed. If a filter's output is dynamic, it can override the
+ * cache mechanism, but obviously this should be used with caution: having one
+ * filter that does not support caching in a particular text format disables
+ * caching for the entire format, not just for one filter.
+ *
+ * Beware of the filter cache when developing your module: it is advised to set
+ * your filter to 'cache' => FALSE while developing, but be sure to remove that
+ * setting if it's not needed, when you are no longer in development mode.
+ *}
+ * @return
+ *   An associative array of filters, whose keys are internal filter names,
+ *   which should be unique and therefore prefixed with the name of the module.
+ *   Each value is an associative array describing the filter, with the
+ *   following elements (all are optional except as noted):
+ *   - title: (required) An administrative summary of what the filter does.
+ *   - description: Additional administrative information about the filter's
+ *     behavior, if needed for clarification.
+ *   - settings callback: The name of a function that returns configuration form
+ *     elements for the filter. See hook_filter_FILTER_settings() for details.
+ *   - default settings: An associative array containing default settings for
+ *     the filter, to be applied when the filter has not been configured yet.
+ *   - prepare callback: The name of a function that escapes the content before
+ *     the actual filtering happens. See hook_filter_FILTER_prepare() for
+ *     details.
+ *   - process callback: (required) The name the function that performs the
+ *     actual filtering. See hook_filter_FILTER_process() for details.
+ *   - cache (default TRUE): Specifies whether the filtered text can be cached.
+ *     Note that setting this to FALSE makes the entire text format not
+ *     cacheable, which may have an impact on the site's overall performance.
+ *     See filter_format_allowcache() for details.
+ *   - tips callback: The name of a function that returns end-user-facing filter
+ *     usage guidelines for the filter. See hook_filter_FILTER_tips() for
+ *     details.
+ *   - weight: A default weight for the filter in new text formats.
+ *
+ * @see filter_example.module
+ * @see hook_filter_info_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_filter_info() {
+$0  $filters['filter_html'] = array(
+    'title' => t('Limit allowed HTML tags'),
+    'description' => t('Allows you to restrict the HTML tags the user can use. It will also remove harmful content such as JavaScript events, JavaScript URLs and CSS styles from those tags that are not removed.'),
+    'process callback' => '_filter_html',
+    'settings callback' => '_filter_html_settings',
+    'default settings' => array(
+      'allowed_html' => '<a> <em> <strong> <cite> <blockquote> <code> <ul> <ol> <li> <dl> <dt> <dd>',
+      'filter_html_help' => 1,
+      'filter_html_nofollow' => 0,
+    ),
+    'tips callback' => '_filter_html_tips',
+  );
+  $filters['filter_autop'] = array(
+    'title' => t('Convert line breaks'),
+    'description' => t('Converts line breaks into HTML (i.e. &lt;br&gt; and &lt;p&gt;) tags.'),
+    'process callback' => '_filter_autop',
+    'tips callback' => '_filter_autop_tips',
+  );
+  return $filters;
+}

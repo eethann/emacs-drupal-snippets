@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_admin_paths_alter
+# key: hook_admin_paths_alter
+# --
+/**
+ * ${2:Redefine administrative paths defined by other modules.
+ *}
+ * @param $paths
+ *   An associative array of administrative paths, as defined by implementations
+ *   of hook_admin_paths().
+ *
+ * @see hook_admin_paths()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_admin_paths_alter(&$paths) {
+$0  // Treat all user pages as administrative.
+  $paths['user'] = TRUE;
+  $paths['user/*'] = TRUE;
+  // Treat the forum topic node form as a non-administrative page.
+  $paths['node/add/forum'] = FALSE;
+}

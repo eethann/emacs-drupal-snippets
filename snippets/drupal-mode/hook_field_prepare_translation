@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: hook_field_prepare_translation
+# key: hook_field_prepare_translation
+# --
+/**
+ * ${2:Define custom prepare_translation behavior for this module's field types.
+ *}
+ * @param $entity_type
+ *   The type of $entity.
+ * @param $entity
+ *   The entity for the operation.
+ * @param $field
+ *   The field structure for the operation.
+ * @param $instance
+ *   The instance structure for $field on $entity's bundle.
+ * @param $langcode
+ *   The language associated to $items.
+ * @param $items
+ *   $entity->{$field['field_name']}[$langcode], or an empty array if unset.
+ * @param $source_entity
+ *   The source entity from which field values are being copied.
+ * @param $source_langcode
+ *   The source language from which field values are being copied.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_prepare_translation($entity_type, $entity, $field, $instance, $langcode, &$items, $source_entity, $source_langcode) {
+$0  // If the translating user is not permitted to use the assigned text format,
+  // we must not expose the source values.
+  $field_name = $field['field_name'];
+  $formats = filter_formats();
+  $format_id = $source_entity->{$field_name}[$source_langcode][0]['format'];
+  if (!filter_access($formats[$format_id])) {
+    $items = array();
+  }
+}

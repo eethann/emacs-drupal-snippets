@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: hook_ckeditor_link_TYPE_autocomplete
+# key: hook_ckeditor_link_TYPE_autocomplete
+# --
+/**
+ * ${2:Get autocomplete suggestions for the given string.
+ *
+ * Implementing modules should return only suggestions the current user has
+ * access to.
+ *}
+ * @param $string
+ *   The string to autocomplete.
+ *
+ * @return
+ *   An array of suggestions where keys are non-aliased internal paths
+ *   and values are titles.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_ckeditor_link_TYPE_autocomplete($string) {
+$0  $matches = array();
+
+  $matches['the-path/123'] = 'The title 1';
+  $matches['the-path/the-path-2/5'] = 'The title 2';
+
+  return $matches;
+}

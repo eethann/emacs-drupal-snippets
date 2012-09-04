@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: hook_field_is_empty
+# key: hook_field_is_empty
+# --
+/**
+ * ${2:Define what constitutes an empty item for a field type.
+ *}
+ * @param $item
+ *   An item that may or may not be empty.
+ * @param $field
+ *   The field to which $item belongs.
+ *
+ * @return
+ *   TRUE if $field's type considers $item not to contain any data;
+ *   FALSE otherwise.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_is_empty($item, $field) {
+$0  if (empty($item['value']) && (string) $item['value'] !== '0') {
+    return TRUE;
+  }
+  return FALSE;
+}

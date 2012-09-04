@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: hook_field_info_max_weight
+# key: hook_field_info_max_weight
+# --
+/**
+ * ${2:Returns the maximum weight for the entity components handled by the module.
+ *
+ * Field API takes care of fields and 'extra_fields'. This hook is intended for
+ * third-party modules adding other entity components (e.g. field_group).
+ *}
+ * @param $entity_type
+ *   The type of entity; e.g. 'node' or 'user'.
+ * @param $bundle
+ *   The bundle name.
+ * @param $context
+ *   The context for which the maximum weight is requested. Either 'form', or
+ *   the name of a view mode.
+ * @return
+ *   The maximum weight of the entity's components, or NULL if no components
+ *   were found.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_info_max_weight($entity_type, $bundle, $context) {
+$0  $weights = array();
+
+  foreach (my_module_entity_additions($entity_type, $bundle, $context) as $addition) {
+    $weights[] = $addition['weight'];
+  }
+
+  return $weights ? max($weights) : NULL;
+}

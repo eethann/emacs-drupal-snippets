@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: hook_date_combo_pre_validate_alter
+# key: hook_date_combo_pre_validate_alter
+# --
+/**
+ * ${2:Alter the date_combo element before the rest of the validation is run.
+ *}
+ * @param array $element
+ *   The $element array.
+ * @param array $form_state
+ *   A keyed array containing the current state of the form.
+ * @param array $context
+ *   An associative array containing the following keys:
+ *   - field: The $field array.
+ *   - instance: The $instance array.
+ *   - item: The $item array.
+ *
+ * @see date_combo_element_process()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_date_combo_pre_validate_alter(&$element, &$form_state, $context) {
+$0  if (!empty($context['item']['all_day'])) {
+
+    $field = $context['field'];
+
+    // If we have an all day flag on this date and the time is empty, change the
+    // format to match the input value so we don't get validation errors.
+    $element['#date_is_all_day'] = TRUE;
+    $element['value']['#date_format'] = date_part_format('date', $element['value']['#date_format']);
+    if (!empty($field['settings']['todate'])) {
+      $element['value2']['#date_format'] = date_part_format('date', $element['value2']['#date_format']);
+    }
+  }
+}

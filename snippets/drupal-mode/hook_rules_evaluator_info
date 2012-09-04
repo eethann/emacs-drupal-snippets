@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: hook_rules_evaluator_info
+# key: hook_rules_evaluator_info
+# --
+/**
+ * ${2:Declare provided rules input evaluators.
+ *
+ * The hook implementation should be placed into the file MODULENAME.rules.inc,
+ * which gets automatically included when the hook is invoked.
+ * For implementing an input evaluator a class has to be provided which
+ * extends the abstract RulesDataInputEvaluator class. Therefore the abstract
+ * methods prepare() and evaluate() have to be implemented, as well as access()
+ * and help() could be overridden in order to control access permissions or to
+ * provide some usage help.
+ *}
+ * @return
+ *   An array of information about the module's provided input evaluators. The
+ *   array contains a sub-array for each evaluator, with the evaluator name as
+ *   the key. The name may only contain lower case alpha-numeric characters and
+ *   underscores and should be prefixed with the providing module name. Possible
+ *   attributes for each sub-array are:
+ *   - class: The implementation class, which has to extend the
+ *     RulesDataInputEvaluator class. Required.
+ *   - weight: A weight for controlling the evaluation order of multiple
+ *     evaluators. Required.
+ *   - type: Optionally, the data types for which the input evaluator should be
+ *     used. Defaults to 'text'. Multiple data types may be specified using an
+ *     array.
+ *
+ *  @see class RulesDataInputEvaluator
+ *  @see hook_rules_evaluator_info_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_rules_evaluator_info() {
+$0  return array(
+    'token' => array(
+      'class' => 'RulesTokenEvaluator',
+      'type' => array('text', 'uri'),
+      'weight' => 0,
+     ),
+  );
+}

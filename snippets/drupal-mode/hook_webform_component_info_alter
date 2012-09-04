@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_webform_component_info_alter
+# key: hook_webform_component_info_alter
+# --
+/**
+ * ${2:Alter the list of available Webform components.
+ *}
+ * @param $components
+ *   A list of existing components as defined by hook_webform_component_info().
+ *
+ * @see hook_webform_component_info()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_component_info_alter(&$components) {
+$0  // Completely remove a component.
+  unset($components['grid']);
+
+  // Change the name of a component.
+  $components['textarea']['label'] = t('Text box');
+}

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hook_profile2_type_delete
+# key: hook_profile2_type_delete
+# --
+/**
+ * ${2:Respond to profile type deletion.
+ *
+ * This hook is invoked after the profile type has been removed from the
+ * database.
+ *}
+ * @param $type
+ *   The profile type that is being deleted.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_profile2_type_delete($type) {
+$0  db_delete('mytable')
+    ->condition('id', $type->id)
+    ->execute();
+}

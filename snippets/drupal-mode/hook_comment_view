@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_comment_view
+# key: hook_comment_view
+# --
+/**
+ * ${2:The comment is being viewed. This hook can be used to add additional data to the comment before theming.
+ *}
+ * @param $comment
+ *   Passes in the comment the action is being performed on.
+ * @param $view_mode
+ *   View mode, e.g. 'full', 'teaser'...
+ * @param $langcode
+ *   The language code used for rendering.
+ *
+ * @see hook_entity_view()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_comment_view($comment, $view_mode, $langcode) {
+$0  // how old is the comment
+  $comment->time_ago = time() - $comment->changed;
+}

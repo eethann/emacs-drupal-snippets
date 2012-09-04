@@ -1,0 +1,61 @@
+# -*- mode: snippet -*-
+# name: hook_field_extra_fields
+# key: hook_field_extra_fields
+# --
+/**
+ * ${2:Exposes "pseudo-field" components on fieldable entities.
+ *
+ * Field UI's "Manage fields" and "Manage display" pages let users re-order
+ * fields, but also non-field components. For nodes, these include the title,
+ * poll choices, and other elements exposed by modules through hook_form() or
+ * hook_form_alter().
+ *
+ * Fieldable entities or modules that want to have their components supported
+ * should expose them using this hook. The user-defined settings (weight,
+ * visible) are automatically applied on rendered forms and displayed
+ * entities in a #pre_render callback added by field_attach_form() and
+ * field_attach_view().
+ *}
+ * @see _field_extra_fields_pre_render()
+ * @see hook_field_extra_fields_alter()
+ *
+ * @return
+ *   A nested array of 'pseudo-field' components. Each list is nested within
+ *   the following keys: entity type, bundle name, context (either 'form' or
+ *   'display'). The keys are the name of the elements as appearing in the
+ *   renderable array (either the entity form or the displayed entity). The
+ *   value is an associative array:
+ *   - label: The human readable name of the component.
+ *   - description: A short description of the component contents.
+ *   - weight: The default weight of the element.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_extra_fields() {
+$0  $extra['node']['poll'] = array(
+    'form' => array(
+      'choice_wrapper' => array(
+        'label' => t('Poll choices'),
+        'description' => t('Poll choices'),
+        'weight' => -4,
+      ),
+      'settings' => array(
+        'label' => t('Poll settings'),
+        'description' => t('Poll module settings'),
+        'weight' => -3,
+      ),
+    ),
+    'display' => array(
+      'poll_view_voting' => array(
+        'label' => t('Poll vote'),
+        'description' => t('Poll vote'),
+        'weight' => 0,
+      ),
+      'poll_view_results' => array(
+        'label' => t('Poll results'),
+        'description' => t('Poll results'),
+        'weight' => 0,
+      ),
+    )
+  );
+
+  return $extra;
+}

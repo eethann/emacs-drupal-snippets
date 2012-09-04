@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_install_tasks_alter
+# key: hook_install_tasks_alter
+# --
+/**
+ * ${2:Alter the full list of installation tasks.
+ *}
+ * @param $tasks
+ *   An array of all available installation tasks, including those provided by
+ *   Drupal core. You can modify this array to change or replace any part of
+ *   the Drupal installation process that occurs after the installation profile
+ *   is selected.
+ * @param $install_state
+ *   An array of information about the current installation state.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_install_tasks_alter(&$tasks, $install_state) {
+$0  // Replace the "Choose language" installation task provided by Drupal core
+  // with a custom callback function defined by this installation profile.
+  $tasks['install_select_locale']['function'] = 'myprofile_locale_selection';
+}

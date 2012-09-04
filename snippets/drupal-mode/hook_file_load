@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: hook_file_load
+# key: hook_file_load
+# --
+/**
+ * ${2:Load additional information into file objects.
+ *
+ * file_load_multiple() calls this hook to allow modules to load
+ * additional information into each file.
+ *}
+ * @param $files
+ *   An array of file objects, indexed by fid.
+ *
+ * @see file_load_multiple()
+ * @see file_load()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_file_load($files) {
+$0  // Add the upload specific data into the file object.
+  $result = db_query('SELECT * FROM {upload} u WHERE u.fid IN (:fids)', array(':fids' => array_keys($files)))->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($result as $record) {
+    foreach ($record as $key => $value) {
+      $files[$record['fid']]->$key = $value;
+    }
+  }
+}

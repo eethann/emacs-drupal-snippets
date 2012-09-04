@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: hook_quicktabs_alter
+# key: hook_quicktabs_alter
+# --
+/**
+ * ${2:Alter the Quicktabs instance before it gets rendered.
+ *}
+ * @param &$quicktabs
+ *   A loaded Quicktabs object, either from the database or from code.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_quicktabs_alter(&$quicktabs) {
+$0}

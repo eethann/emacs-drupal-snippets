@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: hook_search_api_alter_callback_info
+# key: hook_search_api_alter_callback_info
+# --
+/**
+ * ${2:Registers one or more callbacks that can be called at index time to add
+ * additional data to the indexed items (e.g. comments or attachments to nodes),
+ * alter the data in other forms or remove items from the array.
+ *
+ * Data-alter callbacks (which are called "Data alterations" in the UI) are
+ * classes implementing the SearchApiAlterCallbackInterface interface.
+ *}
+ * @see SearchApiAlterCallbackInterface
+ *
+ * @return array
+ *   An associative array keyed by the callback IDs and containing arrays with
+ *   the following keys:
+ *   - name: The name to display for this callback.
+ *   - description: A short description of what the callback does.
+ *   - class: The callback class.
+ *   - weight: (optional) Defines the order in which callbacks are displayed
+ *     (and, therefore, invoked) by default. Defaults to 0.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_search_api_alter_callback_info() {
+$0  $callbacks['example_random_alter'] = array(
+    'name' => t('Random alteration'),
+    'description' => t('Alters all passed item data completely randomly.'),
+    'class' => 'ExampleRandomAlter',
+    'weight' => 100,
+  );
+  $callbacks['example_add_comments'] = array(
+    'name' => t('Add comments'),
+    'description' => t('For nodes and similar entities, adds comments.'),
+    'class' => 'ExampleAddComments',
+  );
+
+  return $callbacks;
+}

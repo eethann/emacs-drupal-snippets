@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_date_formats_alter
+# key: hook_date_formats_alter
+# --
+/**
+ * ${2:Alter date formats declared by another module.
+ *
+ * Called by _system_date_format_types_build() to allow modules to alter the
+ * return values from implementations of hook_date_formats().}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_date_formats_alter(&$formats) {
+$0  foreach ($formats as $id => $format) {
+    $formats[$id]['locales'][] = 'en-ca';
+  }
+}

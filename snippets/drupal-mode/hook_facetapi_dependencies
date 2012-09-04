@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: hook_facetapi_dependencies
+# key: hook_facetapi_dependencies
+# --
+/**
+ * ${2:Define all dependency plugins provided by the module.
+ *
+ * Dependency plugins control what criteria must be met for the backend to
+ * process the facet. It is designed to implement the "progressive disclosure"
+ * pattern where more facets are displayed to users the deeper they get into
+ * the refinement of their search.
+ *}
+ * @return array
+ *   An associative array keyed by unique name of the dependency. Each
+ *   dependency is an associative array keyed by "handler" containing:
+ *   - label: The human readable name of the plugin displayed in the admin UI.
+ *   - class: The name of the plugin class.
+ *
+ * @see FacetapiDependency
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_facetapi_dependencies() {
+$0  return array(
+    'bundle' => array(
+      'handler' => array(
+        'label' => t('Content types'),
+        'class' => 'FacetapiDependencyBundle',
+      ),
+    ),
+  );
+}

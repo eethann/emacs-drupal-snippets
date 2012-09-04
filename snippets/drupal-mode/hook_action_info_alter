@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: hook_action_info_alter
+# key: hook_action_info_alter
+# --
+/**
+ * ${2:Alters the actions declared by another module.
+ *
+ * Called by actions_list() to allow modules to alter the return values from
+ * implementations of hook_action_info().
+ *}
+ * @see trigger_example_action_info_alter()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_action_info_alter(&$actions) {
+$0  $actions['node_unpublish_action']['label'] = t('Unpublish and remove from public view.');
+}

@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: hook_node_load
+# key: hook_node_load
+# --
+/**
+ * ${2:Act on nodes being loaded from the database.
+ *
+ * This hook is invoked during node loading, which is handled by entity_load(),
+ * via classes NodeController and DrupalDefaultEntityController. After the node
+ * information is read from the database or the entity cache, hook_load() is
+ * invoked on the node's content type module, then field_attach_node_revision()
+ * or field_attach_load() is called, then hook_entity_load() is invoked on all
+ * implementing modules, and finally hook_node_load() is invoked on all
+ * implementing modules.
+ *
+ * This hook should only be used to add information that is not in the node or
+ * node revisions table, not to replace information that is in these tables
+ * (which could interfere with the entity cache). For performance reasons,
+ * information for all available nodes should be loaded in a single query where
+ * possible.
+ *
+ * The $types parameter allows for your module to have an early return (for
+ * efficiency) if your module only supports certain node types. However, if your
+ * module defines a content type, you can use hook_load() to respond to loading
+ * of just that content type.
+ *}
+ * @param $nodes
+ *   An array of the nodes being loaded, keyed by nid.
+ * @param $types
+ *   An array containing the types of the nodes.
+ *
+ * For a detailed usage example, see nodeapi_example.module.
+ *
+ * @ingroup node_api_hooks
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_node_load($nodes, $types) {
+$0  $result = db_query('SELECT nid, foo FROM {mytable} WHERE nid IN(:nids)', array(':nids' => array_keys($nodes)));
+  foreach ($result as $record) {
+    $nodes[$record->nid]->foo = $record->foo;
+  }
+}

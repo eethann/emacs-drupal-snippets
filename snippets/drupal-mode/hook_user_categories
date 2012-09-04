@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: hook_user_categories
+# key: hook_user_categories
+# --
+/**
+ * ${2:Retrieve a list of user setting or profile information categories.
+ *}
+ * @return
+ *   An array of associative arrays. Each inner array has elements:
+ *   - "name": The internal name of the category.
+ *   - "title": The human-readable, localized name of the category.
+ *   - "weight": An integer specifying the category's sort ordering.
+ *   - "access callback": Name of the access callback function to use to
+ *     determine whether the user can edit the category. Defaults to using
+ *     user_edit_access(). See hook_menu() for more information on access
+ *     callbacks.
+ *   - "access arguments": Arguments for the access callback function. Defaults
+ *     to array(1).
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_user_categories() {
+$0  return array(array(
+    'name' => 'account',
+    'title' => t('Account settings'),
+    'weight' => 1,
+  ));
+}

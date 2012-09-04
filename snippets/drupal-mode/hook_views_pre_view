@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_views_pre_view
+# key: hook_views_pre_view
+# --
+/**
+ * ${2:This hook is called at the very beginning of views processing,
+ * before anything is done.
+ *
+ * Adding output to the view can be accomplished by placing text on
+ * $view->attachment_before and $view->attachment_after.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_pre_view(&$view, &$display_id, &$args) {
+$0  // example code here
+}

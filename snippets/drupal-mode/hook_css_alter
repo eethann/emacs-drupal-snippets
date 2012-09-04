@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_css_alter
+# key: hook_css_alter
+# --
+/**
+ * ${2:Alter CSS files before they are output on the page.
+ *}
+ * @param $css
+ *   An array of all CSS items (files and inline CSS) being requested on the page.
+ *
+ * @see drupal_add_css()
+ * @see drupal_get_css()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_css_alter(&$css) {
+$0  // Remove defaults.css file.
+  unset($css[drupal_get_path('module', 'system') . '/defaults.css']);
+}

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hook_drupal_goto_alter
+# key: hook_drupal_goto_alter
+# --
+/**
+ * ${2:Change the page the user is sent to by drupal_goto().
+ *}
+ * @param $path
+ *   A Drupal path or a full URL.
+ * @param $options
+ *   An associative array of additional URL options to pass to url().
+ * @param $http_response_code
+ *   The HTTP status code to use for the redirection. See drupal_goto() for more
+ *   information.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_drupal_goto_alter(&$path, &$options, &$http_response_code) {
+$0  // A good addition to misery module.
+  $http_response_code = 500;
+}

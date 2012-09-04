@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_bean_types_api_info
+# key: hook_bean_types_api_info
+# --
+/**
+ * ${2:Implements hook_bean_types_api_info().
+ *
+ * Tell the bean module that you are implemented a plugin and
+ * which version of the API are you using.
+ *
+ * THIS IS REQUIRED}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_bean_types_api_info() {
+$0  return array(
+    'api' => 4,
+  );
+}

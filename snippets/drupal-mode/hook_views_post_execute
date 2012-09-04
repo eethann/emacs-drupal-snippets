@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hook_views_post_execute
+# key: hook_views_post_execute
+# --
+/**
+ * ${2:This hook is called right after the execute process. The query has
+ * been executed, but the pre_render() phase has not yet happened for
+ * handlers.
+ *
+ * Adding output to the view can be accomplished by placing text on
+ * $view->attachment_before and $view->attachment_after. Altering the
+ * content can be achieved by editing the items of $view->result.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_views_post_execute(&$view) {
+$0  // example code here
+}

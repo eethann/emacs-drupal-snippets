@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: hook_date_field_formatter_settings_summary_alter
+# key: hook_date_field_formatter_settings_summary_alter
+# --
+/**
+ * ${2:Alter a date field formatter settings summary.
+ *}
+ * @param array $summary
+ *   An array of strings to be concatenated into a short summary of the
+ *   formatter settings.
+ * @param array $context
+ *   An associative array containing the following keys:
+ *   - field: The $field array.
+ *   - instance: The $instance array.
+ *   - view_mode: The formatter view mode.
+ *
+ * @see hook_field_formatter_settings_summary()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_date_field_formatter_settings_summary_alter(&$summary, $context) {
+$0  $field = $context['field'];
+  $instance = $context['instance'];
+  $view_mode = $context['view_mode'];
+  $display = $instance['display'][$view_mode];
+  $formatter = $display['type'];
+  $settings = $display['settings'];
+  if (isset($settings['show_repeat_rule']) && !empty($field['settings']['repeat'])) {
+    if ($settings['show_repeat_rule'] == 'show') {
+      $summary[] = t('Show repeat rule');
+    }
+    else {
+      $summary[] = t('Hide repeat rule');
+    }
+  }
+}

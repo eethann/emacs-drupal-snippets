@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hook_webform_component_delete
+# key: hook_webform_component_delete
+# --
+/**
+ * ${2:Respond to a Webform component being deleted.}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_component_delete($component) {
+$0  // Delete a record in a 3rd-party module table when a component is deleted.
+  db_delete('mymodule_table')
+    ->condition('nid', $component['nid'])
+    ->condition('cid', $component['cid'])
+    ->execute();
+}

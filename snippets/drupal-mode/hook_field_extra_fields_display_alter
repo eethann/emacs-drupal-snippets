@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: hook_field_extra_fields_display_alter
+# key: hook_field_extra_fields_display_alter
+# --
+/**
+ * ${2:Alters the display settings of pseudo-fields before an entity is displayed.
+ *
+ * This hook is called once per displayed entity. If the result of the hook
+ * involves reading from the database, it is highly recommended to statically
+ * cache the information.
+ *}
+ * @param $displays
+ *   An array of display settings for the pseudo-fields in the entity, keyed
+ *   by pseudo-field names.
+ * @param $context
+ *   An associative array containing:
+ *   - entity_type: The entity type; e.g., 'node' or 'user'.
+ *   - bundle: The bundle name.
+ *   - view_mode: The view mode, e.g. 'full', 'teaser'...
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_field_extra_fields_display_alter(&$displays, $context) {
+$0  if ($context['entity_type'] == 'taxonomy_term' && $context['view_mode'] == 'full') {
+    $displays['description']['visible'] = FALSE;
+  }
+}

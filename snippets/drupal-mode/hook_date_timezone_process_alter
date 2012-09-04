@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hook_date_timezone_process_alter
+# key: hook_date_timezone_process_alter
+# --
+/**
+ * ${2:Alter the date_timezone widget element.
+ *}
+ * @param array $element
+ *   An associative array containing the properties of the date_select element.
+ * @param array $form_state
+ *   A keyed array containing the current state of the form.
+ * @param array $context
+ *   An associative array containing the following keys:
+ *   - form: Nested array of form elements that comprise the form.
+ *
+ * @see date_timezone_element_process()
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_date_timezone_process_alter(&$element, &$form_state, $context) {
+$0  // @todo.
+}

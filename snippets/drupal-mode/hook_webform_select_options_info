@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: hook_webform_select_options_info
+# key: hook_webform_select_options_info
+# --
+/**
+ * ${2:Define callbacks that can be used as select list options.
+ *
+ * When users create a select component, they may select a pre-built list of
+ * certain options. Webform core provides a few of these lists such as the
+ * United States, countries of the world, and days of the week. This hook
+ * provides additional lists that may be utilized.
+ *}
+ * @see webform_options_example()
+ * @see hook_webform_select_options_info_alter()
+ *
+ * @return
+ *   An array of callbacks that can be used for select list options. This array
+ *   should be keyed by the "name" of the pre-defined list. The values should
+ *   be an array with the following additional keys:
+ *     - title: The translated title for this list.
+ *     - options callback: The name of the function that will return the list.
+ *     - options arguments: Any additional arguments to send to the callback.
+ *     - file: Optional. The file containing the options callback, relative to
+ *       the module root.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_select_options_info() {
+$0  $items = array();
+
+  $items['days'] = array(
+    'title' => t('Days of the week'),
+    'options callback' => 'webform_options_days',
+    'file' => 'includes/webform.options.inc',
+  );
+
+  return $items;
+}

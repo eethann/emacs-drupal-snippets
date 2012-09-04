@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hook_webform_submission_presave
+# key: hook_webform_submission_presave
+# --
+/**
+ * ${2:Modify a Webform submission, prior to saving it in the database.
+ *}
+ * @param $node
+ *   The Webform node on which this submission was made.
+ * @param $submission
+ *   The Webform submission that is about to be saved to the database.
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_webform_submission_presave($node, &$submission) {
+$0  // Update some component's value before it is saved.
+  $component_id = 4;
+  $submission->data[$component_id]['value'][0] = 'foo';
+}

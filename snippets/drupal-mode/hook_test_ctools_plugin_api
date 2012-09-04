@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: hook_test_ctools_plugin_api
+# key: hook_test_ctools_plugin_api
+# --
+/**
+ * ${2:Implements hook_ctools_plugin_api().}
+ */
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}_test_ctools_plugin_api($module, $api) {
+$0  if (($module == 'ds' && $api == 'ds') || ($module == 'ds_extras' && $api == 'ds_extras')) {
+    return array('version' => 1);
+  }
+}
