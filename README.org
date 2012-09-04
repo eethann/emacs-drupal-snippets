@@ -11,7 +11,7 @@
    I install these with el-get. First add the recipe
 
    #+BEGIN_SRC emacs-lisp
-   (:name "emacs-drupal-snippets" :type git :url git@github.com:eethann/emacs-drupal-snippets.git)
+   (:name "emacs-drupal-snippets" :type git :url git://github.com/eethann/emacs-drupal-snippets.git)
    #+END_SRC
 
    then el-get-sync and el-get-install emacs-drupal-snippets.
