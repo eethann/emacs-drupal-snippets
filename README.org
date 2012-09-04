@@ -21,3 +21,7 @@
 ** Todo List
 
 *** TODO Add exceptions for hook_x_HOOK forms
+
+** License
+
+   GPL, of course. Let's say 2 or 3 or MIT, whatever works best for you.
